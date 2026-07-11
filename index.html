@@ -66,10 +66,16 @@
   .badge-critico { background: rgba(208,48,47,0.12); color: #d0302f; }
   .badge-discussao { background: rgba(184,134,11,0.12); color: #b8860b; }
   .badge-implementado { background: rgba(31,157,85,0.12); color: #1f9d55; }
+  .badge-regiao { background: rgba(47,111,237,0.12); color: #2f6fed; }
   .card-meta { color: #6b7280; font-size: 11px; margin: 4px 0 10px; }
   .card-body { font-size: 13px; line-height: 1.6; color: #3c4450; }
   .card-footer { margin-top: 10px; padding-top: 10px; border-top: 1px solid #e2e5ea; font-size: 12.5px; color: #3c4450; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .card-footer.stacked { display: block; }
+  .card-footer.stacked > div { margin-bottom: 8px; }
+  .card-footer.stacked > div:last-child { margin-bottom: 0; }
   .rec-label { color: #b8860b; font-weight: 600; }
+  .impact-label { color: #d0302f; font-weight: 600; }
+  .opp-label { color: #1f9d55; font-weight: 600; }
   .card-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
   .link-btn {
     font-size: 12px; color: #2f6fed; text-decoration: none; font-weight: 600;
@@ -88,13 +94,18 @@
   .insight-body { font-size: 13px; line-height: 1.6; color: #3c4450; }
 
   .filter-pills { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
-  .pill { padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer; background: #f0f2f5; color: #6b7280; }
+  .pill { padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer; background: #f0f2f5; color: #6b7280; user-select: none; }
+  .pill:hover { background: #e2e5ea; }
   .pill.active { background: #2f6fed; color: #fff; }
+  .pill.active:hover { background: #2f6fed; }
 
   .timeline { position: relative; padding-left: 20px; }
   .timeline::before { content: ''; position: absolute; left: 4px; top: 6px; bottom: 6px; width: 1px; background: #e2e5ea; }
   .timeline-item { position: relative; margin-bottom: 18px; }
+  .timeline-item.hidden { display: none; }
   .timeline-dot { position: absolute; left: -20px; top: 6px; width: 9px; height: 9px; border-radius: 50%; background: #2f6fed; }
+  .timeline-empty { display: none; color: #6b7280; font-size: 13px; padding: 20px 0; }
+  .timeline-empty.show { display: block; }
 
   .page { display: none; }
   .page.active { display: block; }
@@ -218,13 +229,13 @@
   <!-- PAGE: Briefing Diário -->
   <div class="page active" id="page-briefing">
     <div class="page-title">Briefing Diário</div>
-    <div class="page-subtitle">IA, Blockchain, Criptoativos e Pagamentos Internacionais — desenvolvimentos das últimas 24-48h com impacto para a Brosbnk</div>
+    <div class="page-subtitle">IA, Blockchain, Criptoativos, Pagamentos Internacionais, Regulamentação, Lei de Criptoativos/Criptomoedas e Câmbio com Stablecoins — desenvolvimentos das últimas 24-48h com impacto para a Brosbnk</div>
 
     <div class="stats-grid">
-      <div class="stat-card"><div class="stat-label">Notícias hoje</div><div class="stat-value" style="color:#2f6fed">4</div><div class="stat-sub" style="color:#1f9d55">4 temas cobertos</div></div>
+      <div class="stat-card"><div class="stat-label">Notícias hoje</div><div class="stat-value" style="color:#2f6fed">4</div><div class="stat-sub" style="color:#1f9d55">8 temas monitorados</div></div>
       <div class="stat-card"><div class="stat-label">Impacto alto</div><div class="stat-value" style="color:#d0302f">2</div><div class="stat-sub">requerem avaliação</div></div>
       <div class="stat-card"><div class="stat-label">Ações recomendadas</div><div class="stat-value" style="color:#b8860b">4</div><div class="stat-sub">concretas, por notícia</div></div>
-      <div class="stat-card"><div class="stat-label">Temas</div><div class="stat-value" style="font-size:18px;color:#1f9d55">IA · Chain · Cripto · Pay</div></div>
+      <div class="stat-card"><div class="stat-label">Temas</div><div class="stat-value" style="font-size:13px;line-height:1.5;color:#1f9d55">IA · Blockchain · Cripto · Pagamentos · Regulamentação · Lei Cripto · Câmbio Stablecoins</div></div>
     </div>
 
     <div class="section-heading"><span class="bar"></span>Notícias de hoje</div>
@@ -285,8 +296,7 @@
       <div class="card-meta">Pagamentos Internacionais · 07/07/2026 · Fonte: Let's Money / Valor Econômico</div>
       <div class="card-body">Em audiência da investigação Section 301, Tesouro dos EUA perguntou sobre ganhos de integrar-se ao Pix; brasileiros sugeriram uma ponte com o FedNow.</div>
       <div class="card-footer">
-        <span><span class="rec-label">Recomendação:</span> mapear qual parte do produto de câmbio poderia migrar para um trilho instantâneo Brasil-EUA.</span>
-      </div>
+        <span><span class="rec-label">Recomendação:</span> mapear qual parte do produto de câmbio poderia migrar para um trilho instantâneo Brasil-EUA.</span></div>
       <div class="card-actions" style="margin-top:10px;">
         <a class="link-btn" href="https://www.letsmoney.com.br/noticias/tesouro-eua-integracao-pix/" target="_blank" rel="noopener">Ler matéria original ↗</a>
         <button class="dive-btn" onclick="openDive('pix-fednow')">🔍 Mergulhar</button>
@@ -302,45 +312,145 @@
   <!-- PAGE: Regulamentações -->
   <div class="page" id="page-regulamentacoes">
     <div class="page-title">Regulamentações</div>
-    <div class="page-subtitle">Timeline de regulamentações e mudanças normativas que impactam o setor de pagamentos internacionais</div>
+    <div class="page-subtitle">Timeline de regulamentações que impactam pagamentos internacionais — Brasil, Colômbia, Panamá, Estados Unidos e Global. Cada item traz o impacto no mercado e a oportunidade concreta para a Brosbnk.</div>
     <div class="filter-pills">
-      <div class="pill active">Todos</div>
-      <div class="pill">Brasil</div>
-      <div class="pill">Global</div>
-      <div class="pill">Crítico</div>
+      <div class="pill active" data-filter="todos">Todos</div>
+      <div class="pill" data-filter="brasil">Brasil</div>
+      <div class="pill" data-filter="colombia">Colômbia</div>
+      <div class="pill" data-filter="panama">Panamá</div>
+      <div class="pill" data-filter="eua">Estados Unidos</div>
+      <div class="pill" data-filter="global">Global</div>
+      <div class="pill" data-filter="critico">Crítico</div>
     </div>
     <div class="timeline">
-      <div class="timeline-item">
+
+      <div class="timeline-item" data-region="brasil">
         <div class="timeline-dot"></div>
         <div class="card" style="margin-bottom:0;">
           <div class="card-top"><div class="card-title">Resolução BCB nº 561/2026 entra em vigor</div><div class="badge badge-critico">Crítico</div></div>
-          <div class="card-meta">22 de maio de 2026 · Brasil</div>
+          <div class="card-meta"><span class="badge badge-regiao">Brasil</span> · 22 de maio de 2026</div>
           <div class="card-body">Restrições ao eFX entram em vigor. Prestadores de serviço não podem usar stablecoins ou Bitcoin para liquidar pagamentos internacionais. Liquidação deve ocorrer via câmbio tradicional ou contas em reais de não residentes.</div>
+          <div class="card-footer stacked">
+            <div><span class="impact-label">Impacto no mercado:</span> fecha a rota de liquidação via stablecoin/Bitcoin para eFX no Brasil, empurrando todo o fluxo de volta para o câmbio tradicional regulado.</div>
+            <div><span class="opp-label">Oportunidade Brosbnk:</span> reforça a vantagem de quem já opera 100% dentro do câmbio tradicional — posicionar a Brosbnk como alternativa "compliance-first" frente a concorrentes que apostaram em cripto antes da resolução.</div>
+          </div>
         </div>
       </div>
-      <div class="timeline-item">
+
+      <div class="timeline-item" data-region="brasil">
         <div class="timeline-dot"></div>
         <div class="card" style="margin-bottom:0;">
           <div class="card-top"><div class="card-title">Checker Finance levanta US$ 8 milhões</div><div class="badge badge-discussao">Em discussão</div></div>
-          <div class="card-meta">20 de maio de 2026 · América Latina</div>
+          <div class="card-meta"><span class="badge badge-regiao">Brasil / América Latina</span> · 20 de maio de 2026</div>
           <div class="card-body">Investimento estratégico para expandir infraestrutura de pagamentos cross-border e liquidez de stablecoins na América Latina, com foco especial no Brasil.</div>
+          <div class="card-footer stacked">
+            <div><span class="impact-label">Impacto no mercado:</span> mais capital entrando em infraestrutura cross-border sinaliza que investidores apostam em crescimento de liquidez via stablecoin na região, mesmo com a restrição da Resolução 561.</div>
+            <div><span class="opp-label">Oportunidade Brosbnk:</span> observar se a Checker Finance vira parceira ou concorrente direta em corredores de câmbio; avaliar parceria de liquidez antes que ela feche contratos exclusivos com bancos locais.</div>
+          </div>
         </div>
       </div>
-      <div class="timeline-item">
+
+      <div class="timeline-item" data-region="colombia">
+        <div class="timeline-dot"></div>
+        <div class="card" style="margin-bottom:0;">
+          <div class="card-top"><div class="card-title">Colômbia prepara lei integral para ativos digitais</div><div class="badge badge-discussao">Em discussão</div></div>
+          <div class="card-meta"><span class="badge badge-regiao">Colômbia</span> · Julho de 2026</div>
+          <div class="card-body">Governo colombiano tem projeto de lei pronto para criar o primeiro marco normativo abrangente para criptoativos, stablecoins e tokens, com foco em proteção ao consumidor e estabilidade financeira. Stablecoins e DeFi seguem em zona cinzenta até a aprovação, e o Banco de la República já proíbe uso direto de cripto para quitar obrigações comerciais.</div>
+          <div class="card-footer stacked">
+            <div><span class="impact-label">Impacto no mercado:</span> enquanto a lei não passa, pagamentos internacionais em cripto seguem limitados na Colômbia — qualquer liquidação via stablecoin nesse corredor opera sob incerteza jurídica.</div>
+            <div><span class="opp-label">Oportunidade Brosbnk:</span> o corredor Brasil-Colômbia via câmbio tradicional segue como opção mais segura enquanto a regulação cripto amadurece; posicionar a Brosbnk cedo junto a clientes colombianos como ponte de câmbio confiável antes que a lei defina as regras do jogo.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-region="colombia">
+        <div class="timeline-dot"></div>
+        <div class="card" style="margin-bottom:0;">
+          <div class="card-top"><div class="card-title">DIAN exige relatório completo de criptoativos (Resolução 000240)</div><div class="badge badge-critico">Crítico</div></div>
+          <div class="card-meta"><span class="badge badge-regiao">Colômbia</span> · Início de 2026</div>
+          <div class="card-body">Seguindo o padrão CARF da OCDE, a autoridade fiscal colombiana (DIAN) passa a exigir que empresas reportem donos de contas, volume de operações e valor de mercado de cada movimentação em criptoativos no país.</div>
+          <div class="card-footer stacked">
+            <div><span class="impact-label">Impacto no mercado:</span> aumenta o custo de compliance para qualquer empresa que movimenta cripto na Colômbia, favorecendo quem já tem infraestrutura de reporte automatizado.</div>
+            <div><span class="opp-label">Oportunidade Brosbnk:</span> se a Brosbnk atuar ou pretende atuar na Colômbia, adequar-se cedo ao CARF vira vantagem competitiva frente a concorrentes que ainda não têm reporte automatizado.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-region="panama">
+        <div class="timeline-dot"></div>
+        <div class="card" style="margin-bottom:0;">
+          <div class="card-top"><div class="card-title">Panamá apresenta 1ª lei fintech abrangente (Anteprojeto 314)</div><div class="badge badge-discussao">Em discussão</div></div>
+          <div class="card-meta"><span class="badge badge-regiao">Panamá</span> · 13 de janeiro de 2026</div>
+          <div class="card-body">A "Ley Marco Integral de Tecnologías Financieras" foi apresentada à Assembleia Nacional do Panamá, criando licenciamento para provedores de ativos virtuais e autorizando o uso de Bitcoin, Ethereum e stablecoins para pagar bens, serviços e quitar dívidas — desde que ambas as partes concordem.</div>
+          <div class="card-footer stacked">
+            <div><span class="impact-label">Impacto no mercado:</span> se aprovada, o Panamá se torna um dos mercados mais abertos da região para liquidação via stablecoin, podendo atrair volume de câmbio que hoje passa pelo Brasil ou pela Colômbia.</div>
+            <div><span class="opp-label">Oportunidade Brosbnk:</span> acompanhar a tramitação e avaliar abrir operação ou parceria no Panamá cedo, para não ficar de fora caso o país vire hub regional de pagamentos via stablecoin.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-region="panama">
+        <div class="timeline-dot"></div>
+        <div class="card" style="margin-bottom:0;">
+          <div class="card-top"><div class="card-title">SBP Rule 1-2026 endurece AML/CTF no Panamá</div><div class="badge badge-critico">Crítico</div></div>
+          <div class="card-meta"><span class="badge badge-regiao">Panamá</span> · 27 de janeiro de 2026</div>
+          <div class="card-body">A Superintendência de Bancos do Panamá (SBP) endurece as exigências de prevenção à lavagem de dinheiro e financiamento ao terrorismo para toda entidade que toca o sistema bancário, incluindo fintechs e provedores de cripto.</div>
+          <div class="card-footer stacked">
+            <div><span class="impact-label">Impacto no mercado:</span> eleva a barreira de entrada para fintechs no Panamá — quem não tiver compliance robusto de AML/CTF fica de fora do acesso bancário.</div>
+            <div><span class="opp-label">Oportunidade Brosbnk:</span> usar a experiência de compliance já exigida no Brasil (Resolução 561, VASP) como base para entrar no Panamá já adequada à SBP Rule 1-2026, à frente de concorrentes menos preparados.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-region="eua">
+        <div class="timeline-dot"></div>
+        <div class="card" style="margin-bottom:0;">
+          <div class="card-top"><div class="card-title">CLARITY Act trava no Senado dos EUA</div><div class="badge badge-discussao">Em discussão</div></div>
+          <div class="card-meta"><span class="badge badge-regiao">Estados Unidos</span> · Senado volta em 13/07/2026</div>
+          <div class="card-body">A principal lei de regulação do mercado cripto dos EUA segue travada por três disputas (ética/insider trading, imunidade de desenvolvedores DeFi e yield de stablecoin); o Senado tem poucas semanas úteis antes do recesso de agosto para aprová-la.</div>
+          <div class="card-footer stacked">
+            <div><span class="impact-label">Impacto no mercado:</span> enquanto não aprovada, qualquer estratégia de liquidação via stablecoin com contraparte americana opera sob incerteza jurídica.</div>
+            <div><span class="opp-label">Oportunidade Brosbnk:</span> preparar planos para os dois cenários (aprovação/fracasso) e usar a espera para fechar due diligence com parceiros americanos antes da decisão sair.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-region="eua">
+        <div class="timeline-dot"></div>
+        <div class="card" style="margin-bottom:0;">
+          <div class="card-top"><div class="card-title">GENIUS Act entra na fase final de regulamentação</div><div class="badge badge-critico">Crítico</div></div>
+          <div class="card-meta"><span class="badge badge-regiao">Estados Unidos</span> · Prazo: 18 de julho de 2026</div>
+          <div class="card-body">A lei que regula a emissão de stablecoins nos EUA, sancionada em julho de 2025, chega ao prazo final de regulamentação nesta semana — definindo regras de reserva e proibindo yield pago diretamente pelo emissor.</div>
+          <div class="card-footer stacked">
+            <div><span class="impact-label">Impacto no mercado:</span> define, na prática, quais stablecoins americanas serão consideradas "seguras" para uso institucional, separando emissores em conformidade dos que não estarão.</div>
+            <div><span class="opp-label">Oportunidade Brosbnk:</span> priorizar parcerias apenas com stablecoins aprovadas pelo GENIUS Act, reduzindo risco de compliance em qualquer futura estratégia de liquidação via stablecoin.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-region="global">
         <div class="timeline-dot"></div>
         <div class="card" style="margin-bottom:0;">
           <div class="card-top"><div class="card-title">Mastercard Agent Pay: primeiro pagamento por IA</div><div class="badge badge-implementado">Implementado</div></div>
-          <div class="card-meta">Maio de 2026 · Global</div>
+          <div class="card-meta"><span class="badge badge-regiao">Global</span> · Maio de 2026</div>
           <div class="card-body">Primeira transação comercial iniciada por agente de IA realizada na Holanda. Framework permite que agentes de IA realizem pagamentos com consentimento explícito do consumidor.</div>
+          <div class="card-footer stacked">
+            <div><span class="impact-label">Impacto no mercado:</span> Mastercard valida pagamentos iniciados por agentes de IA como caso de uso real, não experimental — acelera a corrida de bancos e fintechs para abrir APIs a agentes autônomos.</div>
+            <div><span class="opp-label">Oportunidade Brosbnk:</span> sair na frente desenhando endpoints de pagamento programável para clientes corporativos de câmbio, antes que agentes de IA virem canal padrão de iniciação de operações.</div>
+          </div>
         </div>
       </div>
+
     </div>
+    <div class="timeline-empty" id="timeline-empty">Nenhuma regulamentação encontrada para este filtro.</div>
     <div class="insight-box">
       <div class="insight-title">Impacto para BROSBNK</div>
       <ul class="action-list">
-        <li><span class="arrow">→</span>Conformidade com Resolução 561: garantir liquidação via canais tradicionais para eFX</li>
+        <li><span class="arrow">→</span>Conformidade com Resolução 561: garantir liquidação via canais tradicionais para eFX no Brasil</li>
+        <li><span class="arrow">→</span>Colômbia: acompanhar a lei de ativos digitais e já adequar reporte ao padrão CARF/DIAN</li>
+        <li><span class="arrow">→</span>Panamá: monitorar o Anteprojeto 314 e avaliar entrada antecipada com compliance SBP Rule 1-2026 pronto</li>
+        <li><span class="arrow">→</span>Estados Unidos: preparar dois planos para o CLARITY Act e priorizar apenas stablecoins aprovadas pelo GENIUS Act</li>
         <li><span class="arrow">→</span>Preparação para APIs de agentes de IA: desenvolver endpoints para transações programáveis</li>
-        <li><span class="arrow">→</span>Monitoramento de licenças VASP: acompanhar evolução das autorizações para serviços de ativos virtuais</li>
       </ul>
     </div>
   </div>
@@ -573,6 +683,22 @@ document.querySelectorAll('.filter-pills .pill').forEach(function(pill) {
   pill.addEventListener('click', function() {
     document.querySelectorAll('.filter-pills .pill').forEach(function(p) { p.classList.remove('active'); });
     pill.classList.add('active');
+    var filter = pill.dataset.filter;
+    var visibleCount = 0;
+    document.querySelectorAll('#page-regulamentacoes .timeline-item').forEach(function(item) {
+      var show = false;
+      if (filter === 'todos') {
+        show = true;
+      } else if (filter === 'critico') {
+        show = !!item.querySelector('.badge-critico');
+      } else {
+        show = item.dataset.region === filter;
+      }
+      item.classList.toggle('hidden', !show);
+      if (show) visibleCount++;
+    });
+    var emptyMsg = document.getElementById('timeline-empty');
+    if (emptyMsg) emptyMsg.classList.toggle('show', visibleCount === 0);
   });
 });
 
