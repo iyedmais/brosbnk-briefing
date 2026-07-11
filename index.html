@@ -737,8 +737,31 @@ function openDive(key) {
   document.getElementById('chat-title').textContent = d.title;
   document.getElementById('chat-sub').textContent = d.sub;
   document.getElementById('chat-body').innerHTML = d.html;
-  document.getElementById('chat-ask-btn').onclick = function() {
-    if (window.sendPrompt) { window.sendPrompt(d.prompt); }
+  var askBtn = document.getElementById('chat-ask-btn');
+  var originalLabel = 'Perguntar ao Claude sobre isso ↗';
+  askBtn.textContent = originalLabel;
+  askBtn.onclick = function() {
+    if (window.sendPrompt) {
+      // Painel rodando embutido no chat do Claude (ex.: artifact) — envia direto.
+      window.sendPrompt(d.prompt);
+      return;
+    }
+    // Painel rodando como site standalone (GitHub Pages): copia o prompt
+    // e abre uma nova conversa no Claude para o usuário colar.
+    var openClaude = function() { window.open('https://claude.ai/new', '_blank'); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(d.prompt).then(function() {
+        askBtn.textContent = 'Prompt copiado! Abrindo Claude...';
+        setTimeout(function() { askBtn.textContent = originalLabel; }, 3000);
+        openClaude();
+      }, function() {
+        askBtn.textContent = 'Abrindo Claude... cole o prompt manualmente';
+        setTimeout(function() { askBtn.textContent = originalLabel; }, 3000);
+        openClaude();
+      });
+    } else {
+      openClaude();
+    }
   };
   document.getElementById('chat-overlay').classList.add('open');
 }
