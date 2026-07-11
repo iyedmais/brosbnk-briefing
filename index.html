@@ -152,12 +152,17 @@
   .chat-step-num { width: 20px; height: 20px; border-radius: 50%; background: #2f6fed; color: #fff; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
   .chat-step-text strong { display: block; font-size: 13px; margin-bottom: 2px; }
   .chat-step-text span { font-size: 12.5px; color: #6b7280; }
-  .chat-footer { padding: 14px 20px; border-top: 1px solid #e2e5ea; flex-shrink: 0; }
+  .chat-footer { padding: 14px 20px; border-top: 1px solid #e2e5ea; flex-shrink: 0; display: flex; gap: 8px; }
   .chat-ask-btn {
-    width: 100%; background: #14181f; color: #fff; border: none; border-radius: 8px;
+    flex: 1; background: #14181f; color: #fff; border: none; border-radius: 8px;
     padding: 10px; font-size: 13px; font-weight: 600; cursor: pointer;
   }
   .chat-ask-btn:hover { background: #2f6fed; }
+  .chat-copy-btn {
+    background: #fff; color: #14181f; border: 1px solid #e2e5ea; border-radius: 8px;
+    padding: 10px 14px; font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap;
+  }
+  .chat-copy-btn:hover { background: #f0f2f5; }
 
   /* Responsividade */
   @media (max-width: 860px) {
@@ -543,28 +548,28 @@
         <div class="card-meta">Inteligência Artificial · 10/07/2026 · Fonte: PYMNTS Intelligence</div>
         <div class="card-body">Payments firms tratam a adoção de IA como teste de risco e ROI, não como rollout amplo: 80% citam redução de risco/compliance e 70% citam margem como razão para investir.</div>
         <div class="card-footer"><span><span class="rec-label">Recomendação:</span> rodar piloto de IA auditável em KYC/AML de onboarding, com revisão humana obrigatória.</span></div>
-        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://www.pymnts.com/news/artificial-intelligence/2026/study-finds-ai-must-earn-the-right-to-move-money/" target="_blank" rel="noopener">Ler matéria original ↗</a></div>
+        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://www.pymnts.com/news/artificial-intelligence/2026/study-finds-ai-must-earn-the-right-to-move-money/" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('ia-study')">🔍 Mergulhar</button></div>
       </div>
       <div class="card">
         <div class="card-top"><div class="card-title">Itaú é o único banco brasileiro no piloto blockchain 24/7 da Swift</div><div class="badge badge-alto">Impacto: Alto</div></div>
         <div class="card-meta">Blockchain · 09/07/2026 · Fonte: Let's Money</div>
         <div class="card-body">Itaú Unibanco pilota depósitos tokenizados na rede da Swift para mover dinheiro no exterior 24/7, ao lado de Citi, HSBC, UBS e outros 14 bancos globais.</div>
         <div class="card-footer"><span><span class="rec-label">Recomendação:</span> consultar o Itaú sobre elegibilidade como cliente institucional do novo ledger tokenizado.</span></div>
-        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://www.letsmoney.com.br/noticias/itau-swift-blockchain-pagamento-internacional/" target="_blank" rel="noopener">Ler matéria original ↗</a></div>
+        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://www.letsmoney.com.br/noticias/itau-swift-blockchain-pagamento-internacional/" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('itau-swift')">🔍 Mergulhar</button></div>
       </div>
       <div class="card">
         <div class="card-top"><div class="card-title">CLARITY Act trava no Senado dos EUA às vésperas do fim do recesso</div><div class="badge badge-medio">Impacto: Médio</div></div>
         <div class="card-meta">Criptoativos · 06/07/2026 · Fonte: Coinspeaker / Yahoo Finance</div>
         <div class="card-body">Projeto de regulação do mercado cripto nos EUA segue sem votação marcada, travado por três disputas; Senado volta do recesso em 13/07 com poucas semanas úteis antes de agosto.</div>
         <div class="card-footer"><span><span class="rec-label">Recomendação:</span> acompanhar semanalmente a tramitação e preparar planos para os dois cenários (aprovação/fracasso).</span></div>
-        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://finance.yahoo.com/markets/crypto/articles/clarity-act-stalls-senate-three-100403007.html" target="_blank" rel="noopener">Ler matéria original ↗</a></div>
+        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://finance.yahoo.com/markets/crypto/articles/clarity-act-stalls-senate-three-100403007.html" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('clarity-act')">🔍 Mergulhar</button></div>
       </div>
       <div class="card">
         <div class="card-top"><div class="card-title">Tesouro dos EUA sonda integração do Pix com o FedNow em audiência do USTR</div><div class="badge badge-alto">Impacto: Alto</div></div>
         <div class="card-meta">Pagamentos Internacionais · 07/07/2026 · Fonte: Let's Money / Valor Econômico</div>
         <div class="card-body">Em audiência da investigação Section 301, Tesouro dos EUA perguntou sobre ganhos de integrar-se ao Pix; brasileiros sugeriram uma ponte com o FedNow.</div>
         <div class="card-footer"><span><span class="rec-label">Recomendação:</span> mapear qual parte do produto de câmbio poderia migrar para um trilho instantâneo Brasil-EUA.</span></div>
-        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://www.letsmoney.com.br/noticias/tesouro-eua-integracao-pix/" target="_blank" rel="noopener">Ler matéria original ↗</a></div>
+        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://www.letsmoney.com.br/noticias/tesouro-eua-integracao-pix/" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('pix-fednow')">🔍 Mergulhar</button></div>
       </div>
     </div>
 
@@ -575,28 +580,28 @@
         <div class="card-meta">Blockchain · 02/07/2026 · Fonte: Hipther</div>
         <div class="card-body">HSBC, UBS, Wells Fargo e Citi pilotam liquidação tokenizada na nova rede Swift.</div>
         <div class="card-footer"><span><span class="rec-label">Recomendação:</span> verificar se o parceiro bancário está no piloto e pedir acesso antecipado.</span></div>
-        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://hipther.com/latest-news/2026/07/02/114492/blocks-headlines-today-in-blockchain-july-2-2026-707-cayman-ethereum-blockchain-consensus-ai-supply-chains-and-institutional-web3/" target="_blank" rel="noopener">Ler matéria original ↗</a></div>
+        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://hipther.com/latest-news/2026/07/02/114492/blocks-headlines-today-in-blockchain-july-2-2026-707-cayman-ethereum-blockchain-consensus-ai-supply-chains-and-institutional-web3/" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('swift-network')">🔍 Mergulhar</button></div>
       </div>
       <div class="card">
         <div class="card-top"><div class="card-title">Citigroup expande pagamentos instantâneos cross-border</div><div class="badge badge-alto">Impacto: Alto</div></div>
         <div class="card-meta">Pagamentos · 09/07/2026 · Fonte: US News</div>
         <div class="card-body">Liquidação em tempo real estendida a bancos parceiros fora da rede interna do Citi.</div>
         <div class="card-footer"><span><span class="rec-label">Recomendação:</span> contatar correspondent banking do Citi para elegibilidade como parceiro.</span></div>
-        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://money.usnews.com/investing/news/articles/2026-07-09/citigroup-expands-cross-border-instant-payments-to-partner-banks" target="_blank" rel="noopener">Ler matéria original ↗</a></div>
+        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://money.usnews.com/investing/news/articles/2026-07-09/citigroup-expands-cross-border-instant-payments-to-partner-banks" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('citi-instant')">🔍 Mergulhar</button></div>
       </div>
       <div class="card">
         <div class="card-top"><div class="card-title">Circle recebe aprovação de trust bank nos EUA</div><div class="badge badge-medio">Impacto: Médio</div></div>
         <div class="card-meta">Criptoativos · 08-09/07/2026 · Fonte: CoinDesk</div>
         <div class="card-body">Emissora do USDC formaliza entrada no sistema bancário regulado dos EUA.</div>
         <div class="card-footer"><span><span class="rec-label">Recomendação:</span> avaliar integração com USDC para liquidação em corredores de câmbio.</span></div>
-        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://www.coindesk.com/" target="_blank" rel="noopener">Ler matéria original ↗</a></div>
+        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://www.coindesk.com/" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('circle-trust')">🔍 Mergulhar</button></div>
       </div>
       <div class="card">
         <div class="card-top"><div class="card-title">Hyundai adota stablecoin para tesouraria internacional</div><div class="badge badge-alto">Impacto: Alto</div></div>
         <div class="card-meta">Criptoativos · 08-09/07/2026 · Fonte: CoinDesk</div>
         <div class="card-body">Primeira grande empresa sul-coreana a mover capital entre operações via stablecoin.</div>
         <div class="card-footer"><span><span class="rec-label">Recomendação:</span> lançar piloto de tesouraria via stablecoin com clientes estratégicos.</span></div>
-        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://www.coindesk.com/business/2026/07/06/bitmine-added-another-usd74-million-in-ether-as-tom-lee-bets-on-clarity-act-boost" target="_blank" rel="noopener">Ler matéria original ↗</a></div>
+        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://www.coindesk.com/business/2026/07/06/bitmine-added-another-usd74-million-in-ether-as-tom-lee-bets-on-clarity-act-boost" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('hyundai-treasury')">🔍 Mergulhar</button></div>
       </div>
     </div>
   </div>
@@ -616,6 +621,7 @@
     <div class="chat-body" id="chat-body"></div>
     <div class="chat-footer">
       <button class="chat-ask-btn" id="chat-ask-btn">Perguntar ao Claude sobre isso ↗</button>
+      <button class="chat-copy-btn" id="chat-copy-btn" title="Copiar texto">📋 Copiar</button>
     </div>
   </div>
 </div>
@@ -688,6 +694,74 @@ var diveData = {
       "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Simular o impacto no volume</strong><span>Estimar quanto do volume de câmbio tradicional migraria para pagamentos instantâneos de baixo valor.</span></div></div>",
       "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Não esperar a ponte estar pronta</strong><span>Preparar a operação agora, já que interligar dois sistemas costuma levar mais tempo do que a janela política.</span></div></div>",
       "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Comunicar a clientes estratégicos</strong><span>Sinalizar a clientes de comex que a Brosbnk acompanha de perto essa possível mudança de infraestrutura.</span></div></div>"
+    ].join("")
+  },
+  'swift-network': {
+    title: "Swift lança plataforma blockchain com 17 bancos globais",
+    sub: "O que é e como a Brosbnk deve reagir",
+    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer em relação à Swift ter lançado uma nova plataforma blockchain para transações tokenizadas, com 17 bancos (HSBC, UBS, Wells Fargo, Citi, entre outros) se preparando para pilotar transações ao vivo.",
+    html: [
+      "<h4>O que aconteceu, em linguagem simples</h4>",
+      "<p>A Swift lançou uma nova plataforma blockchain para transações tokenizadas. Dezessete bancos — incluindo HSBC, UBS, Wells Fargo e Citi — estão se preparando para pilotar transações ao vivo com ativos digitais tokenizados na rede.</p>",
+      "<h4>Por que isso importa para a Brosbnk</h4>",
+      "<p>A Swift é a espinha dorsal das liquidações internacionais que a Brosbnk usa hoje para câmbio e remessas; uma migração para trilhos tokenizados redefine o padrão de settlement de todo o setor.</p>",
+      "<h4>Plano passo a passo</h4>",
+      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Mapear o parceiro bancário atual</strong><span>Descobrir se ele está entre os 17 participantes do piloto.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Pedir acesso antecipado</strong><span>Falar com o gerente de relacionamento sobre acesso antecipado ao programa piloto.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Escolher uma rota de teste de baixo risco</strong><span>Selecionar um corredor de câmbio de baixo volume para testar.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Medir o ganho real</strong><span>Acompanhar tempo e custo de liquidação por 30 dias.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Decidir sobre expansão</strong><span>Usar os resultados do piloto para decidir se vale ampliar para mais rotas.</span></div></div>"
+    ].join("")
+  },
+  'citi-instant': {
+    title: "Citigroup expande pagamentos instantâneos cross-border",
+    sub: "O que é e como a Brosbnk deve reagir",
+    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer em relação ao Citigroup ter ampliado seu serviço de pagamentos instantâneos internacionais para bancos parceiros, permitindo liquidação em tempo real fora da rede interna do banco.",
+    html: [
+      "<h4>O que aconteceu, em linguagem simples</h4>",
+      "<p>O Citigroup ampliou seu serviço de pagamentos instantâneos internacionais para bancos parceiros, permitindo liquidação em tempo real fora da rede interna do banco.</p>",
+      "<h4>Por que isso importa para a Brosbnk</h4>",
+      "<p>Isso pressiona o padrão de velocidade que clientes de comex e câmbio esperam de qualquer fintech de pagamentos, incluindo a Brosbnk — e pode ser uma porta de entrada para herdar liquidação instantânea via parceria.</p>",
+      "<h4>Plano passo a passo</h4>",
+      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Contatar o Citi</strong><span>Falar com o time de correspondent banking do Citigroup.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Levantar rotas prioritárias</strong><span>Mapear as rotas de comex/câmbio de maior volume da carteira atual.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Priorizar 1-2 rotas</strong><span>Selecionar as rotas com maior potencial de ganho para negociação.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Avaliar custo de integração</strong><span>Estimar o esforço técnico necessário para conectar-se como parceiro.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Comunicar clientes estratégicos</strong><span>Avisar clientes-chave assim que a integração avançar.</span></div></div>"
+    ].join("")
+  },
+  'circle-trust': {
+    title: "Circle recebe aprovação de trust bank nos EUA",
+    sub: "O que é e como a Brosbnk deve reagir",
+    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer em relação à Circle, emissora do USDC, ter obtido aprovação regulatória para operar como trust bank federal nos EUA.",
+    html: [
+      "<h4>O que aconteceu, em linguagem simples</h4>",
+      "<p>A Circle, emissora do stablecoin USDC, obteve aprovação regulatória para operar como trust bank federal nos EUA, formalizando sua entrada no sistema bancário regulado.</p>",
+      "<h4>Por que isso importa para a Brosbnk</h4>",
+      "<p>Stablecoins regulados como o USDC são cada vez mais usados como trilho de liquidação em pagamentos internacionais e câmbio — área central da Brosbnk — mas a Circle licenciada também pode virar concorrente direta por clientes corporativos.</p>",
+      "<h4>Plano passo a passo</h4>",
+      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Checar compliance</strong><span>Confirmar como a Resolução BCB 561/2026 se aplica ao uso de USDC fora do Brasil.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Mapear corredores</strong><span>Identificar corredores de câmbio com maior fricção cambial.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Estudar integração técnica</strong><span>Avaliar o esforço de integração com USDC via Circle.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Rodar piloto controlado</strong><span>Testar com um cliente disposto antes de escalar.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Monitorar como concorrente</strong><span>Acompanhar se a Circle passa a competir diretamente por clientes corporativos.</span></div></div>"
+    ].join("")
+  },
+  'hyundai-treasury': {
+    title: "Hyundai adota stablecoin para tesouraria internacional",
+    sub: "O que é e como a Brosbnk deve reagir",
+    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer em relação à Hyundai ter se tornado a primeira grande empresa sul-coreana a usar stablecoin para transferências internacionais corporativas.",
+    html: [
+      "<h4>O que aconteceu, em linguagem simples</h4>",
+      "<p>A Hyundai se tornou a primeira grande empresa sul-coreana a implementar transferências internas via stablecoin, movendo capital entre operações internacionais.</p>",
+      "<h4>Por que isso importa para a Brosbnk</h4>",
+      "<p>É um sinal de demanda corporativa real (não especulativa) por stablecoins como ferramenta de tesouraria internacional — mercado adjacente aos clientes corporativos de câmbio da Brosbnk, e uma oportunidade de novo produto.</p>",
+      "<h4>Plano passo a passo</h4>",
+      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Identificar clientes-alvo</strong><span>Selecionar 2-3 clientes corporativos com operações internacionais.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Desenhar a oferta piloto</strong><span>Estruturar um serviço de tesouraria internacional via stablecoin.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Definir limites de compliance</strong><span>Respeitar a Resolução 561 e o licenciamento VASP.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Testar e medir</strong><span>Rodar o piloto por um trimestre e medir custo/tempo frente ao câmbio tradicional.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Formalizar como produto</strong><span>Se validado, transformar em oferta permanente.</span></div></div>"
     ].join("")
   }
 };
@@ -770,6 +844,41 @@ function closeDive() {
 }
 document.getElementById('chat-overlay').addEventListener('click', function(e) {
   if (e.target === this) closeDive();
+});
+
+document.getElementById('chat-copy-btn').addEventListener('click', function() {
+  var copyBtn = this;
+  var titleText = document.getElementById('chat-title').textContent;
+  var bodyText = document.getElementById('chat-body').innerText;
+  var fullText = titleText + '\n\n' + bodyText;
+  var originalLabel = '📋 Copiar';
+  var markCopied = function() {
+    copyBtn.textContent = '✓ Copiado!';
+    setTimeout(function() { copyBtn.textContent = originalLabel; }, 2000);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(fullText).then(markCopied, function() {
+      var ta = document.createElement('textarea');
+      ta.value = fullText;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
+      markCopied();
+    });
+  } else {
+    var ta = document.createElement('textarea');
+    ta.value = fullText;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
+    markCopied();
+  }
 });
 </script>
 </body>
