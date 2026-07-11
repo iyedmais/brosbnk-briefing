@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BROSBNK Briefing Diário</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: Inter, system-ui, -apple-system, sans-serif;
+    background: #f7f8fa;
+    color: #14181f;
+    display: flex;
+    min-height: 100vh;
+  }
+  .sidebar {
+    width: 220px;
+    flex-shrink: 0;
+    background: #ffffff;
+    border-right: 1px solid #e2e5ea;
+    padding: 20px 14px;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+  }
+  .logo-wrap { margin-bottom: 28px; padding: 0 4px; }
+  .nav-item {
+    padding: 10px 12px;
+    font-size: 13.5px;
+    color: #6b7280;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 2px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    user-select: none;
+  }
+  .nav-item:hover { background: #f0f2f5; color: #14181f; }
+  .nav-item.active { background: #2f6fed; color: #fff; font-weight: 600; }
+  .sidebar-footer { margin-top: auto; font-size: 11px; color: #9aa1ac; }
+
+  .main { flex: 1; padding: 28px 36px; max-width: 980px; }
+  .page-title { font-family: 'IBM Plex Mono', monospace; font-weight: 700; font-size: 26px; margin-bottom: 6px; }
+  .page-subtitle { color: #6b7280; font-size: 14px; margin-bottom: 22px; }
+
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 28px; }
+  .stat-card { background: #fff; border: 1px solid #e2e5ea; border-radius: 10px; padding: 14px; }
+  .stat-label { color: #6b7280; font-size: 12px; margin-bottom: 6px; }
+  .stat-value { font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 700; }
+  .stat-sub { font-size: 11px; margin-top: 4px; color: #6b7280; }
+
+  .section-heading { display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 700; margin: 24px 0 16px; }
+  .section-heading .bar { width: 3px; height: 18px; background: #2f6fed; display: inline-block; }
+
+  .card { background: #fff; border: 1px solid #e2e5ea; border-radius: 10px; padding: 16px 18px; margin-bottom: 14px; box-shadow: 0 1px 2px rgba(20,24,31,0.04); }
+  .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+  .card-title { font-weight: 700; font-size: 15px; }
+  .badge { font-size: 11px; padding: 3px 9px; border-radius: 20px; white-space: nowrap; font-weight: 600; }
+  .badge-alto { background: rgba(31,157,85,0.12); color: #1f9d55; }
+  .badge-medio { background: rgba(184,134,11,0.12); color: #b8860b; }
+  .badge-critico { background: rgba(208,48,47,0.12); color: #d0302f; }
+  .badge-discussao { background: rgba(184,134,11,0.12); color: #b8860b; }
+  .badge-implementado { background: rgba(31,157,85,0.12); color: #1f9d55; }
+  .card-meta { color: #6b7280; font-size: 11px; margin: 4px 0 10px; }
+  .card-body { font-size: 13px; line-height: 1.6; color: #3c4450; }
+  .card-footer { margin-top: 10px; padding-top: 10px; border-top: 1px solid #e2e5ea; font-size: 12.5px; color: #3c4450; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .rec-label { color: #b8860b; font-weight: 600; }
+  .card-actions { display: flex; gap: 8px; align-items: center; }
+  .link-btn {
+    font-size: 12px; color: #2f6fed; text-decoration: none; font-weight: 600;
+    display: inline-flex; align-items: center; gap: 4px;
+  }
+  .link-btn:hover { text-decoration: underline; }
+  .dive-btn {
+    font-size: 12px; font-weight: 600; color: #fff; background: #14181f;
+    border: none; border-radius: 20px; padding: 6px 14px; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .dive-btn:hover { background: #2f6fed; }
+
+  .insight-box { margin-top: 26px; background: #f0f2f5; border: 1px solid #e2e5ea; border-radius: 10px; padding: 16px 18px; }
+  .insight-title { font-weight: 700; font-size: 14px; margin-bottom: 10px; }
+  .insight-body { font-size: 13px; line-height: 1.6; color: #3c4450; }
+
+  .filter-pills { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+  .pill { padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer; background: #f0f2f5; color: #6b7280; }
+  .pill.active { background: #2f6fed; color: #fff; }
+
+  .timeline { position: relative; padding-left: 20px; }
+  .timeline::before { content: ''; position: absolute; left: 4px; top: 6px; bottom: 6px; width: 1px; background: #e2e5ea; }
+  .timeline-item { position: relative; margin-bottom: 18px; }
+  .timeline-dot { position: absolute; left: -20px; top: 6px; width: 9px; height: 9px; border-radius: 50%; background: #2f6fed; }
+
+  .page { display: none; }
+  .page.active { display: block; }
+
+  .action-list { list-style: none; }
+  .action-list li { display: flex; gap: 10px; padding: 8px 0; font-size: 13px; color: #3c4450; align-items: flex-start; }
+  .action-list .arrow { color: #2f6fed; font-weight: 700; }
+
+  .priority-item { display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid #e2e5ea; }
+  .priority-num { width: 22px; height: 22px; border-radius: 50%; background: #14181f; color: #fff; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .priority-text strong { display: block; font-size: 13.5px; margin-bottom: 2px; }
+  .priority-text span { font-size: 12.5px; color: #6b7280; }
+
+  /* Chat modal (Mergulhar) */
+  .chat-overlay {
+    display: none; position: fixed; inset: 0; background: rgba(20,24,31,0.5);
+    align-items: center; justify-content: center; z-index: 1000; padding: 20px;
+  }
+  .chat-overlay.open { display: flex; }
+  .chat-panel {
+    background: #fff; border-radius: 14px; width: 100%; max-width: 640px; max-height: 82vh;
+    display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+  }
+  .chat-header {
+    padding: 16px 20px; border-bottom: 1px solid #e2e5ea; display: flex;
+    justify-content: space-between; align-items: center; flex-shrink: 0;
+  }
+  .chat-header-title { font-weight: 700; font-size: 15px; }
+  .chat-header-sub { font-size: 12px; color: #6b7280; margin-top: 2px; }
+  .chat-close { background: none; border: none; font-size: 20px; cursor: pointer; color: #6b7280; line-height: 1; padding: 4px 8px; }
+  .chat-close:hover { color: #14181f; }
+  .chat-body { flex: 1; overflow-y: auto; padding: 18px 20px; font-size: 13.5px; line-height: 1.7; color: #262b33; }
+  .chat-body h4 { font-size: 13px; font-weight: 700; margin: 16px 0 6px; color: #14181f; }
+  .chat-body h4:first-child { margin-top: 0; }
+  .chat-step { display: flex; gap: 10px; margin-bottom: 12px; }
+  .chat-step-num { width: 20px; height: 20px; border-radius: 50%; background: #2f6fed; color: #fff; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .chat-step-text strong { display: block; font-size: 13px; margin-bottom: 2px; }
+  .chat-step-text span { font-size: 12.5px; color: #6b7280; }
+  .chat-footer { padding: 14px 20px; border-top: 1px solid #e2e5ea; flex-shrink: 0; }
+  .chat-ask-btn {
+    width: 100%; background: #14181f; color: #fff; border: none; border-radius: 8px;
+    padding: 10px; font-size: 13px; font-weight: 600; cursor: pointer;
+  }
+  .chat-ask-btn:hover { background: #2f6fed; }
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="logo-wrap">
+    <svg width="150" height="40" viewBox="0 0 675 179" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Logo BROSBNK">
+      <path d="M38.4729 23.1168L0 0.452881V85.2757H38.4729V23.1168Z" fill="#14181f"/>
+      <path d="M139.368 92.8956C138.536 103.967 134.129 114.048 127.292 121.992L154.626 149.326C168.391 134.337 177.082 114.623 178 92.8956H139.368Z" fill="#d0302f"/>
+      <path d="M56.0938 127.378L28.76 154.712C43.7489 168.477 63.4628 177.168 85.1902 178.086V139.454C74.1184 138.621 64.0381 134.215 56.0938 127.378Z" fill="#f2b705"/>
+      <path d="M92.8101 139.454V178.086C114.538 177.174 134.251 168.477 149.24 154.712L121.907 127.378C113.962 134.215 103.882 138.621 92.8101 139.454Z" fill="#1e4fa3"/>
+      <path d="M38.6321 92.8956H0C0.911942 114.623 9.60905 134.337 23.3739 149.326L50.7076 121.992C43.8711 114.048 39.4644 103.967 38.6321 92.8956Z" fill="#1f9d55"/>
+      <path d="M154.626 28.8455C152.906 26.9727 151.113 25.1794 149.24 23.4595C134.251 9.69474 114.537 1.00375 92.81 0.0856858C91.5492 0.0306021 90.2761 0 89.0031 0C87.73 0 86.457 0.0306021 85.1962 0.0856858C63.4687 0.997627 43.7548 9.69474 28.7659 23.4595C26.8931 25.1794 25.0998 26.9727 23.38 28.8455C9.60905 43.8344 0.911942 63.5483 0 85.2757H38.6321C39.4644 74.2039 43.8711 64.1236 50.7076 56.1793C52.3663 54.2514 54.1657 52.4519 56.0936 50.7933C64.0379 43.9568 74.1182 39.5501 85.19 38.7177C86.4509 38.6259 87.7178 38.5586 88.9969 38.5586C90.2761 38.5586 91.5492 38.6198 92.8038 38.7177C103.876 39.5501 113.956 43.9568 121.9 50.7933C123.828 52.4519 125.628 54.2514 127.286 56.1793C134.123 64.1236 138.529 74.2039 139.362 85.2757H177.994C177.082 63.5483 168.385 43.8344 154.62 28.8455H154.626Z" fill="#14181f"/>
+      <path d="M254.615 80.0884C257.624 82.2169 259.973 84.8591 261.661 88.0151C263.423 91.1711 264.303 94.5839 264.303 98.2537C264.303 102.731 263.019 106.841 260.45 110.584C257.881 114.254 254.468 117.006 250.211 118.841C247.055 120.236 243.789 120.933 240.413 120.933H207.936C207.202 120.933 206.541 120.676 205.954 120.162C205.44 119.575 205.184 118.878 205.184 118.07V46.4001C205.184 45.6661 205.44 45.0423 205.954 44.5285C206.541 43.9413 207.202 43.6478 207.936 43.6478H235.679C239.129 43.6478 242.505 44.345 245.808 45.7395C249.918 47.6478 253.257 50.4368 255.826 54.1065C258.395 57.7763 259.679 61.8497 259.679 66.3268C259.679 71.3911 257.991 75.9783 254.615 80.0884ZM219.385 58.7304V73.9232C219.385 74.3636 219.532 74.7673 219.826 75.1342C220.193 75.4278 220.596 75.5746 221.037 75.5746H235.679C238.395 75.5746 240.707 74.6939 242.615 72.9324C244.523 71.0975 245.477 68.8957 245.477 66.3268C245.477 63.758 244.523 61.5928 242.615 59.8314C240.707 57.9965 238.395 57.079 235.679 57.079H221.037C220.596 57.079 220.193 57.2625 219.826 57.6295C219.532 57.9231 219.385 58.2901 219.385 58.7304ZM240.303 107.501C243.019 107.501 245.331 106.584 247.239 104.749C249.147 102.914 250.101 100.749 250.101 98.2537C250.101 95.6849 249.147 93.5197 247.239 91.7582C245.331 89.9233 243.019 89.0059 240.303 89.0059H221.037C220.596 89.0059 220.193 89.1894 219.826 89.5564C219.532 89.8499 219.385 90.2169 219.385 90.6573V105.85C219.385 106.29 219.532 106.694 219.826 107.061C220.193 107.355 220.596 107.501 221.037 107.501H240.303ZM327.613 65.4461C327.613 69.7764 326.512 73.7764 324.311 77.4462C322.182 81.1159 319.32 84.015 315.723 86.1435C315.063 86.5105 314.622 87.0609 314.402 87.7949C314.182 88.5288 314.255 89.2261 314.622 89.8866L330.145 116.749C330.439 117.336 330.549 117.96 330.476 118.621C330.402 119.208 330.109 119.722 329.595 120.162C329.081 120.602 328.457 120.823 327.723 120.823H317.705C316.677 120.823 315.87 120.382 315.283 119.502L298.769 90.7674C298.255 89.8132 297.448 89.3362 296.347 89.3362H292.934C292.2 89.3362 291.54 89.6298 290.953 90.2169C290.439 90.7307 290.182 91.3912 290.182 92.1986V118.07C290.182 118.804 289.888 119.465 289.301 120.052C288.787 120.566 288.164 120.823 287.43 120.823H278.732C277.998 120.823 277.338 120.566 276.751 120.052C276.237 119.465 275.98 118.804 275.98 118.07V46.6202C275.98 45.8129 276.237 45.1524 276.751 44.6386C277.338 44.0514 277.998 43.7578 278.732 43.7578H307.466C309.448 43.7578 311.356 44.0514 313.191 44.6386C315.1 45.1524 316.861 45.9597 318.476 47.0606C320.164 48.1615 321.595 49.5194 322.769 51.134C325.999 55.3176 327.613 60.0882 327.613 65.4461ZM292.934 55.7579C292.2 55.7579 291.54 56.0148 290.953 56.5286C290.439 57.0423 290.182 57.7029 290.182 58.5103V72.3819C290.182 73.1893 290.439 73.8498 290.953 74.3636C291.54 74.8774 292.2 75.1342 292.934 75.1342H303.613C306.476 75.1342 308.861 74.07 310.769 71.9416C312.751 69.8131 313.595 67.3177 313.301 64.4553C313.228 63.2075 312.898 62.0699 312.31 61.0424C311.723 59.9415 310.953 59.024 309.999 58.2901C309.118 57.4827 308.09 56.8589 306.916 56.4185C305.742 55.9781 304.531 55.7579 303.283 55.7579H292.934ZM387.616 43.7578C395.689 46.6203 402.258 51.5744 407.322 58.6203C412.46 65.5929 415.029 73.4828 415.029 82.2903C415.029 91.0977 412.46 99.061 407.322 106.18C402.184 113.226 395.542 118.107 387.395 120.823C383.065 122.291 378.661 123.025 374.184 123.025C369.781 123.025 365.414 122.291 361.083 120.823C352.936 118.107 346.294 113.226 341.156 106.18C336.019 99.061 333.45 91.0977 333.45 82.2903C333.45 76.492 334.624 70.9874 336.973 65.7764C339.322 60.4919 342.551 55.9781 346.661 52.235C350.845 48.4184 355.579 45.5927 360.863 43.7578C365.267 42.2165 369.707 41.4459 374.184 41.4459C378.735 41.4459 383.212 42.2165 387.616 43.7578ZM374.184 108.823C381.524 108.823 387.799 106.254 393.01 101.116C398.221 95.905 400.827 89.6298 400.827 82.2903C400.827 74.9507 398.221 68.7122 393.01 63.5745C387.799 58.3635 381.524 55.7579 374.184 55.7579C366.918 55.7579 360.68 58.3635 355.469 63.5745C350.257 68.7122 347.652 74.9507 347.652 82.2903C347.652 87.0609 348.826 91.5013 351.175 95.6115C353.597 99.7216 356.826 102.951 360.863 105.3C364.973 107.648 369.414 108.823 374.184 108.823ZM452.61 69.5195C454.298 70.1067 455.619 70.5837 456.573 70.9507C457.527 71.2443 458.922 71.7948 460.757 72.6021C462.665 73.4095 464.206 74.2168 465.38 75.0241C466.555 75.7581 467.913 76.7856 469.454 78.1067C470.995 79.3545 472.243 80.6756 473.197 82.0701C474.151 83.4646 474.995 85.1894 475.729 87.2444C476.537 89.2995 477.087 91.4646 477.381 93.7399C478.188 101.079 476.096 107.575 471.105 113.226C470.738 113.74 469.858 114.584 468.463 115.758C463.766 119.942 458.298 122.327 452.059 122.914C451.105 122.988 450.114 123.025 449.087 123.025C442.408 123.025 436.463 121.08 431.252 117.19C431.032 116.969 430.738 116.713 430.371 116.419C430.077 116.052 429.857 115.832 429.71 115.758C425.454 111.942 422.701 107.465 421.454 102.327C421.233 101.52 421.343 100.786 421.784 100.125C422.298 99.4647 422.958 99.0977 423.765 99.0243L432.573 98.1436C433.233 98.0702 433.821 98.217 434.334 98.584C434.922 98.9509 435.289 99.4647 435.435 100.125C436.243 102.767 437.821 105.006 440.169 106.841C443.252 109.116 446.738 110.07 450.628 109.703C454.518 109.336 457.674 107.722 460.096 104.859C462.591 101.997 463.619 98.7674 463.179 95.1711C462.958 93.2628 462.481 91.6481 461.747 90.327C461.087 88.9325 460.023 87.7582 458.555 86.804C457.087 85.7765 455.582 84.9692 454.041 84.382C452.573 83.7215 450.555 82.9875 447.986 82.1802C444.903 81.226 442.628 80.382 441.16 79.648C435.215 76.7856 431.105 73.0792 428.83 68.5287C426.554 63.9782 426.371 59.0607 428.279 53.7763C429.821 49.5194 432.683 46.1065 436.867 43.5377C442.591 40.0147 448.903 39.0606 455.802 40.6753C457.857 41.1156 460.023 42.0698 462.298 43.5377C467.876 47.0606 471.215 51.7212 472.316 57.5194C472.463 58.4002 472.28 59.1708 471.766 59.8314C471.252 60.4919 470.555 60.8222 469.674 60.8222L460.867 61.0424C459.399 61.0424 458.481 60.4185 458.114 59.1708C457.747 57.9231 457.05 56.8222 456.023 55.868C454.995 54.9139 454.188 54.3267 453.601 54.1065C453.087 53.813 452.646 53.6295 452.279 53.5561C450.078 53.0423 447.949 53.1891 445.894 53.9965C443.839 54.7304 442.445 56.0882 441.711 58.0699C441.564 58.5103 441.454 58.8772 441.38 59.1708C441.307 59.4644 441.234 59.9415 441.16 60.602C441.087 61.1892 441.16 61.7396 441.38 62.2534C441.6 62.7672 441.931 63.3543 442.371 64.0149C442.812 64.602 443.472 65.2259 444.353 65.8865C445.234 66.547 446.334 67.2076 447.656 67.8681C448.39 68.1617 450.041 68.7122 452.61 69.5195Z" fill="#14181f"/>
+      <path d="M539.578 101.446C539.578 106.804 537.633 111.428 533.744 115.318C529.927 119.135 525.303 121.043 519.872 121.043H490.147C489.413 121.043 489.046 120.676 489.046 119.942V45.079C489.046 44.345 489.413 43.978 490.147 43.978H515.248C520.679 43.978 525.303 45.9597 529.12 49.923C533.01 53.8864 534.955 58.6203 534.955 64.125C534.955 67.2076 534.294 70.3636 532.973 73.5929C531.652 76.7489 529.927 79.2444 527.799 81.0792C527.432 81.3728 527.468 81.6297 527.909 81.8499C531.285 83.4646 534.074 86.1435 536.276 89.8866C538.478 93.5564 539.578 97.4096 539.578 101.446ZM494.661 50.4735V79.3178C494.661 79.8315 494.954 80.0884 495.541 80.0884H511.725C514.881 80.0884 517.817 79.3911 520.532 77.9966C523.248 76.5287 525.413 74.5104 527.028 71.9416C528.569 69.4461 529.303 66.8406 529.23 64.125C529.23 61.4094 528.606 59.024 527.358 56.969C526.184 54.8405 524.496 53.079 522.294 51.6845C520.165 50.29 517.817 49.5928 515.248 49.5928H495.541C494.954 49.5928 494.661 49.8863 494.661 50.4735ZM494.661 86.5839V114.547C494.661 115.135 494.954 115.428 495.541 115.428H519.872C524.569 115.428 528.312 113.557 531.101 109.813C533.964 106.07 534.698 101.85 533.303 97.1528C532.276 93.7032 530.257 90.9509 527.248 88.8958C524.312 86.7674 521.009 85.7031 517.34 85.7031H495.541C494.954 85.7031 494.661 85.9967 494.661 86.5839ZM557.074 63.1341V119.612C557.074 119.979 556.927 120.309 556.633 120.602C556.34 120.896 556.009 121.043 555.642 121.043H552.89C552.523 121.043 552.193 120.896 551.899 120.602C551.606 120.309 551.459 119.979 551.459 119.612V45.4092C551.459 45.0423 551.532 44.8221 551.679 44.7487C551.899 44.6753 552.12 44.8221 552.34 45.1891L595.496 103.428C595.716 103.722 595.9 103.832 596.046 103.758C596.267 103.685 596.377 103.465 596.377 103.098V45.4092C596.377 45.189 596.413 44.9689 596.487 44.7487C596.634 44.5285 596.817 44.345 597.037 44.1982C597.257 44.0514 597.514 43.978 597.808 43.978H600.56C600.927 43.978 601.258 44.1248 601.551 44.4184C601.845 44.712 601.991 45.0423 601.991 45.4092V120.823C601.991 121.263 601.881 121.483 601.661 121.483C601.514 121.557 601.331 121.447 601.111 121.153L557.954 62.914C557.734 62.547 557.514 62.4002 557.294 62.4736C557.147 62.547 557.074 62.7672 557.074 63.1341ZM622.9 96.1619V119.612C622.9 119.979 622.753 120.309 622.459 120.602C622.166 120.896 621.835 121.043 621.468 121.043H618.716C618.349 121.043 618.019 120.896 617.725 120.602C617.432 120.309 617.285 119.979 617.285 119.612V45.4092C617.285 45.0423 617.432 44.712 617.725 44.4184C618.019 44.1248 618.349 43.978 618.716 43.978H621.468C621.835 43.978 622.166 44.1248 622.459 44.4184C622.753 44.712 622.9 45.0423 622.9 45.4092V84.9325C622.9 85.2995 622.973 85.5196 623.12 85.593C623.34 85.6664 623.56 85.5563 623.78 85.2628L657.138 45.079C657.799 44.345 658.606 43.978 659.56 43.978H664.184C664.551 43.978 664.771 44.0881 664.845 44.3083C664.992 44.5285 664.955 44.7854 664.735 45.079L635.45 80.749C634.79 81.4829 634.79 82.2169 635.45 82.9508L667.377 119.942C667.597 120.236 667.671 120.492 667.597 120.713C667.524 120.933 667.267 121.043 666.827 121.043H662.313C661.359 121.043 660.551 120.676 659.891 119.942L631.707 87.1343C631.046 86.4004 630.386 86.4004 629.725 87.1343L623.89 93.7399C623.23 94.4004 622.9 95.2078 622.9 96.1619Z" fill="#14181f"/>
+    </svg>
+  </div>
+  <div class="nav-item active" data-page="briefing">📈 Briefing Diário</div>
+  <div class="nav-item" data-page="regulamentacoes">📄 Regulamentações</div>
+  <div class="nav-item" data-page="tendencias">⚡ Tendências</div>
+  <div class="nav-item" data-page="alertas">⚠️ Alertas</div>
+  <div class="nav-item" data-page="arquivo">🗄️ Arquivo</div>
+  <div class="sidebar-footer">Atualizado em 10/07/2026</div>
+</div>
+
+<div class="main">
+
+  <!-- PAGE: Briefing Diário -->
+  <div class="page active" id="page-briefing">
+    <div class="page-title">Briefing Diário</div>
+    <div class="page-subtitle">IA, Blockchain, Criptoativos e Pagamentos Internacionais — desenvolvimentos das últimas 24-48h com impacto para a Brosbnk</div>
+
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-label">Notícias hoje</div><div class="stat-value" style="color:#2f6fed">4</div><div class="stat-sub" style="color:#1f9d55">4 temas cobertos</div></div>
+      <div class="stat-card"><div class="stat-label">Impacto alto</div><div class="stat-value" style="color:#d0302f">4</div><div class="stat-sub">requerem avaliação</div></div>
+      <div class="stat-card"><div class="stat-label">Ações recomendadas</div><div class="stat-value" style="color:#b8860b">4</div><div class="stat-sub">concretas, por notícia</div></div>
+      <div class="stat-card"><div class="stat-label">Temas</div><div class="stat-value" style="font-size:18px;color:#1f9d55">IA · Chain · Cripto · Pay</div></div>
+    </div>
+
+    <div class="section-heading"><span class="bar"></span>Notícias de hoje</div>
+
+    <div class="card" id="news-1">
+      <div class="card-top">
+        <div class="card-title">Swift lança plataforma blockchain com 17 bancos globais</div>
+        <div class="badge badge-alto">Impacto: Alto</div>
+      </div>
+      <div class="card-meta">Blockchain · 02/07/2026 · Fonte: Hipther</div>
+      <div class="card-body">HSBC, UBS, Wells Fargo e Citi pilotam liquidação tokenizada na nova rede Swift.</div>
+      <div class="card-footer">
+        <span><span class="rec-label">Recomendação:</span> verificar se o parceiro bancário está no piloto e pedir acesso antecipado.</span>
+      </div>
+      <div class="card-actions" style="margin-top:10px;">
+        <a class="link-btn" href="https://hipther.com/latest-news/2026/07/02/114492/blocks-headlines-today-in-blockchain-july-2-2026-707-cayman-ethereum-blockchain-consensus-ai-supply-chains-and-institutional-web3/" target="_blank" rel="noopener">Ler matéria original ↗</a>
+        <button class="dive-btn" onclick="openDive('swift')">🔍 Mergulhar</button>
+      </div>
+    </div>
+
+    <div class="card" id="news-2">
+      <div class="card-top">
+        <div class="card-title">Citigroup expande pagamentos instantâneos cross-border</div>
+        <div class="badge badge-alto">Impacto: Alto</div>
+      </div>
+      <div class="card-meta">Pagamentos · 09/07/2026 · Fonte: US News</div>
+      <div class="card-body">Liquidação em tempo real estendida a bancos parceiros fora da rede interna do Citi.</div>
+      <div class="card-footer">
+        <span><span class="rec-label">Recomendação:</span> contatar correspondent banking do Citi para elegibilidade como parceiro.</span>
+      </div>
+      <div class="card-actions" style="margin-top:10px;">
+        <a class="link-btn" href="https://money.usnews.com/investing/news/articles/2026-07-09/citigroup-expands-cross-border-instant-payments-to-partner-banks" target="_blank" rel="noopener">Ler matéria original ↗</a>
+        <button class="dive-btn" onclick="openDive('citi')">🔍 Mergulhar</button>
+      </div>
+    </div>
+
+    <div class="card" id="news-3">
+      <div class="card-top">
+        <div class="card-title">Circle recebe aprovação de trust bank nos EUA</div>
+        <div class="badge badge-medio">Impacto: Médio</div>
+      </div>
+      <div class="card-meta">Criptoativos · 08-09/07/2026 · Fonte: CoinDesk</div>
+      <div class="card-body">Emissora do USDC formaliza entrada no sistema bancário regulado dos EUA.</div>
+      <div class="card-footer">
+        <span><span class="rec-label">Recomendação:</span> avaliar integração com USDC para liquidação em corredores de câmbio.</span>
+      </div>
+      <div class="card-actions" style="margin-top:10px;">
+        <a class="link-btn" href="https://www.coindesk.com/" target="_blank" rel="noopener">Ler matéria original ↗</a>
+        <button class="dive-btn" onclick="openDive('circle')">🔍 Mergulhar</button>
+      </div>
+    </div>
+
+    <div class="card" id="news-4">
+      <div class="card-top">
+        <div class="card-title">Hyundai adota stablecoin para tesouraria internacional</div>
+        <div class="badge badge-alto">Impacto: Alto</div>
+      </div>
+      <div class="card-meta">Criptoativos · 08-09/07/2026 · Fonte: CoinDesk</div>
+      <div class="card-body">Primeira grande empresa sul-coreana a mover capital entre operações via stablecoin.</div>
+      <div class="card-footer">
+        <span><span class="rec-label">Recomendação:</span> lançar piloto de tesouraria via stablecoin com clientes estratégicos.</span>
+      </div>
+      <div class="card-actions" style="margin-top:10px;">
+        <a class="link-btn" href="https://www.coindesk.com/business/2026/07/06/bitmine-added-another-usd74-million-in-ether-as-tom-lee-bets-on-clarity-act-boost" target="_blank" rel="noopener">Ler matéria original ↗</a>
+        <button class="dive-btn" onclick="openDive('hyundai')">🔍 Mergulhar</button>
+      </div>
+    </div>
+
+    <div class="insight-box">
+      <div class="insight-title">Insight estratégico</div>
+      <div class="insight-body">Bancos-âncora (Swift, Citi) e emissores de stablecoin (Circle) estão convergindo para os mesmos trilhos de liquidação tokenizada — a janela para a Brosbnk se posicionar como parceira ou early adopter é agora, antes que a adoção corporativa (Hyundai) se torne padrão de mercado.</div>
+    </div>
+  </div>
+
+  <!-- PAGE: Regulamentações -->
+  <div class="page" id="page-regulamentacoes">
+    <div class="page-title">Regulamentações</div>
+    <div class="page-subtitle">Timeline de regulamentações e mudanças normativas que impactam o setor de pagamentos internacionais</div>
+    <div class="filter-pills">
+      <div class="pill active">Todos</div><div class="pill">Brasil</div><div class="pill">Global</div><div class="pill">Crítico</div>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="card" style="margin-bottom:0;">
+          <div class="card-top"><div class="card-title">Resolução BCB nº 561/2026 entra em vigor</div><div class="badge badge-critico">Crítico</div></div>
+          <div class="card-meta">22 de maio de 2026 · Brasil</div>
+          <div class="card-body">Restrições ao eFX entram em vigor. Prestadores de serviço não podem usar stablecoins ou Bitcoin para liquidar pagamentos internacionais. Liquidação deve ocorrer via câmbio tradicional ou contas em reais de não residentes.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="card" style="margin-bottom:0;">
+          <div class="card-top"><div class="card-title">Checker Finance levanta US$ 8 milhões</div><div class="badge badge-discussao">Em discussão</div></div>
+          <div class="card-meta">20 de maio de 2026 · América Latina</div>
+          <div class="card-body">Investimento estratégico para expandir infraestrutura de pagamentos cross-border e liquidez de stablecoins na América Latina, com foco especial no Brasil.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="card" style="margin-bottom:0;">
+          <div class="card-top"><div class="card-title">Mastercard Agent Pay: primeiro pagamento por IA</div><div class="badge badge-implementado">Implementado</div></div>
+          <div class="card-meta">Maio de 2026 · Global</div>
+          <div class="card-body">Primeira transação comercial iniciada por agente de IA realizada na Holanda. Framework permite que agentes de IA realizem pagamentos com consentimento explícito do consumidor.</div>
+        </div>
+      </div>
+    </div>
+    <div class="insight-box">
+      <div class="insight-title">Impacto para BROSBNK</div>
+      <ul class="action-list">
+        <li><span class="arrow">→</span>Conformidade com Resolução 561: garantir liquidação via canais tradicionais para eFX</li>
+        <li><span class="arrow">→</span>Preparação para APIs de agentes de IA: desenvolver endpoints para transações programáveis</li>
+        <li><span class="arrow">→</span>Monitoramento de licenças VASP: acompanhar evolução das autorizações para serviços de ativos virtuais</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PAGE: Tendências -->
+  <div class="page" id="page-tendencias">
+    <div class="page-title">Tendências</div>
+    <div class="page-subtitle">Principais tendências tecnológicas e de mercado que moldam o futuro dos pagamentos internacionais</div>
+    <div class="section-heading"><span class="bar"></span>Tendências principais</div>
+    <div class="card">
+      <div class="card-top"><div class="card-title">Pagamentos por agentes de IA</div><div class="badge badge-alto">Impacto: Alto</div></div>
+      <div class="card-body">Mastercard e Visa lançam frameworks para transações iniciadas por agentes de IA. 53% das empresas americanas permitiriam que agentes negociassem termos em seu nome.</div>
+      <div class="card-meta" style="margin-top:8px;">2026-2027</div>
+    </div>
+    <div class="card">
+      <div class="card-top"><div class="card-title">Adoção de stablecoins em mercados emergentes</div><div class="badge badge-alto">Impacto: Alto</div></div>
+      <div class="card-body">Meta, Stripe e outras plataformas começam a oferecer pagamentos em USDC em Colômbia, Filipinas e outros mercados emergentes.</div>
+      <div class="card-meta" style="margin-top:8px;">2026</div>
+    </div>
+    <div class="card">
+      <div class="card-top"><div class="card-title">Convergência regulatória global</div><div class="badge badge-medio">Impacto: Médio</div></div>
+      <div class="card-body">Reino Unido, EUA e outros mercados desenvolvidos criam frameworks unificados para pagamentos tradicionais e tokenizados.</div>
+      <div class="card-meta" style="margin-top:8px;">2026-2027</div>
+    </div>
+    <div class="insight-box">
+      <div class="insight-title">Dinâmica de mercado</div>
+      <div class="insight-body">Volume de stablecoins: $27.6T (Q1 2026, estimativa anual) · Crescimento YoY: +40% em mercados emergentes · Oportunidade de liquidez: $10T em potencial em 4 regiões principais.</div>
+    </div>
+  </div>
+
+  <!-- PAGE: Alertas -->
+  <div class="page" id="page-alertas">
+    <div class="page-title">Alertas & notificações</div>
+    <div class="page-subtitle">Acompanhe eventos críticos e prazos importantes que requerem ação imediata</div>
+    <div class="stats-grid" style="grid-template-columns: repeat(3,1fr);">
+      <div class="stat-card"><div class="stat-label">Críticos</div><div class="stat-value" style="color:#d0302f">2</div><div class="stat-sub">requerem ação imediata</div></div>
+      <div class="stat-card"><div class="stat-label">Avisos</div><div class="stat-value" style="color:#b8860b">3</div><div class="stat-sub">monitorar próximas semanas</div></div>
+      <div class="stat-card"><div class="stat-label">Informações</div><div class="stat-value" style="color:#2f6fed">4</div><div class="stat-sub">atualizações de mercado</div></div>
+    </div>
+    <div class="section-heading"><span class="bar"></span>Itens de ação prioritários</div>
+    <div class="priority-item">
+      <div class="priority-num">1</div>
+      <div class="priority-text"><strong>Conformidade com Resolução 561 (prazo: 31/05)</strong><span>Revisar e atualizar infraestrutura de liquidação</span></div>
+    </div>
+    <div class="priority-item">
+      <div class="priority-num">2</div>
+      <div class="priority-text"><strong>Preparar documentação VASP (prazo: 31/05/2027)</strong><span>Iniciar processo de autorização junto ao BC</span></div>
+    </div>
+    <div class="priority-item" style="border-bottom:none;">
+      <div class="priority-num">3</div>
+      <div class="priority-text"><strong>Desenvolver APIs para agentes de IA</strong><span>Preparar endpoints para transações programáveis</span></div>
+    </div>
+  </div>
+
+  <!-- PAGE: Arquivo -->
+  <div class="page" id="page-arquivo">
+    <div class="page-title">Arquivo</div>
+    <div class="page-subtitle">Acesse notícias anteriores e explore o histórico completo de briefings</div>
+    <div class="card">
+      <div class="card-title" style="margin-bottom:8px;">Briefing 10/07/2026</div>
+      <div class="card-body">4 notícias: Swift blockchain, Citigroup instant payments, Circle trust bank, Hyundai stablecoin.</div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="margin-bottom:8px;">Briefings anteriores</div>
+      <div class="card-body" style="color:#9aa1ac;">O histórico se acumula a cada execução diária do briefing.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Chat overlay "Mergulhar" -->
+<div class="chat-overlay" id="chat-overlay">
+  <div class="chat-panel">
+    <div class="chat-header">
+      <div>
+        <div class="chat-header-title" id="chat-title">Mergulhar na notícia</div>
+        <div class="chat-header-sub" id="chat-sub">Plano passo a passo para a Brosbnk</div>
+      </div>
+      <button class="chat-close" onclick="closeDive()">✕</button>
+    </div>
+    <div class="chat-body" id="chat-body"></div>
+    <div class="chat-footer">
+      <button class="chat-ask-btn" id="chat-ask-btn">Perguntar ao Claude sobre isso ↗</button>
+    </div>
+  </div>
+</div>
+
+<script>
+var diveData = {
+  swift: {
+    title: "Swift lança plataforma blockchain com 17 bancos",
+    sub: "O que é e como a Brosbnk deve reagir",
+    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer em relação ao lançamento da plataforma blockchain da Swift com 17 bancos (HSBC, UBS, Wells Fargo, Citi) pilotando liquidação tokenizada.",
+    html: [
+      "<h4>O que aconteceu, em linguagem simples</h4>",
+      "<p>A Swift, a rede que os bancos usam há décadas para se comunicar e liquidar pagamentos internacionais, criou uma versão nova baseada em blockchain. Dezessete bancos grandes, incluindo HSBC e Citi, vão testar mover dinheiro tokenizado nessa rede — ou seja, uma representação digital de moeda que se movimenta mais rápido que o sistema tradicional.</p>",
+      "<h4>Por que isso importa para a Brosbnk</h4>",
+      "<p>A Brosbnk hoje depende de trilhos de liquidação tradicionais para câmbio e pagamentos internacionais. Se esse novo padrão pegar, os bancos que ficarem de fora correm o risco de operar em um sistema mais lento e caro no futuro.</p>",
+      "<h4>Passo a passo recomendado</h4>",
+      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Mapear o parceiro bancário atual</strong><span>Descobrir se o banco correspondente que a Brosbnk usa hoje para liquidação internacional está entre os 17 participantes do piloto.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Pedir acesso antecipado</strong><span>Se estiver, contatar o gerente de relacionamento e solicitar participação como parceiro secundário no piloto.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Escolher uma rota de teste de baixo risco</strong><span>Selecionar um corredor de câmbio de baixo volume (não o principal) para testar a liquidação tokenizada sem expor operação crítica.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Medir o ganho real</strong><span>Comparar tempo e custo de liquidação nesse novo trilho contra o processo atual, por pelo menos 30 dias.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Decidir sobre expansão</strong><span>Se o ganho for consistente, levar a decisão de expandir para mais corredores à diretoria.</span></div></div>"
+    ].join("")
+  },
+  citi: {
+    title: "Citigroup expande pagamentos instantâneos",
+    sub: "O que é e como a Brosbnk deve reagir",
+    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer em relação à expansão do Citigroup de pagamentos instantâneos cross-border para bancos parceiros.",
+    html: [
+      "<h4>O que aconteceu, em linguagem simples</h4>",
+      "<p>O Citigroup abriu sua rede de pagamentos internacionais instantâneos para outros bancos poderem usar como parceiros, não só clientes internos do Citi. Isso significa que qualquer instituição conectada pode oferecer liquidação em tempo real para seus próprios clientes.</p>",
+      "<h4>Por que isso importa para a Brosbnk</h4>",
+      "<p>Clientes corporativos de câmbio e comex estão cada vez mais acostumados com pagamentos instantâneos no dia a dia (Pix, por exemplo) e vão esperar o mesmo padrão em operações internacionais. Se a Brosbnk continuar em D+1 ou D+2 em certas rotas, corre risco de perder clientes para quem oferecer velocidade.</p>",
+      "<h4>Passo a passo recomendado</h4>",
+      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Contatar o time de correspondent banking do Citi</strong><span>Perguntar diretamente sobre os critérios de elegibilidade para se tornar banco parceiro no programa de pagamentos instantâneos.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Levantar as rotas de maior volume</strong><span>Puxar um relatório interno das rotas de comex e câmbio com maior volume de transações da carteira atual da Brosbnk.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Priorizar 1-2 rotas para negociação</strong><span>Focar a conversa com o Citi nas rotas de maior impacto para o negócio, não tentar cobrir tudo de uma vez.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Avaliar custo de integração</strong><span>Pedir ao time técnico uma estimativa de esforço para conectar os sistemas da Brosbnk à API de pagamentos instantâneos do Citi.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Comunicar aos clientes estratégicos</strong><span>Se a integração avançar, preparar comunicação para clientes corporativos destacando a nova velocidade de liquidação.</span></div></div>"
+    ].join("")
+  },
+  circle: {
+    title: "Circle recebe licença de trust bank",
+    sub: "O que é e como a Brosbnk deve reagir",
+    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer em relação à aprovação da Circle como trust bank federal nos EUA e o que isso significa para o uso do USDC.",
+    html: [
+      "<h4>O que aconteceu, em linguagem simples</h4>",
+      "<p>A Circle, empresa por trás do stablecoin USDC (uma moeda digital atrelada ao dólar), conseguiu uma licença bancária federal nos EUA. Isso significa que ela agora opera dentro do sistema bancário regulado, e não mais como uma empresa de tecnologia à margem dele.</p>",
+      "<h4>Por que isso importa para a Brosbnk</h4>",
+      "<p>Isso reduz a incerteza jurídica de usar USDC como ferramenta de liquidação em operações de câmbio. Ao mesmo tempo, a Circle pode passar a oferecer diretamente serviços de custódia e liquidação para empresas, competindo com fintechs como a Brosbnk pelo mesmo cliente corporativo.</p>",
+      "<h4>Passo a passo recomendado</h4>",
+      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Entender o enquadramento local</strong><span>Verificar com o time de compliance se a Resolução BCB 561/2026, que restringe uso de stablecoins em eFX, afeta o uso de USDC como ferramenta de liquidação bilateral fora do Brasil.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Mapear corredores com maior fricção cambial</strong><span>Identificar rotas de câmbio (ex. América Latina-EUA) onde o custo e tempo de liquidação tradicional são mais altos.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Estudar a integração técnica com USDC</strong><span>Levantar o esforço de engenharia para suportar recebimento e conversão de USDC como ponte de liquidação nesses corredores específicos.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Rodar um piloto controlado</strong><span>Testar com um cliente corporativo disposto, em volume pequeno, comparando custo e velocidade contra o câmbio tradicional.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Monitorar a Circle como concorrente</strong><span>Acompanhar se a Circle passa a oferecer serviços de custódia corporativa diretamente, o que sinalizaria concorrência direta com a Brosbnk.</span></div></div>"
+    ].join("")
+  },
+  hyundai: {
+    title: "Hyundai adota stablecoin corporativo",
+    sub: "O que é e como a Brosbnk deve reagir",
+    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer em relação à Hyundai adotar stablecoin para movimentar dinheiro entre suas operações internacionais.",
+    html: [
+      "<h4>O que aconteceu, em linguagem simples</h4>",
+      "<p>A Hyundai passou a usar stablecoin (moeda digital atrelada ao dólar ou outra moeda forte) para mover dinheiro entre suas próprias operações em diferentes países, em vez de usar apenas os canais bancários tradicionais de tesouraria internacional.</p>",
+      "<h4>Por que isso importa para a Brosbnk</h4>",
+      "<p>Isso é um sinal de que grandes empresas, não só especuladores, estão adotando stablecoin como ferramenta prática de tesouraria. Se esse movimento crescer, parte do volume de câmbio corporativo que hoje passaria por bancos como a Brosbnk pode migrar para esses trilhos alternativos — mas também abre a oportunidade de a Brosbnk oferecer esse serviço ela mesma.</p>",
+      "<h4>Passo a passo recomendado</h4>",
+      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Identificar clientes corporativos com operações internacionais</strong><span>Levantar 2-3 clientes estratégicos da carteira atual que têm filiais ou fornecedores em outros países.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Desenhar uma oferta piloto simples</strong><span>Propor um serviço de movimentação de tesouraria via stablecoin para esses clientes, com acompanhamento próximo da Brosbnk.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Definir os limites de compliance</strong><span>Confirmar com jurídico quais regras da Resolução 561 e de licenciamento VASP se aplicam a esse tipo de operação.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Testar e medir</strong><span>Rodar o piloto por um trimestre, comparando custo e tempo de transferência internacional contra o método tradicional usado pelo cliente.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Formalizar como produto, se validado</strong><span>Se os resultados forem positivos, transformar em um produto formal de tesouraria internacional via stablecoin.</span></div></div>"
+    ].join("")
+  }
+};
+
+document.querySelectorAll('.nav-item').forEach(function(item) {
+  item.addEventListener('click', function() {
+    document.querySelectorAll('.nav-item').forEach(function(i) { i.classList.remove('active'); });
+    document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+    item.classList.add('active');
+    document.getElementById('page-' + item.dataset.page).classList.add('active');
+  });
+});
+
+document.querySelectorAll('.filter-pills .pill').forEach(function(pill) {
+  pill.addEventListener('click', function() {
+    document.querySelectorAll('.filter-pills .pill').forEach(function(p) { p.classList.remove('active'); });
+    pill.classList.add('active');
+  });
+});
+
+function openDive(key) {
+  var d = diveData[key];
+  if (!d) return;
+  document.getElementById('chat-title').textContent = d.title;
+  document.getElementById('chat-sub').textContent = d.sub;
+  document.getElementById('chat-body').innerHTML = d.html;
+  document.getElementById('chat-ask-btn').onclick = function() {
+    if (window.sendPrompt) { window.sendPrompt(d.prompt); }
+  };
+  document.getElementById('chat-overlay').classList.add('open');
+}
+function closeDive() {
+  document.getElementById('chat-overlay').classList.remove('open');
+}
+document.getElementById('chat-overlay').addEventListener('click', function(e) {
+  if (e.target === this) closeDive();
+});
+</script>
+
+</body>
+</html>
