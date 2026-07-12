@@ -685,12 +685,17 @@ function buildRadarCard(item, index) {
     '<div class="card-meta">' + escapeHtml(item.categoria || 'Notícia') + ' · ' + escapeHtml(item.data || '') + ' · Fonte: ' + escapeHtml(item.fonte || 'Não informada') + '</div>' +
     '<div class="card-body">' + escapeHtml(item.resumo || '') + '</div>' +
     '<div class="card-footer"><span><span class="rec-label">Impacto BROSBNK:</span> ' + escapeHtml(item.impacto_brosbnk || 'Em avaliação.') + '</span></div>' +
-    (link === '#' ? '' : '<div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="' + escapeHtml(link) + '" target="_blank" rel="noopener">Ler matéria original ↗</a></div>');
+    '<div class="card-actions" style="margin-top:10px;">' +
+    (link === '#' ? '' : '<a class="link-btn" href="' + escapeHtml(link) + '" target="_blank" rel="noopener">Ler matéria original ↗</a>') +
+    '<button class="dive-btn" onclick="openRadarDive(' + index + ')">🔍 Mergulhar</button></div>';
   return card;
 }
 
+var radarNewsCache = [];
+
 function renderBrosbnkRadar(news) {
       if (!news.length) throw new Error('A planilha ainda não contém notícias válidas.');
+      radarNewsCache = news;
       document.querySelectorAll('#page-briefing > .card').forEach(function(card) { card.remove(); });
       var insight = document.querySelector('#page-briefing > .insight-box');
       news.sort(function(a, b) {
@@ -940,6 +945,38 @@ function toggleArchive(id) {
   var heading = document.getElementById('head-' + id.replace('arch-', ''));
   if (group) group.classList.toggle('collapsed');
   if (heading) heading.classList.toggle('collapsed');
+}
+
+function openRadarDive(index) {
+  var item = radarNewsCache[index];
+  if (!item) return;
+  var prompt = [
+    'Analise esta notícia para o BROSBNK:', item.titulo,
+    'Categoria: ' + (item.categoria || 'Não informada'),
+    'Fonte: ' + (item.fonte || 'Não informada'),
+    'Resumo: ' + (item.resumo || ''),
+    'Impacto inicial: ' + (item.impacto_brosbnk || ''),
+    'Explique a ameaça, a oportunidade, o efeito regulatório/operacional e recomende 3 ações práticas.'
+  ].join('\n');
+  document.getElementById('chat-title').textContent = item.titulo;
+  document.getElementById('chat-sub').textContent = 'Análise automática para o BROSBNK';
+  document.getElementById('chat-body').innerHTML = [
+    '<h4>Resumo</h4><p>' + escapeHtml(item.resumo || 'Resumo não informado.') + '</p>',
+    '<h4>Por que importa para o BROSBNK</h4><p>' + escapeHtml(item.impacto_brosbnk || 'Impacto em avaliação.') + '</p>',
+    '<h4>Pontos para aprofundar</h4>',
+    '<div class="chat-step"><div class="chat-step-num">1</div><div class="chat-step-text"><strong>Ameaça ou oportunidade</strong><span>Avaliar como o movimento altera concorrência, parceiros e posicionamento.</span></div></div>',
+    '<div class="chat-step"><div class="chat-step-num">2</div><div class="chat-step-text"><strong>Impacto operacional</strong><span>Verificar efeitos em corredores, liquidez, compliance, tecnologia e custos.</span></div></div>',
+    '<div class="chat-step"><div class="chat-step-num">3</div><div class="chat-step-text"><strong>Próxima ação</strong><span>Definir se o tema exige monitoramento, contato com parceiro ou decisão interna.</span></div></div>'
+  ].join('');
+  var askBtn = document.getElementById('chat-ask-btn');
+  askBtn.textContent = 'Copiar pergunta para a IA';
+  askBtn.onclick = function() {
+    navigator.clipboard.writeText(prompt).then(function() {
+      askBtn.textContent = '✓ Pergunta copiada!';
+      setTimeout(function() { askBtn.textContent = 'Copiar pergunta para a IA'; }, 3000);
+    });
+  };
+  document.getElementById('chat-overlay').classList.add('open');
 }
 
 function openDive(key) {
