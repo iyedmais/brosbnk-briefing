@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BROSBNK Briefing Diário</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root { color-scheme: light; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -67,6 +70,8 @@
   .badge-discussao { background: rgba(184,134,11,0.12); color: #b8860b; }
   .badge-implementado { background: rgba(31,157,85,0.12); color: #1f9d55; }
   .badge-regiao { background: rgba(47,111,237,0.12); color: #2f6fed; }
+  .badge-verificar { background: rgba(107,114,128,0.14); color: #4b5563; }
+  .verification-notice { margin: 0 0 20px; padding: 14px 16px; border: 1px solid #f0c36d; border-left: 4px solid #b8860b; border-radius: 8px; background: #fff9e8; color: #5f4a12; font-size: 12.5px; line-height: 1.55; }
   .card-meta { color: #6b7280; font-size: 11px; margin: 4px 0 10px; }
   .card-body { font-size: 13px; line-height: 1.6; color: #3c4450; }
   .card-footer { margin-top: 10px; padding-top: 10px; border-top: 1px solid #e2e5ea; font-size: 12.5px; color: #3c4450; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
@@ -212,7 +217,7 @@
 </head>
 <body>
 <div class="sidebar">
-  <div class="logo-wrap">
+  <div class="logo-wrap" role="img" aria-label="BROSBNK">
     <svg width="176" height="47" viewBox="0 0 675 179" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Logo BROSBNK">
       <g clip-path="url(#clip0_brand)">
         <path d="M38.4729 23.1168L0 0.452881V85.2757H38.4729V23.1168Z" fill="black"/>
@@ -248,7 +253,7 @@
   <div class="nav-item" data-page="tendencias">⚡ Tendências</div>
   <div class="nav-item" data-page="alertas">⚠️ Alertas</div>
   <div class="nav-item" data-page="arquivo">🗄️ Arquivo</div>
-  <div class="sidebar-footer">Atualizado em 11/07/2026</div>
+  <div class="sidebar-footer" id="last-updated">Atualizado em 11/07/2026</div>
 </div>
 
 <div class="main">
@@ -259,9 +264,9 @@
     <div class="page-subtitle">IA, Blockchain, Criptoativos, Pagamentos Internacionais, Regulamentação, Lei de Criptoativos/Criptomoedas e Câmbio com Stablecoins — desenvolvimentos das últimas 24-48h com impacto para a Brosbnk</div>
 
     <div class="stats-grid">
-      <div class="stat-card"><div class="stat-label">Notícias hoje</div><div class="stat-value" style="color:#2f6fed">4</div><div class="stat-sub" style="color:#1f9d55">8 temas monitorados</div></div>
-      <div class="stat-card"><div class="stat-label">Impacto alto</div><div class="stat-value" style="color:#d0302f">2</div><div class="stat-sub">requerem avaliação</div></div>
-      <div class="stat-card"><div class="stat-label">Ações recomendadas</div><div class="stat-value" style="color:#b8860b">4</div><div class="stat-sub">concretas, por notícia</div></div>
+      <div class="stat-card"><div class="stat-label">Notícias hoje</div><div class="stat-value" id="news-today-count" style="color:#2f6fed">4</div><div class="stat-sub" style="color:#1f9d55">8 temas monitorados</div></div>
+      <div class="stat-card"><div class="stat-label">Impacto alto</div><div class="stat-value" id="high-impact-count" style="color:#d0302f">2</div><div class="stat-sub">requerem avaliação</div></div>
+      <div class="stat-card"><div class="stat-label">Ações recomendadas</div><div class="stat-value" id="recommendation-count" style="color:#b8860b">4</div><div class="stat-sub">concretas, por notícia</div></div>
       <div class="stat-card"><div class="stat-label">Temas</div><div class="stat-value" style="font-size:13px;line-height:1.5;color:#1f9d55">IA · Blockchain · Cripto · Pagamentos · Regulamentação · Lei Cripto · Câmbio Stablecoins</div></div>
     </div>
 
@@ -340,6 +345,7 @@
   <div class="page" id="page-regulamentacoes">
     <div class="page-title">Regulamentações</div>
     <div class="page-subtitle">Timeline de regulamentações que impactam pagamentos internacionais — Brasil, Colômbia, Panamá, Estados Unidos e Global. Cada item traz o impacto no mercado e a oportunidade concreta para a Brosbnk.</div>
+    <div class="verification-notice"><strong>Revisão em andamento:</strong> itens sem link direto para ato, diário oficial ou autoridade competente são apenas sinais de monitoramento. Não devem fundamentar decisão jurídica, regulatória ou operacional até validação documental.</div>
     <div class="filter-pills">
       <div class="pill active" data-filter="todos">Todos</div>
       <div class="pill" data-filter="brasil">Brasil</div>
@@ -354,12 +360,12 @@
       <div class="timeline-item" data-region="brasil">
         <div class="timeline-dot"></div>
         <div class="card" style="margin-bottom:0;">
-          <div class="card-top"><div class="card-title">Resolução BCB nº 561/2026 entra em vigor</div><div class="badge badge-critico">Crítico</div></div>
+          <div class="card-top"><div class="card-title">Alegação sobre “Resolução BCB nº 561/2026”</div><div class="badge badge-verificar">Não verificado</div></div>
           <div class="card-meta"><span class="badge badge-regiao">Brasil</span> · 22 de maio de 2026</div>
-          <div class="card-body">Restrições ao eFX entram em vigor. Prestadores de serviço não podem usar stablecoins ou Bitcoin para liquidar pagamentos internacionais. Liquidação deve ocorrer via câmbio tradicional ou contas em reais de não residentes.</div>
+          <div class="card-body">O número, a vigência e o conteúdo atribuídos a esse ato não foram localizados nas fontes oficiais consultadas. A descrição anterior foi preservada somente como hipótese a confirmar.</div>
           <div class="card-footer stacked">
-            <div><span class="impact-label">Impacto no mercado:</span> fecha a rota de liquidação via stablecoin/Bitcoin para eFX no Brasil, empurrando todo o fluxo de volta para o câmbio tradicional regulado.</div>
-            <div><span class="opp-label">Oportunidade Brosbnk:</span> reforça a vantagem de quem já opera 100% dentro do câmbio tradicional — posicionar a Brosbnk como alternativa "compliance-first" frente a concorrentes que apostaram em cripto antes da resolução.</div>
+            <div><span class="impact-label">Impacto no mercado:</span> indeterminado até confirmação do ato e de seu alcance jurídico.</div>
+            <div><span class="opp-label">Ação Brosbnk:</span> solicitar validação ao jurídico regulatório e anexar o link oficial antes de classificar como crítico.</div>
           </div>
         </div>
       </div>
@@ -371,7 +377,7 @@
           <div class="card-meta"><span class="badge badge-regiao">Brasil / América Latina</span> · 20 de maio de 2026</div>
           <div class="card-body">Investimento estratégico para expandir infraestrutura de pagamentos cross-border e liquidez de stablecoins na América Latina, com foco especial no Brasil.</div>
           <div class="card-footer stacked">
-            <div><span class="impact-label">Impacto no mercado:</span> mais capital entrando em infraestrutura cross-border sinaliza que investidores apostam em crescimento de liquidez via stablecoin na região, mesmo com a restrição da Resolução 561.</div>
+            <div><span class="impact-label">Impacto no mercado:</span> mais capital entrando em infraestrutura cross-border sinaliza interesse de investidores na liquidez via stablecoin na região; o enquadramento brasileiro precisa ser analisado separadamente em fonte oficial.</div>
             <div><span class="opp-label">Oportunidade Brosbnk:</span> observar se a Checker Finance vira parceira ou concorrente direta em corredores de câmbio; avaliar parceria de liquidez antes que ela feche contratos exclusivos com bancos locais.</div>
           </div>
         </div>
@@ -393,9 +399,9 @@
       <div class="timeline-item" data-region="colombia">
         <div class="timeline-dot"></div>
         <div class="card" style="margin-bottom:0;">
-          <div class="card-top"><div class="card-title">DIAN exige relatório completo de criptoativos (Resolução 000240)</div><div class="badge badge-critico">Crítico</div></div>
+          <div class="card-top"><div class="card-title">Alegação sobre DIAN Resolução 000240 e criptoativos</div><div class="badge badge-verificar">Não verificado</div></div>
           <div class="card-meta"><span class="badge badge-regiao">Colômbia</span> · Início de 2026</div>
-          <div class="card-body">Seguindo o padrão CARF da OCDE, a autoridade fiscal colombiana (DIAN) passa a exigir que empresas reportem donos de contas, volume de operações e valor de mercado de cada movimentação em criptoativos no país.</div>
+          <div class="card-body">A obrigação, o número do ato e sua relação direta com o CARF precisam ser confirmados no texto oficial da DIAN antes de uso operacional.</div>
           <div class="card-footer stacked">
             <div><span class="impact-label">Impacto no mercado:</span> aumenta o custo de compliance para qualquer empresa que movimenta cripto na Colômbia, favorecendo quem já tem infraestrutura de reporte automatizado.</div>
             <div><span class="opp-label">Oportunidade Brosbnk:</span> se a Brosbnk atuar ou pretende atuar na Colômbia, adequar-se cedo ao CARF vira vantagem competitiva frente a concorrentes que ainda não têm reporte automatizado.</div>
@@ -406,9 +412,9 @@
       <div class="timeline-item" data-region="panama">
         <div class="timeline-dot"></div>
         <div class="card" style="margin-bottom:0;">
-          <div class="card-top"><div class="card-title">Panamá apresenta 1ª lei fintech abrangente (Anteprojeto 314)</div><div class="badge badge-discussao">Em discussão</div></div>
+          <div class="card-top"><div class="card-title">Alegação sobre Anteprojeto 314 de fintech no Panamá</div><div class="badge badge-verificar">Não verificado</div></div>
           <div class="card-meta"><span class="badge badge-regiao">Panamá</span> · 13 de janeiro de 2026</div>
-          <div class="card-body">A "Ley Marco Integral de Tecnologías Financieras" foi apresentada à Assembleia Nacional do Panamá, criando licenciamento para provedores de ativos virtuais e autorizando o uso de Bitcoin, Ethereum e stablecoins para pagar bens, serviços e quitar dívidas — desde que ambas as partes concordem.</div>
+          <div class="card-body">Não foi localizado, na pesquisa inicial, documento oficial que confirme simultaneamente número, título e conteúdo descritos. Manter apenas como pauta de pesquisa.</div>
           <div class="card-footer stacked">
             <div><span class="impact-label">Impacto no mercado:</span> se aprovada, o Panamá se torna um dos mercados mais abertos da região para liquidação via stablecoin, podendo atrair volume de câmbio que hoje passa pelo Brasil ou pela Colômbia.</div>
             <div><span class="opp-label">Oportunidade Brosbnk:</span> acompanhar a tramitação e avaliar abrir operação ou parceria no Panamá cedo, para não ficar de fora caso o país vire hub regional de pagamentos via stablecoin.</div>
@@ -419,12 +425,12 @@
       <div class="timeline-item" data-region="panama">
         <div class="timeline-dot"></div>
         <div class="card" style="margin-bottom:0;">
-          <div class="card-top"><div class="card-title">SBP Rule 1-2026 endurece AML/CTF no Panamá</div><div class="badge badge-critico">Crítico</div></div>
+          <div class="card-top"><div class="card-title">Alegação sobre “SBP Rule 1-2026” no Panamá</div><div class="badge badge-verificar">Não verificado</div></div>
           <div class="card-meta"><span class="badge badge-regiao">Panamá</span> · 27 de janeiro de 2026</div>
-          <div class="card-body">A Superintendência de Bancos do Panamá (SBP) endurece as exigências de prevenção à lavagem de dinheiro e financiamento ao terrorismo para toda entidade que toca o sistema bancário, incluindo fintechs e provedores de cripto.</div>
+          <div class="card-body">O ato específico e sua aplicação a fintechs e provedores de cripto não foram confirmados em fonte oficial na revisão inicial.</div>
           <div class="card-footer stacked">
             <div><span class="impact-label">Impacto no mercado:</span> eleva a barreira de entrada para fintechs no Panamá — quem não tiver compliance robusto de AML/CTF fica de fora do acesso bancário.</div>
-            <div><span class="opp-label">Oportunidade Brosbnk:</span> usar a experiência de compliance já exigida no Brasil (Resolução 561, VASP) como base para entrar no Panamá já adequada à SBP Rule 1-2026, à frente de concorrentes menos preparados.</div>
+            <div><span class="opp-label">Ação Brosbnk:</span> confirmar o ato e seu escopo com assessoria panamenha antes de transformar a alegação em requisito de compliance.</div>
           </div>
         </div>
       </div>
@@ -473,9 +479,9 @@
     <div class="insight-box">
       <div class="insight-title">Impacto para BROSBNK</div>
       <ul class="action-list">
-        <li><span class="arrow">→</span>Conformidade com Resolução 561: garantir liquidação via canais tradicionais para eFX no Brasil</li>
-        <li><span class="arrow">→</span>Colômbia: acompanhar a lei de ativos digitais e já adequar reporte ao padrão CARF/DIAN</li>
-        <li><span class="arrow">→</span>Panamá: monitorar o Anteprojeto 314 e avaliar entrada antecipada com compliance SBP Rule 1-2026 pronto</li>
+        <li><span class="arrow">→</span>Brasil: confirmar em fonte oficial o ato aplicável a eFX e stablecoins antes de alterar a operação</li>
+        <li><span class="arrow">→</span>Colômbia: validar com o jurídico o marco vigente e as obrigações efetivas de reporte à DIAN</li>
+        <li><span class="arrow">→</span>Panamá: conferir os atos diretamente na Assembleia Nacional e na SBP antes de planejar adequações</li>
         <li><span class="arrow">→</span>Estados Unidos: preparar dois planos para o CLARITY Act e priorizar apenas stablecoins aprovadas pelo GENIUS Act</li>
         <li><span class="arrow">→</span>Preparação para APIs de agentes de IA: desenvolver endpoints para transações programáveis</li>
       </ul>
@@ -520,11 +526,11 @@
     <div class="section-heading"><span class="bar"></span>Itens de ação prioritários</div>
     <div class="priority-item">
       <div class="priority-num">1</div>
-      <div class="priority-text"><strong>Conformidade com Resolução 561 (prazo: 31/05)</strong><span>Revisar e atualizar infraestrutura de liquidação</span></div>
+      <div class="priority-text"><strong>Validar atos regulatórios citados no painel</strong><span>Obter texto oficial, vigência, alcance e parecer jurídico antes de mudar a infraestrutura</span></div>
     </div>
     <div class="priority-item">
       <div class="priority-num">2</div>
-      <div class="priority-text"><strong>Preparar documentação VASP (prazo: 31/05/2027)</strong><span>Iniciar processo de autorização junto ao BC</span></div>
+      <div class="priority-text"><strong>Mapear requisitos de autorização no Brasil</strong><span>Confirmar categoria, cronograma e capital aplicáveis diretamente nas normas do BCB</span></div>
     </div>
     <div class="priority-item" style="border-bottom:none;">
       <div class="priority-num">3</div>
@@ -537,8 +543,8 @@
     <div class="page-title">Arquivo</div>
     <div class="page-subtitle">Histórico completo de notícias de todos os briefings diários — clique na data para abrir ou fechar</div>
     <div class="stats-grid" style="grid-template-columns: repeat(2,1fr);">
-      <div class="stat-card"><div class="stat-label">Briefings arquivados</div><div class="stat-value" style="color:#2f6fed">2</div><div class="stat-sub">desde 10/07/2026</div></div>
-      <div class="stat-card"><div class="stat-label">Notícias acumuladas</div><div class="stat-value" style="color:#1f9d55">8</div><div class="stat-sub">em todos os briefings</div></div>
+      <div class="stat-card"><div class="stat-label">Briefings arquivados</div><div class="stat-value" id="archive-group-count" style="color:#2f6fed">2</div><div class="stat-sub">desde 10/07/2026</div></div>
+      <div class="stat-card"><div class="stat-label">Notícias acumuladas</div><div class="stat-value" id="archive-news-count" style="color:#1f9d55">8</div><div class="stat-sub">em todos os briefings</div></div>
     </div>
 
     <div class="section-heading archive-date-heading" id="head-20260711" onclick="toggleArchive('arch-20260711')"><span class="bar"></span>11/07/2026<span class="count-badge">4 notícias</span><span class="chevron">▾</span></div>
@@ -620,8 +626,7 @@
     </div>
     <div class="chat-body" id="chat-body"></div>
     <div class="chat-footer">
-      <button class="chat-ask-btn" id="chat-ask-btn">Perguntar ao Claude sobre isso ↗</button>
-      <button class="chat-copy-btn" id="chat-copy-btn" title="Copiar texto">📋 Copiar</button>
+      <button class="chat-ask-btn" id="chat-ask-btn">Copiar pergunta para a IA</button>
     </div>
   </div>
 </div>
@@ -740,7 +745,7 @@ var diveData = {
       "<h4>Por que isso importa para a Brosbnk</h4>",
       "<p>Stablecoins regulados como o USDC são cada vez mais usados como trilho de liquidação em pagamentos internacionais e câmbio — área central da Brosbnk — mas a Circle licenciada também pode virar concorrente direta por clientes corporativos.</p>",
       "<h4>Plano passo a passo</h4>",
-      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Checar compliance</strong><span>Confirmar como a Resolução BCB 561/2026 se aplica ao uso de USDC fora do Brasil.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Checar compliance</strong><span>Confirmar com o jurídico quais normas brasileiras efetivamente se aplicam ao uso de USDC fora do Brasil.</span></div></div>",
       "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Mapear corredores</strong><span>Identificar corredores de câmbio com maior fricção cambial.</span></div></div>",
       "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Estudar integração técnica</strong><span>Avaliar o esforço de integração com USDC via Circle.</span></div></div>",
       "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Rodar piloto controlado</strong><span>Testar com um cliente disposto antes de escalar.</span></div></div>",
@@ -759,12 +764,39 @@ var diveData = {
       "<h4>Plano passo a passo</h4>",
       "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Identificar clientes-alvo</strong><span>Selecionar 2-3 clientes corporativos com operações internacionais.</span></div></div>",
       "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Desenhar a oferta piloto</strong><span>Estruturar um serviço de tesouraria internacional via stablecoin.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Definir limites de compliance</strong><span>Respeitar a Resolução 561 e o licenciamento VASP.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Definir limites de compliance</strong><span>Validar as normas e autorizações aplicáveis em cada jurisdição antes de operar.</span></div></div>",
       "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Testar e medir</strong><span>Rodar o piloto por um trimestre e medir custo/tempo frente ao câmbio tradicional.</span></div></div>",
       "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Formalizar como produto</strong><span>Se validado, transformar em oferta permanente.</span></div></div>"
     ].join("")
   }
 };
+
+function updateDashboardMetrics() {
+  var currentCards = document.querySelectorAll('#page-briefing > .card');
+  var highImpact = document.querySelectorAll('#page-briefing > .card .badge-alto');
+  var recommendations = document.querySelectorAll('#page-briefing > .card .rec-label');
+  var archiveGroups = document.querySelectorAll('#page-arquivo .archive-group');
+  var archiveCards = document.querySelectorAll('#page-arquivo .archive-group .card');
+  var setText = function(id, value) {
+    var element = document.getElementById(id);
+    if (element) element.textContent = value;
+  };
+  setText('news-today-count', currentCards.length);
+  setText('high-impact-count', highImpact.length);
+  setText('recommendation-count', recommendations.length);
+  setText('archive-group-count', archiveGroups.length);
+  setText('archive-news-count', archiveCards.length);
+}
+
+updateDashboardMetrics();
+
+var updatedElement = document.getElementById('last-updated');
+if (updatedElement && document.lastModified) {
+  var modifiedDate = new Date(document.lastModified);
+  if (!isNaN(modifiedDate.getTime())) {
+    updatedElement.textContent = 'Arquivo atualizado em ' + modifiedDate.toLocaleDateString('pt-BR');
+  }
+}
 
 document.querySelectorAll('.nav-item').forEach(function(item) {
   item.addEventListener('click', function() {
@@ -812,17 +844,10 @@ function openDive(key) {
   document.getElementById('chat-sub').textContent = d.sub;
   document.getElementById('chat-body').innerHTML = d.html;
   var askBtn = document.getElementById('chat-ask-btn');
-  var originalLabel = 'Perguntar ao Claude sobre isso ↗';
+  var originalLabel = 'Copiar pergunta para a IA';
   askBtn.textContent = originalLabel;
   askBtn.onclick = function() {
-    if (window.sendPrompt) {
-      // Painel rodando embutido no chat do Claude (ex.: artifact) — envia direto.
-      window.sendPrompt(d.prompt);
-      return;
-    }
-    // Painel rodando como site standalone (GitHub Pages): copia o prompt
-    // e abre uma nova conversa no Claude para o usuário colar.
-    var openClaude = function() { window.open('https://claude.ai/new', '_blank'); };
+    // Copia o contexto para uso em qualquer assistente de IA, sem abrir outro site.
     var legacyCopyPrompt = function() {
       var ta = document.createElement('textarea');
       ta.value = d.prompt;
@@ -837,21 +862,19 @@ function openDive(key) {
       return ok;
     };
     if (legacyCopyPrompt()) {
-      askBtn.textContent = 'Prompt copiado! Abrindo Claude...';
+      askBtn.textContent = '✓ Pergunta copiada!';
       setTimeout(function() { askBtn.textContent = originalLabel; }, 3000);
-      openClaude();
     } else if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(d.prompt).then(function() {
-        askBtn.textContent = 'Prompt copiado! Abrindo Claude...';
+        askBtn.textContent = '✓ Pergunta copiada!';
         setTimeout(function() { askBtn.textContent = originalLabel; }, 3000);
-        openClaude();
       }, function() {
-        askBtn.textContent = 'Abrindo Claude... cole o prompt manualmente';
+        askBtn.textContent = 'Não foi possível copiar';
         setTimeout(function() { askBtn.textContent = originalLabel; }, 3000);
-        openClaude();
       });
     } else {
-      openClaude();
+      askBtn.textContent = 'Não foi possível copiar';
+      setTimeout(function() { askBtn.textContent = originalLabel; }, 3000);
     }
   };
   document.getElementById('chat-overlay').classList.add('open');
@@ -863,43 +886,6 @@ document.getElementById('chat-overlay').addEventListener('click', function(e) {
   if (e.target === this) closeDive();
 });
 
-document.getElementById('chat-copy-btn').addEventListener('click', function() {
-  var copyBtn = this;
-  var titleText = document.getElementById('chat-title').textContent;
-  var bodyText = document.getElementById('chat-body').innerText;
-  var fullText = titleText + '\n\n' + bodyText;
-  var originalLabel = '📋 Copiar';
-  var markCopied = function() {
-    copyBtn.textContent = '✓ Copiado!';
-    setTimeout(function() { copyBtn.textContent = originalLabel; }, 2000);
-  };
-  var markFailed = function() {
-    copyBtn.textContent = 'Selecione e copie manualmente';
-    setTimeout(function() { copyBtn.textContent = originalLabel; }, 2500);
-  };
-  // Método principal: execCommand via textarea temporário — síncrono, funciona
-  // dentro do próprio clique sem depender de permissão assíncrona do navegador.
-  var legacyCopy = function() {
-    var ta = document.createElement('textarea');
-    ta.value = fullText;
-    ta.style.position = 'fixed';
-    ta.style.opacity = '0';
-    document.body.appendChild(ta);
-    ta.focus();
-    ta.select();
-    var ok = false;
-    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
-    document.body.removeChild(ta);
-    return ok;
-  };
-  if (legacyCopy()) {
-    markCopied();
-  } else if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(fullText).then(markCopied, markFailed);
-  } else {
-    markFailed();
-  }
-});
 </script>
 </body>
 </html>
