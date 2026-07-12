@@ -633,6 +633,7 @@
 
 <script>
 var BROSBNK_RADAR_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTNYA8boA2Ozy4GdciHw78o-mpTShAzXz1VdO9lucOToIHoILaCst_QTDo-wYo-ZhQr3s7u9RijcLzE/pub?gid=0&single=true&output=csv';
+var BROSBNK_RADAR_GVIZ = 'https://docs.google.com/spreadsheets/d/1Hn8BqC5M14XXSO_B2VYCxPL2d6A50CiCCNR6s4JSuUw/gviz/tq?tqx=responseHandler:handleBrosbnkRadar&gid=0';
 
 function escapeHtml(value) {
   return String(value == null ? '' : value)
@@ -688,14 +689,7 @@ function buildRadarCard(item, index) {
   return card;
 }
 
-function loadBrosbnkRadar() {
-  fetch(BROSBNK_RADAR_CSV, { cache: 'no-store' })
-    .then(function(response) {
-      if (!response.ok) throw new Error('Falha HTTP ' + response.status);
-      return response.text();
-    })
-    .then(function(text) {
-      var news = parseCsv(text);
+function renderBrosbnkRadar(news) {
       if (!news.length) throw new Error('A planilha ainda não contém notícias válidas.');
       document.querySelectorAll('#page-briefing > .card').forEach(function(card) { card.remove(); });
       var insight = document.querySelector('#page-briefing > .insight-box');
@@ -710,12 +704,36 @@ function loadBrosbnkRadar() {
       var updated = document.getElementById('last-updated');
       if (updated) updated.textContent = 'Radar atualizado em ' + latestDate;
       updateDashboardMetrics();
-    })
-    .catch(function(error) {
-      console.error('BROSBNK RADAR:', error);
-      var updated = document.getElementById('last-updated');
-      if (updated) updated.textContent = 'Radar indisponível · exibindo última versão';
-    });
+}
+
+function handleBrosbnkRadar(response) {
+  try {
+    if (!response || response.status !== 'ok' || !response.table) throw new Error('Resposta inválida da planilha.');
+    var headers = response.table.cols.map(function(col) { return String(col.label || '').trim().toLowerCase(); });
+    var news = response.table.rows.map(function(row) {
+      var item = {};
+      headers.forEach(function(header, index) {
+        var cell = row.c[index];
+        item[header] = cell ? String(cell.f != null ? cell.f : (cell.v != null ? cell.v : '')).trim() : '';
+      });
+      return item;
+    }).filter(function(item) { return item.titulo; });
+    renderBrosbnkRadar(news);
+  } catch (error) {
+    console.error('BROSBNK RADAR:', error);
+    var updated = document.getElementById('last-updated');
+    if (updated) updated.textContent = 'Radar indisponível · exibindo última versão';
+  }
+}
+
+function loadBrosbnkRadar() {
+  var script = document.createElement('script');
+  script.src = BROSBNK_RADAR_GVIZ + '&_=' + Date.now();
+  script.onerror = function() {
+    var updated = document.getElementById('last-updated');
+    if (updated) updated.textContent = 'Radar indisponível · exibindo última versão';
+  };
+  document.head.appendChild(script);
 }
 
 var diveData = {
