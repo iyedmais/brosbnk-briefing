@@ -69,7 +69,6 @@
   .badge-critico { background: rgba(208,48,47,0.12); color: #d0302f; }
   .badge-discussao { background: rgba(184,134,11,0.12); color: #b8860b; }
   .badge-implementado { background: rgba(31,157,85,0.12); color: #1f9d55; }
-  .badge-aprovado { background: rgba(31,157,85,0.12); color: #1f9d55; }
   .badge-regiao { background: rgba(47,111,237,0.12); color: #2f6fed; }
   .badge-verificar { background: rgba(107,114,128,0.14); color: #4b5563; }
   .verification-notice { margin: 0 0 20px; padding: 14px 16px; border: 1px solid #f0c36d; border-left: 4px solid #b8860b; border-radius: 8px; background: #fff9e8; color: #5f4a12; font-size: 12.5px; line-height: 1.55; }
@@ -254,7 +253,7 @@
   <div class="nav-item" data-page="tendencias">⚡ Tendências</div>
   <div class="nav-item" data-page="alertas">⚠️ Alertas</div>
   <div class="nav-item" data-page="arquivo">🗄️ Arquivo</div>
-  <div class="sidebar-footer" id="last-updated">Atualizado em 13/07/2026</div>
+  <div class="sidebar-footer" id="last-updated">Atualizado em 14/07/2026</div>
 </div>
 
 <div class="main">
@@ -262,11 +261,11 @@
   <!-- PAGE: Briefing Diário -->
   <div class="page active" id="page-briefing">
     <div class="page-title">Briefing Diário</div>
-    <div class="page-subtitle">IA, Blockchain, Criptoativos, Pagamentos Internacionais, Regulamentação, Lei de Criptoativos/Criptomoedas e Câmbio com Stablecoins — desenvolvimentos das últimas 24-48h com impacto para a Brosbnk</div>
+    <div class="page-subtitle">IA, Blockchain, Criptoativos, Pagamentos Internacionais, Regulamentação, Lei de Criptoativos/Criptomoedas e Câmbio com Stablecoins — desenvolvimentos das últimas 24-48h com impacto para a Brosbnk · 14/07/2026</div>
 
     <div class="stats-grid">
       <div class="stat-card"><div class="stat-label">Notícias hoje</div><div class="stat-value" id="news-today-count" style="color:#2f6fed">4</div><div class="stat-sub" style="color:#1f9d55">8 temas monitorados</div></div>
-      <div class="stat-card"><div class="stat-label">Impacto alto</div><div class="stat-value" id="high-impact-count" style="color:#d0302f">1</div><div class="stat-sub">requerem avaliação</div></div>
+      <div class="stat-card"><div class="stat-label">Impacto alto</div><div class="stat-value" id="high-impact-count" style="color:#d0302f">2</div><div class="stat-sub">+ 1 crítico (GENIUS Act)</div></div>
       <div class="stat-card"><div class="stat-label">Ações recomendadas</div><div class="stat-value" id="recommendation-count" style="color:#b8860b">4</div><div class="stat-sub">concretas, por notícia</div></div>
       <div class="stat-card"><div class="stat-label">Temas</div><div class="stat-value" style="font-size:13px;line-height:1.5;color:#1f9d55">IA · Blockchain · Cripto · Pagamentos · Regulamentação · Lei Cripto · Câmbio Stablecoins</div></div>
     </div>
@@ -275,71 +274,71 @@
 
     <div class="card" id="news-1">
       <div class="card-top">
-        <div class="card-title">BC classifica exchanges cripto (PSAVs) como instituições financeiras Tipo 3</div>
+        <div class="card-title">USDC ultrapassa Tether e teste de remessa Hyundai avança para Circle e Visa</div>
         <div class="badge badge-alto">Impacto: Alto</div>
       </div>
-      <div class="card-meta">Regulamentação · Lei de Criptoativos · 01/07/2026 · Fonte: LegisWeb / Mattos Filho</div>
-      <div class="card-body">Resolução BCB nº 580/2026 enquadra as sociedades prestadoras de serviços de ativos virtuais e seus conglomerados como instituições Tipo 3, equiparando-as a corretoras de valores; exigências de capital mínimo, gestão de risco e divulgação valem a partir de 01/01/2027.</div>
+      <div class="card-meta">Câmbio com Stablecoins · Pagamentos Internacionais · 07-14/07/2026 · Fonte: CoinDesk / Cryptobriefing / Yahoo Finance</div>
+      <div class="card-body">O USDC passou a responder por ~70% do volume ajustado de stablecoins no 1º semestre de 2026 (US$90,8 tri acumulados), contra ~25% do USDT, com o mercado batendo recorde de US$1,79 tri em junho. Em paralelo, a Hyundai concluiu remessa transfronteiriça via stablecoin (US$20 mil dos EUA ao México em ~7 min) e prepara novo teste com Circle e Visa.</div>
       <div class="card-footer">
-        <span><span class="rec-label">Recomendação:</span> mapear até dez/2026 quais PSAVs parceiras já se adequam ao Tipo 3 e usar isso como filtro de due diligence.</span>
+        <span><span class="rec-label">Recomendação:</span> desenhar piloto de remessa/tesouraria corporativa via USDC em corredor de alto volume, usando o case Hyundai como prova de conceito comercial.</span>
       </div>
       <div class="card-actions" style="margin-top:10px;">
-        <a class="link-btn" href="https://www.legisweb.com.br/legislacao/?id=497649" target="_blank" rel="noopener">Ler matéria original ↗</a>
-        <button class="dive-btn" onclick="openDive('bcb-580')">🔍 Mergulhar</button>
+        <a class="link-btn" href="https://finance.yahoo.com/markets/crypto/articles/circle-usdc-pulls-ahead-tether-192600167.html" target="_blank" rel="noopener">Ler matéria original ↗</a>
+        <button class="dive-btn" onclick="openDive('usdc-lead')">🔍 Mergulhar</button>
       </div>
     </div>
 
     <div class="card" id="news-2">
       <div class="card-top">
-        <div class="card-title">Prazo final do GENIUS Act vence em 18/07 — reguladores correm contra o tempo</div>
+        <div class="card-title">Reta final do GENIUS Act: 4 dias para o prazo e regras finais ainda não publicadas</div>
         <div class="badge badge-critico">Impacto: Crítico</div>
       </div>
-      <div class="card-meta">Lei de Criptomoedas · Câmbio com Stablecoins · Prazo 18/07/2026 · Fonte: CryptoSlate / Tesouro dos EUA</div>
-      <div class="card-body">Reguladores dos EUA (OCC, Fed, FDIC, FinCEN/OFAC) têm até 18/07 para transformar o GENIUS Act em regras operacionais sobre emissores de stablecoin, sem mecanismo de fallback caso percam o prazo; a Circle (USDC) já garantiu carta de trust bank da OCC em 10/07.</div>
+      <div class="card-meta">Lei de Criptomoedas · Câmbio com Stablecoins · Estados Unidos · 14/07/2026 · Fonte: Finance Magnates / Stablecoin Insider</div>
+      <div class="card-body">A quatro dias do prazo estatutário de 18/07, as agências dos EUA (OCC, Fed, FDIC, NCUA, Treasury, FinCEN/OFAC) ainda não publicaram as regras finais do GENIUS Act. As minutas já revelam capital mínimo de US$5 milhões por emissor, padrões mais duros de reserva e liquidez e uma janela de ~120 dias de adequação após a publicação.</div>
       <div class="card-footer">
-        <span><span class="rec-label">Recomendação:</span> priorizar USDC/Circle como stablecoin de referência em qualquer parceria futura, por já deter conformidade bancária federal.</span>
+        <span><span class="rec-label">Recomendação:</span> adotar desde já os critérios das minutas (capital US$5M, reservas, 120 dias) como checklist de seleção de emissor, priorizando USDC/Circle.</span>
       </div>
       <div class="card-actions" style="margin-top:10px;">
-        <a class="link-btn" href="https://cryptoslate.com/genius-act-deadline-puts-stablecoin-issuers-on-the-clock/" target="_blank" rel="noopener">Ler matéria original ↗</a>
-        <button class="dive-btn" onclick="openDive('genius-act-deadline')">🔍 Mergulhar</button>
+        <a class="link-btn" href="https://www.financemagnates.com/cryptocurrency/regulation/ten-days-to-the-genius-act-deadline-what-the-draft-rules-already-reveal/" target="_blank" rel="noopener">Ler matéria original ↗</a>
+        <button class="dive-btn" onclick="openDive('genius-deadline')">🔍 Mergulhar</button>
       </div>
     </div>
 
     <div class="card" id="news-3">
       <div class="card-top">
-        <div class="card-title">Mercado de stablecoins encolhe US$ 10 bi desde maio, mas USDC ganha espaço sobre USDT</div>
-        <div class="badge badge-medio">Impacto: Médio</div>
+        <div class="card-title">LatAm avança: Panamá reconhece cripto como meio de pagamento e Colômbia inicia reporte fiscal CARF</div>
+        <div class="badge badge-alto">Impacto: Alto</div>
       </div>
-      <div class="card-meta">Criptoativos · Câmbio com Stablecoins · 12/07/2026 · Fonte: CoinDesk / InvestNews</div>
-      <div class="card-body">Capitalização global de stablecoins caiu ~US$ 10 bi desde maio (USDT: US$190bi→184bi; USDC: quase US$80bi→73bi), mas analistas veem correção pontual; no Brasil, a USDC ganha share sobre a USDT por ter auditorias públicas e enquadramento no GENIUS Act e na MiCA europeia.</div>
+      <div class="card-meta">Regulamentação · Lei de Criptoativos · Panamá / Colômbia · Julho 2026 · Fonte: Chambers and Partners / Coinlaw / Bitget News</div>
+      <div class="card-body">O Anteproyecto de Ley N° 314 do Panamá (apresentado em 13/01/2026) reconhece ativos digitais — incluindo Bitcoin, Ethereum e stablecoins — como meio de pagamento válido em contratos civis e comerciais, e cria licenciamento VASP/CASP. Na Colômbia, a DIAN passou a exigir reporte de dados cripto pelo ano fiscal 2026 sob o padrão CARF da OCDE, com o primeiro relatório anual devido até maio de 2027.</div>
       <div class="card-footer">
-        <span><span class="rec-label">Recomendação:</span> adotar USDC como padrão em qualquer piloto de câmbio digital, priorizando transparência regulatória sobre volume histórico do USDT.</span>
+        <span><span class="rec-label">Recomendação:</span> mapear o Panamá como porta de entrada para produto de câmbio via stablecoin e montar já capacidade de reporte CARF automatizado para atuar na Colômbia.</span>
       </div>
       <div class="card-actions" style="margin-top:10px;">
-        <a class="link-btn" href="https://www.coindesk.com/markets/2026/07/12/stablecoin-market-cap-has-shrunk-by-usd10-billion-since-may-but-analyst-sees-no-reason-to-panic" target="_blank" rel="noopener">Ler matéria original ↗</a>
-        <button class="dive-btn" onclick="openDive('stablecoin-usdc-share')">🔍 Mergulhar</button>
+        <a class="link-btn" href="https://practiceguides.chambers.com/practice-guides/blockchain-crypto-assets-2026/panama" target="_blank" rel="noopener">Ler matéria original ↗</a>
+        <button class="dive-btn" onclick="openDive('latam-reg')">🔍 Mergulhar</button>
       </div>
     </div>
 
     <div class="card" id="news-4">
       <div class="card-top">
-        <div class="card-title">HSBC firma parceria plurianual com Google Cloud para embutir IA em operações globais</div>
+        <div class="card-title">Era do piloto acabou: 84% dos bancos rodam IA em nível corporativo</div>
         <div class="badge badge-medio">Impacto: Médio</div>
       </div>
-      <div class="card-meta">Inteligência Artificial · 08/07/2026 · Fonte: Hipther / Fintech Pulse</div>
-      <div class="card-body">HSBC planeja mais de 200 casos de uso de IA em dois anos via modelos Gemini, tratando IA como camada operacional — não piloto pontual; o movimento acompanha a abertura do AFAC 2026, competição global que testa IA aplicada a serviços financeiros reais.</div>
+      <div class="card-meta">Inteligência Artificial · 01-14/07/2026 · Fonte: Fintech.Global (nCino) / PYMNTS</div>
+      <div class="card-body">Benchmark da nCino com 150 executivos mostra que 84% das instituições dos EUA já rodam IA em nível corporativo (91% IA generativa, 87% preditiva, 81% agêntica) — a era do piloto acabou. Anthropic e FIS demonstraram agentes de IA embarcados diretamente no core bancário, com implantações iniciais em curso e disponibilidade ampla prevista para o 2º semestre de 2026.</div>
       <div class="card-footer">
-        <span><span class="rec-label">Recomendação:</span> expandir o piloto de IA em KYC/AML de onboarding para um roadmap de camada operacional, incluindo triagem de comex, com revisão humana obrigatória.</span>
+        <span><span class="rec-label">Recomendação:</span> evoluir o piloto de IA em KYC/AML para roadmap de camada operacional (triagem comex, monitoramento de câmbio), com revisão humana obrigatória.</span>
       </div>
       <div class="card-actions" style="margin-top:10px;">
-        <a class="link-btn" href="https://hipther.com/latest-news/2026/07/08/114785/fintech-pulse-your-daily-industry-brief-july-8-2026-afac-2026-ant-group-nvidia-belitsoft-eromnet-payverse-paypal-goldman-sachs-icbc-tencent/" target="_blank" rel="noopener">Ler matéria original ↗</a>
-        <button class="dive-btn" onclick="openDive('hsbc-google-ai')">🔍 Mergulhar</button>
+        <a class="link-btn" href="https://fintech.global/2026/07/01/ncino-banks-are-running-three-ais-not-one/" target="_blank" rel="noopener">Ler matéria original ↗</a>
+        <button class="dive-btn" onclick="openDive('ai-enterprise')">🔍 Mergulhar</button>
       </div>
     </div>
 
     <div class="insight-box">
       <div class="insight-title">Insight estratégico</div>
-      <div class="insight-body">O fio condutor do dia é padronização: o Banco Central equipara exchanges cripto a corretoras de valores, os reguladores dos EUA correm contra o prazo do GENIUS Act sem rede de segurança, e o mercado migra para a stablecoin mais transparente (USDC) em vez da mais líquida historicamente (USDT). Quem tratar conformidade como vantagem competitiva — e não como custo — sai na frente à medida que 2027 se aproxima.</div>
+      <div class="insight-body">O eixo do dia é infraestrutura virando padrão: o USDC consolida-se como trilho institucional de fato, os EUA fecham (ou não) o marco do GENIUS Act nesta semana, a América Latina redesenha suas regras cripto e a IA sai do piloto para o core bancário. Para a Brosbnk, a janela é padronizar cedo — USDC como trilho de referência, os critérios do GENIUS como filtro de emissor, o Panamá como corredor emergente e a IA como camada operacional auditável, não experimento isolado.</div>
     </div>
   </div>
 
@@ -359,15 +358,54 @@
     </div>
     <div class="timeline">
 
+      <div class="timeline-item" data-region="panama">
+        <div class="timeline-dot"></div>
+        <div class="card" style="margin-bottom:0;">
+          <div class="card-top"><div class="card-title">Panamá — Anteproyecto de Ley N° 314 reconhece cripto como meio de pagamento</div><div class="badge badge-discussao">Em discussão</div></div>
+          <div class="card-meta"><span class="badge badge-regiao">Panamá</span> · Apresentado em 13/01/2026 · atualização 14/07/2026</div>
+          <div class="card-body">Projeto apresentado à Assembleia Nacional formaliza licenciamento de VASP/CASP e reconhece ativos digitais — inclusive Bitcoin, Ethereum e stablecoins — como meio de pagamento válido em contratos civis e comerciais. O país ainda não tem regime específico para stablecoins sistêmicas. (Fonte: Chambers and Partners, Blockchain & Crypto-Assets 2026 — Panamá.)</div>
+          <div class="card-footer stacked">
+            <div><span class="impact-label">Impacto no mercado:</span> se aprovada, o Panamá se torna um dos mercados mais abertos da região para liquidação via stablecoin, podendo atrair volume de câmbio que hoje passa pelo Brasil ou pela Colômbia.</div>
+            <div><span class="opp-label">Oportunidade Brosbnk:</span> acompanhar a tramitação e posicionar o Panamá como corredor-piloto para produto de câmbio/liquidação via stablecoin, avaliando parceria ou licença local antes que o país vire hub regional.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-region="colombia">
+        <div class="timeline-dot"></div>
+        <div class="card" style="margin-bottom:0;">
+          <div class="card-top"><div class="card-title">Colômbia — DIAN inicia reporte fiscal cripto sob padrão CARF</div><div class="badge badge-discussao">Em discussão</div></div>
+          <div class="card-meta"><span class="badge badge-regiao">Colômbia</span> · Ano fiscal 2026 · 1º relatório até maio/2027</div>
+          <div class="card-body">A DIAN passou a exigir que exchanges e prestadores de serviço cripto coletem e reportem dados de usuários (titularidade, volumes, transferências, preços de mercado e saldos líquidos) cobrindo Bitcoin, altcoins e stablecoins, seguindo o padrão CARF da OCDE. Enforcement começou no ano fiscal de 2026; o primeiro relatório anual completo vence em maio de 2027. (Fonte: Coinlaw / Bitget News.)</div>
+          <div class="card-footer stacked">
+            <div><span class="impact-label">Impacto no mercado:</span> aumenta o custo de compliance de qualquer empresa que movimenta cripto na Colômbia, favorecendo quem já tem infraestrutura de reporte automatizado.</div>
+            <div><span class="opp-label">Oportunidade Brosbnk:</span> montar capacidade de reporte CARF automatizado agora torna a adequação um diferencial competitivo caso a Brosbnk atue ou pretenda atuar na Colômbia.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-region="eua">
+        <div class="timeline-dot"></div>
+        <div class="card" style="margin-bottom:0;">
+          <div class="card-top"><div class="card-title">GENIUS Act — reta final de regulamentação (prazo 18/07)</div><div class="badge badge-critico">Crítico</div></div>
+          <div class="card-meta"><span class="badge badge-regiao">Estados Unidos</span> · Prazo: 18 de julho de 2026 · atualização 14/07/2026</div>
+          <div class="card-body">A quatro dias do prazo estatutário, as agências dos EUA ainda não publicaram as regras finais. As minutas já revelam capital mínimo de US$5 milhões por emissor, padrões mais duros de reserva/liquidez, ausência de seguro de depósito para detentores de token e janela de ~120 dias de adequação após a publicação. Não há mecanismo de fallback caso o prazo não seja cumprido.</div>
+          <div class="card-footer stacked">
+            <div><span class="impact-label">Impacto no mercado:</span> define, na prática, quais stablecoins americanas serão consideradas "seguras" para uso institucional, separando emissores em conformidade dos que não estarão; um eventual vácuo aumenta a incerteza de curto prazo.</div>
+            <div><span class="opp-label">Oportunidade Brosbnk:</span> usar os critérios das minutas como checklist de due diligence de emissor, priorizando USDC/Circle (já com charter bancário federal) em qualquer estratégia de liquidação via stablecoin.</div>
+          </div>
+        </div>
+      </div>
+
       <div class="timeline-item" data-region="brasil">
         <div class="timeline-dot"></div>
         <div class="card" style="margin-bottom:0;">
-          <div class="card-top"><div class="card-title">Resolução BCB nº 580/2026 classifica exchanges cripto como instituições Tipo 3</div><div class="badge badge-aprovado">Aprovada</div></div>
-          <div class="card-meta"><span class="badge badge-regiao">Brasil</span> · Publicada 01/07/2026 · Vigência prudencial 01/01/2027</div>
-          <div class="card-body">O Banco Central enquadrou as sociedades prestadoras de serviços de ativos virtuais (PSAVs) e seus conglomerados como instituições Tipo 3, sob o princípio "mesma atividade, mesmo risco, mesma regulação"; a partir de 2027, passam a exigir capital mínimo, gestão de risco e divulgação periódica, nos moldes de corretoras e distribuidoras de valores mobiliários.</div>
+          <div class="card-top"><div class="card-title">Brasil — Resolução BCB nº 580/2026 classifica PSAVs como IF Tipo 3</div><div class="badge badge-alto">Vigência 2027</div></div>
+          <div class="card-meta"><span class="badge badge-regiao">Brasil</span> · Publicada 01/07/2026 · vigência prudencial 01/01/2027</div>
+          <div class="card-body">O Banco Central enquadrou as prestadoras de serviços de ativos virtuais (PSAVs) e seus conglomerados como instituições financeiras Tipo 3, sob o princípio "mesma atividade, mesmo risco, mesma regulação". A partir de 01/01/2027 valem exigências de capital mínimo, gestão de risco e divulgação periódica, nos moldes de corretoras/distribuidoras.</div>
           <div class="card-footer stacked">
-            <div><span class="impact-label">Impacto no mercado:</span> exchanges cripto brasileiras descapitalizadas podem sair do mercado ou se consolidar até 2027, elevando a barreira de entrada e reduzindo operadores informais.</div>
-            <div><span class="opp-label">Oportunidade Brosbnk:</span> usar o enquadramento Tipo 3 como filtro pronto de due diligence, trabalhando apenas com PSAVs já aderentes, e se posicionar como parceira "compliance-first" para clientes que buscam contraparte cripto regulada.</div>
+            <div><span class="impact-label">Impacto no mercado:</span> eleva a barreira de entrada e afasta operadores informais; exchanges descapitalizadas podem sair do mercado ou reduzir operação até 2027.</div>
+            <div><span class="opp-label">Oportunidade Brosbnk:</span> mapear até o fim de 2026 quais PSAVs já sinalizam adequação ao Tipo 3 e usar o enquadramento como filtro de due diligence pronto para contrapartes cripto.</div>
           </div>
         </div>
       </div>
@@ -385,19 +423,6 @@
         </div>
       </div>
 
-      <div class="timeline-item" data-region="brasil">
-        <div class="timeline-dot"></div>
-        <div class="card" style="margin-bottom:0;">
-          <div class="card-top"><div class="card-title">Checker Finance levanta US$ 8 milhões</div><div class="badge badge-discussao">Em discussão</div></div>
-          <div class="card-meta"><span class="badge badge-regiao">Brasil / América Latina</span> · 20 de maio de 2026</div>
-          <div class="card-body">Investimento estratégico para expandir infraestrutura de pagamentos cross-border e liquidez de stablecoins na América Latina, com foco especial no Brasil.</div>
-          <div class="card-footer stacked">
-            <div><span class="impact-label">Impacto no mercado:</span> mais capital entrando em infraestrutura cross-border sinaliza interesse de investidores na liquidez via stablecoin na região; o enquadramento brasileiro precisa ser analisado separadamente em fonte oficial.</div>
-            <div><span class="opp-label">Oportunidade Brosbnk:</span> observar se a Checker Finance vira parceira ou concorrente direta em corredores de câmbio; avaliar parceria de liquidez antes que ela feche contratos exclusivos com bancos locais.</div>
-          </div>
-        </div>
-      </div>
-
       <div class="timeline-item" data-region="colombia">
         <div class="timeline-dot"></div>
         <div class="card" style="margin-bottom:0;">
@@ -407,32 +432,6 @@
           <div class="card-footer stacked">
             <div><span class="impact-label">Impacto no mercado:</span> enquanto a lei não passa, pagamentos internacionais em cripto seguem limitados na Colômbia — qualquer liquidação via stablecoin nesse corredor opera sob incerteza jurídica.</div>
             <div><span class="opp-label">Oportunidade Brosbnk:</span> o corredor Brasil-Colômbia via câmbio tradicional segue como opção mais segura enquanto a regulação cripto amadurece; posicionar a Brosbnk cedo junto a clientes colombianos como ponte de câmbio confiável antes que a lei defina as regras do jogo.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="timeline-item" data-region="colombia">
-        <div class="timeline-dot"></div>
-        <div class="card" style="margin-bottom:0;">
-          <div class="card-top"><div class="card-title">Alegação sobre DIAN Resolução 000240 e criptoativos</div><div class="badge badge-verificar">Não verificado</div></div>
-          <div class="card-meta"><span class="badge badge-regiao">Colômbia</span> · Início de 2026</div>
-          <div class="card-body">A obrigação, o número do ato e sua relação direta com o CARF precisam ser confirmados no texto oficial da DIAN antes de uso operacional.</div>
-          <div class="card-footer stacked">
-            <div><span class="impact-label">Impacto no mercado:</span> aumenta o custo de compliance para qualquer empresa que movimenta cripto na Colômbia, favorecendo quem já tem infraestrutura de reporte automatizado.</div>
-            <div><span class="opp-label">Oportunidade Brosbnk:</span> se a Brosbnk atuar ou pretende atuar na Colômbia, adequar-se cedo ao CARF vira vantagem competitiva frente a concorrentes que ainda não têm reporte automatizado.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="timeline-item" data-region="panama">
-        <div class="timeline-dot"></div>
-        <div class="card" style="margin-bottom:0;">
-          <div class="card-top"><div class="card-title">Alegação sobre Anteprojeto 314 de fintech no Panamá</div><div class="badge badge-verificar">Não verificado</div></div>
-          <div class="card-meta"><span class="badge badge-regiao">Panamá</span> · 13 de janeiro de 2026</div>
-          <div class="card-body">Não foi localizado, na pesquisa inicial, documento oficial que confirme simultaneamente número, título e conteúdo descritos. Manter apenas como pauta de pesquisa.</div>
-          <div class="card-footer stacked">
-            <div><span class="impact-label">Impacto no mercado:</span> se aprovada, o Panamá se torna um dos mercados mais abertos da região para liquidação via stablecoin, podendo atrair volume de câmbio que hoje passa pelo Brasil ou pela Colômbia.</div>
-            <div><span class="opp-label">Oportunidade Brosbnk:</span> acompanhar a tramitação e avaliar abrir operação ou parceria no Panamá cedo, para não ficar de fora caso o país vire hub regional de pagamentos via stablecoin.</div>
           </div>
         </div>
       </div>
@@ -454,24 +453,11 @@
         <div class="timeline-dot"></div>
         <div class="card" style="margin-bottom:0;">
           <div class="card-top"><div class="card-title">CLARITY Act trava no Senado dos EUA</div><div class="badge badge-discussao">Em discussão</div></div>
-          <div class="card-meta"><span class="badge badge-regiao">Estados Unidos</span> · Senado voltou do recesso em 13/07/2026</div>
-          <div class="card-body">A principal lei de regulação do mercado cripto dos EUA segue travada por três disputas (ética/insider trading, imunidade de desenvolvedores DeFi e yield de stablecoin); o Senado tem poucas semanas úteis antes do recesso de agosto para aprová-la, e uma versão atualizada do texto é esperada ainda esta semana.</div>
+          <div class="card-meta"><span class="badge badge-regiao">Estados Unidos</span> · Senado voltou em 13/07/2026</div>
+          <div class="card-body">A principal lei de regulação do mercado cripto dos EUA segue travada por três disputas (ética/insider trading, imunidade de desenvolvedores DeFi e yield de stablecoin); o Senado tem poucas semanas úteis antes do recesso de agosto para aprová-la.</div>
           <div class="card-footer stacked">
             <div><span class="impact-label">Impacto no mercado:</span> enquanto não aprovada, qualquer estratégia de liquidação via stablecoin com contraparte americana opera sob incerteza jurídica.</div>
             <div><span class="opp-label">Oportunidade Brosbnk:</span> preparar planos para os dois cenários (aprovação/fracasso) e usar a espera para fechar due diligence com parceiros americanos antes da decisão sair.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="timeline-item" data-region="eua">
-        <div class="timeline-dot"></div>
-        <div class="card" style="margin-bottom:0;">
-          <div class="card-top"><div class="card-title">GENIUS Act entra na fase final de regulamentação — prazo em 18/07</div><div class="badge badge-critico">Crítico</div></div>
-          <div class="card-meta"><span class="badge badge-regiao">Estados Unidos</span> · Prazo: 18 de julho de 2026</div>
-          <div class="card-body">A lei que regula a emissão de stablecoins nos EUA, sancionada em julho de 2025, chega ao prazo final de regulamentação nesta semana — definindo regras de reserva e proibindo yield pago diretamente pelo emissor. Não há mecanismo de fallback caso os órgãos (OCC, Fed, FDIC, FinCEN/OFAC) não cumpram o prazo. A Circle (USDC) já se antecipou, obtendo carta de trust bank da OCC em 10/07/2026.</div>
-          <div class="card-footer stacked">
-            <div><span class="impact-label">Impacto no mercado:</span> define, na prática, quais stablecoins americanas serão consideradas "seguras" para uso institucional, separando emissores em conformidade dos que não estarão — sem rede de segurança se o prazo passar sem regras.</div>
-            <div><span class="opp-label">Oportunidade Brosbnk:</span> priorizar parcerias apenas com stablecoins já aprovadas ou adiantadas ao GENIUS Act (caso Circle/USDC), reduzindo risco de compliance em qualquer futura estratégia de liquidação via stablecoin.</div>
           </div>
         </div>
       </div>
@@ -494,10 +480,10 @@
     <div class="insight-box">
       <div class="insight-title">Impacto para BROSBNK</div>
       <ul class="action-list">
-        <li><span class="arrow">→</span>Brasil: usar a Resolução BCB nº 580/2026 (Tipo 3) como filtro de due diligence para contrapartes cripto e confirmar em fonte oficial o ato aplicável a eFX e stablecoins</li>
-        <li><span class="arrow">→</span>Colômbia: validar com o jurídico o marco vigente e as obrigações efetivas de reporte à DIAN</li>
-        <li><span class="arrow">→</span>Panamá: conferir os atos diretamente na Assembleia Nacional e na SBP antes de planejar adequações</li>
-        <li><span class="arrow">→</span>Estados Unidos: acompanhar o desfecho do prazo do GENIUS Act em 18/07 e preparar dois planos para o CLARITY Act</li>
+        <li><span class="arrow">→</span>Brasil: mapear PSAVs já aderentes ao Tipo 3 (Resolução 580) e usar o enquadramento como filtro de due diligence</li>
+        <li><span class="arrow">→</span>Colômbia: montar reporte CARF automatizado como diferencial e validar o marco vigente com o jurídico</li>
+        <li><span class="arrow">→</span>Panamá: acompanhar o Anteproyecto 314 e avaliar o país como corredor-piloto de liquidação via stablecoin</li>
+        <li><span class="arrow">→</span>Estados Unidos: usar os critérios das minutas do GENIUS Act (capital US$5M, 120 dias) como checklist de emissor</li>
         <li><span class="arrow">→</span>Preparação para APIs de agentes de IA: desenvolver endpoints para transações programáveis</li>
       </ul>
     </div>
@@ -509,23 +495,28 @@
     <div class="page-subtitle">Principais tendências tecnológicas e de mercado que moldam o futuro dos pagamentos internacionais</div>
     <div class="section-heading"><span class="bar"></span>Tendências principais</div>
     <div class="card">
-      <div class="card-top"><div class="card-title">Pagamentos por agentes de IA</div><div class="badge badge-alto">Impacto: Alto</div></div>
-      <div class="card-body">Mastercard e Visa lançam frameworks para transações iniciadas por agentes de IA. 53% das empresas americanas permitiriam que agentes negociassem termos em seu nome.</div>
+      <div class="card-top"><div class="card-title">USDC vira trilho institucional de referência</div><div class="badge badge-alto">Impacto: Alto</div></div>
+      <div class="card-body">Com ~70% do volume ajustado de stablecoins no 1º semestre de 2026 e charter bancário federal via Circle, o USDC se consolida como padrão para tesouraria e remessas corporativas — casos como Hyundai (com Circle e Visa) validam a demanda não-especulativa.</div>
+      <div class="card-meta" style="margin-top:8px;">2026</div>
+    </div>
+    <div class="card">
+      <div class="card-top"><div class="card-title">IA sai do piloto para o core bancário</div><div class="badge badge-alto">Impacto: Alto</div></div>
+      <div class="card-body">84% das instituições dos EUA rodam IA em nível corporativo (gen, preditiva e agêntica). Fornecedores de core (ex.: Anthropic + FIS) já embarcam agentes de IA diretamente nos fluxos bancários — reduz a barreira de entrada para fintechs menores.</div>
       <div class="card-meta" style="margin-top:8px;">2026-2027</div>
     </div>
     <div class="card">
       <div class="card-top"><div class="card-title">Adoção de stablecoins em mercados emergentes</div><div class="badge badge-alto">Impacto: Alto</div></div>
-      <div class="card-body">Meta, Stripe e outras plataformas começam a oferecer pagamentos em USDC em Colômbia, Filipinas e outros mercados emergentes; no Brasil, USDC já supera USDT em ganho de share pela transparência das auditorias.</div>
+      <div class="card-body">Meta, Stripe e outras plataformas começam a oferecer pagamentos em USDC em Colômbia, Filipinas e outros mercados emergentes; LatAm redesenha marcos (Panamá, Colômbia) para acomodar o fluxo.</div>
       <div class="card-meta" style="margin-top:8px;">2026</div>
     </div>
     <div class="card">
-      <div class="card-top"><div class="card-title">Convergência regulatória global</div><div class="badge badge-medio">Impacto: Médio</div></div>
-      <div class="card-body">Reino Unido, EUA e outros mercados desenvolvidos criam frameworks unificados para pagamentos tradicionais e tokenizados; Brasil equipara exchanges cripto a corretoras de valores.</div>
+      <div class="card-top"><div class="card-title">Pagamentos por agentes de IA</div><div class="badge badge-medio">Impacto: Médio</div></div>
+      <div class="card-body">Mastercard e Visa lançam frameworks para transações iniciadas por agentes de IA. 53% das empresas americanas permitiriam que agentes negociassem termos em seu nome.</div>
       <div class="card-meta" style="margin-top:8px;">2026-2027</div>
     </div>
     <div class="insight-box">
       <div class="insight-title">Dinâmica de mercado</div>
-      <div class="insight-body">Volume de stablecoins: $27.6T (Q1 2026, estimativa anual) · Capitalização recuou ~US$10bi desde maio de 2026 · Crescimento YoY: +40% em mercados emergentes · Oportunidade de liquidez: $10T em potencial em 4 regiões principais.</div>
+      <div class="insight-body">Volume de stablecoins: recorde de US$1,79 tri em junho de 2026 (+63% sobre maio) · USDC ~70% do volume ajustado no 1º semestre · Oportunidade de liquidez em corredores LatAm e Brasil-EUA/México em expansão.</div>
     </div>
   </div>
 
@@ -534,26 +525,26 @@
     <div class="page-title">Alertas &amp; notificações</div>
     <div class="page-subtitle">Acompanhe eventos críticos e prazos importantes que requerem ação imediata</div>
     <div class="stats-grid" style="grid-template-columns: repeat(3,1fr);">
-      <div class="stat-card"><div class="stat-label">Críticos</div><div class="stat-value" style="color:#d0302f">3</div><div class="stat-sub">requerem ação imediata</div></div>
+      <div class="stat-card"><div class="stat-label">Críticos</div><div class="stat-value" style="color:#d0302f">1</div><div class="stat-sub">GENIUS Act — prazo 18/07</div></div>
       <div class="stat-card"><div class="stat-label">Avisos</div><div class="stat-value" style="color:#b8860b">3</div><div class="stat-sub">monitorar próximas semanas</div></div>
-      <div class="stat-card"><div class="stat-label">Informações</div><div class="stat-value" style="color:#2f6fed">5</div><div class="stat-sub">atualizações de mercado</div></div>
+      <div class="stat-card"><div class="stat-label">Informações</div><div class="stat-value" style="color:#2f6fed">4</div><div class="stat-sub">atualizações de mercado</div></div>
     </div>
     <div class="section-heading"><span class="bar"></span>Itens de ação prioritários</div>
     <div class="priority-item">
       <div class="priority-num">1</div>
-      <div class="priority-text"><strong>Acompanhar o prazo final do GENIUS Act (18/07/2026)</strong><span>Definir qual stablecoin (USDC/USDT) será elegível para uso institucional nos EUA; não há fallback se o prazo não for cumprido</span></div>
+      <div class="priority-text"><strong>Acompanhar o desfecho do GENIUS Act em 18/07</strong><span>Verificar se as regras finais saem no prazo e adotar os critérios das minutas (capital US$5M, 120 dias) como filtro de emissor</span></div>
     </div>
     <div class="priority-item">
       <div class="priority-num">2</div>
-      <div class="priority-text"><strong>Validar atos regulatórios citados no painel</strong><span>Obter texto oficial, vigência, alcance e parecer jurídico antes de mudar a infraestrutura</span></div>
+      <div class="priority-text"><strong>Mapear PSAVs aderentes ao Tipo 3 no Brasil</strong><span>Usar a Resolução BCB nº 580/2026 como filtro de due diligence de contrapartes cripto antes de 2027</span></div>
     </div>
     <div class="priority-item">
       <div class="priority-num">3</div>
-      <div class="priority-text"><strong>Mapear requisitos de autorização no Brasil</strong><span>Confirmar categoria, cronograma e capital aplicáveis diretamente nas normas do BCB, incluindo o enquadramento Tipo 3 da Resolução 580/2026</span></div>
+      <div class="priority-text"><strong>Avaliar Panamá como corredor de stablecoin</strong><span>Acompanhar o Anteproyecto 314 e preparar capacidade de reporte CARF para a Colômbia</span></div>
     </div>
     <div class="priority-item" style="border-bottom:none;">
       <div class="priority-num">4</div>
-      <div class="priority-text"><strong>Desenvolver APIs para agentes de IA</strong><span>Preparar endpoints para transações programáveis</span></div>
+      <div class="priority-text"><strong>Evoluir IA de piloto para camada operacional</strong><span>Expandir KYC/AML para triagem de comex e monitoramento de câmbio, com revisão humana obrigatória</span></div>
     </div>
   </div>
 
@@ -562,71 +553,39 @@
     <div class="page-title">Arquivo</div>
     <div class="page-subtitle">Histórico completo de notícias de todos os briefings diários — clique na data para abrir ou fechar</div>
     <div class="stats-grid" style="grid-template-columns: repeat(2,1fr);">
-      <div class="stat-card"><div class="stat-label">Briefings arquivados</div><div class="stat-value" id="archive-group-count" style="color:#2f6fed">4</div><div class="stat-sub">desde 10/07/2026</div></div>
-      <div class="stat-card"><div class="stat-label">Notícias acumuladas</div><div class="stat-value" id="archive-news-count" style="color:#1f9d55">16</div><div class="stat-sub">em todos os briefings</div></div>
+      <div class="stat-card"><div class="stat-label">Briefings arquivados</div><div class="stat-value" id="archive-group-count" style="color:#2f6fed">3</div><div class="stat-sub">desde 10/07/2026</div></div>
+      <div class="stat-card"><div class="stat-label">Notícias acumuladas</div><div class="stat-value" id="archive-news-count" style="color:#1f9d55">12</div><div class="stat-sub">em todos os briefings</div></div>
     </div>
 
     <div class="section-heading archive-date-heading" id="head-20260713" onclick="toggleArchive('arch-20260713')"><span class="bar"></span>13/07/2026<span class="count-badge">4 notícias</span><span class="chevron">▾</span></div>
     <div class="archive-group" id="arch-20260713">
       <div class="card">
-        <div class="card-top"><div class="card-title">BC classifica exchanges cripto (PSAVs) como instituições financeiras Tipo 3</div><div class="badge badge-alto">Impacto: Alto</div></div>
-        <div class="card-meta">Regulamentação · Lei de Criptoativos · 01/07/2026 · Fonte: LegisWeb / Mattos Filho</div>
-        <div class="card-body">Resolução BCB nº 580/2026 enquadra as PSAVs e seus conglomerados como instituições Tipo 3, com capital mínimo, gestão de risco e divulgação exigidos a partir de 01/01/2027.</div>
-        <div class="card-footer"><span><span class="rec-label">Recomendação:</span> mapear até dez/2026 quais PSAVs parceiras já se adequam ao Tipo 3.</span></div>
-        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://www.legisweb.com.br/legislacao/?id=497649" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('bcb-580')">🔍 Mergulhar</button></div>
+        <div class="card-top"><div class="card-title">BC classifica exchanges cripto (PSAVs) como IF Tipo 3 (Resolução 580)</div><div class="badge badge-alto">Impacto: Alto</div></div>
+        <div class="card-meta">Regulamentação / Lei de Criptoativos · 01/07/2026 · Fonte: LegisWeb (Resolução BCB nº 580/2026)</div>
+        <div class="card-body">O Banco Central classificou as PSAVs e seus conglomerados como instituições financeiras Tipo 3 sob "mesma atividade, mesmo risco, mesma regulação"; a partir de 01/01/2027 valem capital mínimo, gestão de risco e divulgação periódica.</div>
+        <div class="card-footer"><span><span class="rec-label">Recomendação:</span> mapear PSAVs já aderentes ao Tipo 3 e usar como filtro de due diligence de contrapartes cripto.</span></div>
+        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://www.legisweb.com.br/legislacao/?id=497649" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('bc-tipo3')">🔍 Mergulhar</button></div>
       </div>
       <div class="card">
-        <div class="card-top"><div class="card-title">Prazo final do GENIUS Act vence em 18/07</div><div class="badge badge-critico">Impacto: Crítico</div></div>
-        <div class="card-meta">Lei de Criptomoedas · Câmbio com Stablecoins · Prazo 18/07/2026 · Fonte: CryptoSlate / Tesouro dos EUA</div>
-        <div class="card-body">Reguladores dos EUA têm até 18/07 para regulamentar o GENIUS Act, sem fallback; Circle (USDC) já garantiu carta de trust bank em 10/07.</div>
-        <div class="card-footer"><span><span class="rec-label">Recomendação:</span> priorizar USDC/Circle como stablecoin de referência em parcerias futuras.</span></div>
-        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://cryptoslate.com/genius-act-deadline-puts-stablecoin-issuers-on-the-clock/" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('genius-act-deadline')">🔍 Mergulhar</button></div>
+        <div class="card-top"><div class="card-title">Prazo final do GENIUS Act vence em 18/07 — reguladores correm contra o tempo</div><div class="badge badge-critico">Impacto: Crítico</div></div>
+        <div class="card-meta">Lei de Criptomoedas / Câmbio com Stablecoins · 13/07/2026 · Fonte: CryptoSlate</div>
+        <div class="card-body">Reguladores dos EUA têm até 18/07 para transformar o GENIUS Act em regras operacionais, sem mecanismo de fallback. A Circle já recebeu carta de trust bank da OCC em 10/07, podendo gerir diretamente as reservas do USDC.</div>
+        <div class="card-footer"><span><span class="rec-label">Recomendação:</span> priorizar USDC/Circle como emissor de referência por já deter charter bancário federal.</span></div>
+        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://cryptoslate.com/genius-act-deadline-puts-stablecoin-issuers-on-the-clock/" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('genius-1807')">🔍 Mergulhar</button></div>
       </div>
       <div class="card">
-        <div class="card-top"><div class="card-title">Mercado de stablecoins encolhe US$ 10 bi, mas USDC ganha espaço sobre USDT</div><div class="badge badge-medio">Impacto: Médio</div></div>
-        <div class="card-meta">Criptoativos · Câmbio com Stablecoins · 12/07/2026 · Fonte: CoinDesk / InvestNews</div>
-        <div class="card-body">Capitalização global de stablecoins recua ~US$10bi desde maio; no Brasil, USDC ganha share sobre USDT por transparência regulatória.</div>
-        <div class="card-footer"><span><span class="rec-label">Recomendação:</span> adotar USDC como padrão em qualquer piloto de câmbio digital.</span></div>
-        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://www.coindesk.com/markets/2026/07/12/stablecoin-market-cap-has-shrunk-by-usd10-billion-since-may-but-analyst-sees-no-reason-to-panic" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('stablecoin-usdc-share')">🔍 Mergulhar</button></div>
+        <div class="card-top"><div class="card-title">Mercado de stablecoins encolhe US$10 bi desde maio, mas USDC ganha espaço</div><div class="badge badge-medio">Impacto: Médio</div></div>
+        <div class="card-meta">Câmbio com Stablecoins · 12/07/2026 · Fonte: CoinDesk</div>
+        <div class="card-body">A capitalização das stablecoins caiu ~US$10 bi desde maio (USDT ~US$184bi, USDC ~US$73bi), mas analistas não veem alarme — episódio semelhante já foi revertido. No Brasil, o USDC ganha espaço sobre o USDT por auditorias mensais públicas.</div>
+        <div class="card-footer"><span><span class="rec-label">Recomendação:</span> adotar USDC (auditado, GENIUS/MiCA) como padrão em qualquer piloto de câmbio digital.</span></div>
+        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://www.coindesk.com/markets/2026/07/12/stablecoin-market-cap-has-shrunk-by-usd10-billion-since-may-but-analyst-sees-no-reason-to-panic" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('stablecoin-shrink')">🔍 Mergulhar</button></div>
       </div>
       <div class="card">
-        <div class="card-top"><div class="card-title">HSBC firma parceria plurianual com Google Cloud para IA</div><div class="badge badge-medio">Impacto: Médio</div></div>
-        <div class="card-meta">Inteligência Artificial · 08/07/2026 · Fonte: Hipther / Fintech Pulse</div>
-        <div class="card-body">HSBC planeja 200+ casos de uso de IA em dois anos via Gemini, tratando IA como camada operacional.</div>
-        <div class="card-footer"><span><span class="rec-label">Recomendação:</span> expandir piloto de IA em KYC/AML para roadmap operacional mais amplo.</span></div>
-        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://hipther.com/latest-news/2026/07/08/114785/fintech-pulse-your-daily-industry-brief-july-8-2026-afac-2026-ant-group-nvidia-belitsoft-eromnet-payverse-paypal-goldman-sachs-icbc-tencent/" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('hsbc-google-ai')">🔍 Mergulhar</button></div>
-      </div>
-    </div>
-
-    <div class="section-heading archive-date-heading collapsed" id="head-20260712" onclick="toggleArchive('arch-20260712')" style="margin-top:32px;"><span class="bar"></span>12/07/2026<span class="count-badge">4 notícias</span><span class="chevron">▾</span></div>
-    <div class="archive-group collapsed" id="arch-20260712">
-      <div class="card">
-        <div class="card-top"><div class="card-title">Banco Central restringe uso de stablecoins em pagamentos internacionais (Resolução BCB nº 561/2026)</div><div class="badge badge-critico">Impacto: Crítico</div></div>
-        <div class="card-meta">Regulamentação · Lei de Criptoativos · Câmbio com Stablecoins · Vigência 01/10/2026 · Fonte: ConJur</div>
-        <div class="card-body">A partir de 1º de outubro, provedores de eFX ficam proibidos de liquidar operações com contraparte no exterior usando stablecoins — liquidação passa a exigir câmbio tradicional ou conta de não residente.</div>
-        <div class="card-footer"><span><span class="rec-label">Recomendação:</span> auditar até agosto qualquer fluxo eFX liquidado via stablecoin e migrar para câmbio tradicional antes de 01/10.</span></div>
-        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://www.conjur.com.br/2026-jul-01/o-cerco-do-banco-central-as-stablecoins/" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('bc-561-efx')">🔍 Mergulhar</button></div>
-      </div>
-      <div class="card">
-        <div class="card-top"><div class="card-title">Swift confirma que ledger blockchain está pronto para uso, com 17 bancos pilotando pagamentos 24/7</div><div class="badge badge-alto">Impacto: Alto</div></div>
-        <div class="card-meta">Blockchain · Pagamentos Internacionais · 09/07/2026 · Fonte: Swift</div>
-        <div class="card-body">Dezessete bancos de seis continentes vão pilotar transações ao vivo com depósitos tokenizados na rede Swift, passando de piloto para infraestrutura operacional.</div>
-        <div class="card-footer"><span><span class="rec-label">Recomendação:</span> consultar o(s) banco(s) correspondente(s) sobre elegibilidade como cliente institucional.</span></div>
-        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://www.swift.com/news-events/press-releases/swifts-blockchain-ledger-ready-use-17-banks-set-pioneer-tokenised-cross-border-payments-trusted-global-infrastructure" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('swift-ledger-ready')">🔍 Mergulhar</button></div>
-      </div>
-      <div class="card">
-        <div class="card-top"><div class="card-title">Receita Federal torna obrigatória a declaração DeCripto a partir de julho de 2026</div><div class="badge badge-medio">Impacto: Médio</div></div>
-        <div class="card-meta">Lei de Criptoativos · Julho de 2026 · Fonte: CoinGape Brasil</div>
-        <div class="card-body">Nova declaração DeCripto, seguindo o padrão CARF da OCDE, exige de exchanges e provedores de cripto — inclusive estrangeiros que atendem clientes no Brasil — reporte equivalente ao de operadores domésticos.</div>
-        <div class="card-footer"><span><span class="rec-label">Recomendação:</span> verificar enquadramento e priorizar implementação do reporte DeCripto.</span></div>
-        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://br.coingape.com/receita-federal-define-inicio-da-decripto-para-julho-de-2026/" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('decripto-obrigatoria')">🔍 Mergulhar</button></div>
-      </div>
-      <div class="card">
-        <div class="card-top"><div class="card-title">Reguladores dos EUA propõem regras de KYC para emissores de stablecoin sob o GENIUS Act</div><div class="badge badge-medio">Impacto: Médio</div></div>
-        <div class="card-meta">Lei de Criptomoedas · Comentários até 21/08/2026 · Fonte: PYMNTS</div>
-        <div class="card-body">FinCEN, OCC, Fed, FDIC e NCUA propõem exigir identificação de clientes (CIP) de emissores como USDC e USDT em relações diretas de emissão, resgate e custódia.</div>
-        <div class="card-footer"><span><span class="rec-label">Recomendação:</span> priorizar parcerias com emissores que já sinalizam adesão voluntária ao CIP (ex. Circle).</span></div>
-        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://www.pymnts.com/cryptocurrency/2026/fincen-banking-agencies-propose-first-customer-identification-rules-stablecoin-issuers/" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('genius-kyc-proposal')">🔍 Mergulhar</button></div>
+        <div class="card-top"><div class="card-title">HSBC firma parceria plurianual com Google Cloud para embutir IA</div><div class="badge badge-medio">Impacto: Médio</div></div>
+        <div class="card-meta">Inteligência Artificial · 08/07/2026 · Fonte: Hipther</div>
+        <div class="card-body">O HSBC embarca IA como camada operacional em operações globais, com +200 casos de uso em dois anos via Gemini. Movimento acompanha o AFAC 2026, que posiciona IA financeira como disciplina prática e implantável.</div>
+        <div class="card-footer"><span><span class="rec-label">Recomendação:</span> expandir o piloto de IA em KYC/AML para roadmap de camada operacional inspirado no modelo HSBC-Google Cloud.</span></div>
+        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://hipther.com/latest-news/2026/07/08/114785/fintech-pulse-your-daily-industry-brief-july-8-2026-afac-2026-ant-group-nvidia-belitsoft-eromnet-payverse-paypal-goldman-sachs-icbc-tencent/" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('hsbc-google')">🔍 Mergulhar</button></div>
       </div>
     </div>
 
@@ -716,140 +675,140 @@
 
 <script>
 var diveData = {
-  'bcb-580': {
-    title: "BC classifica exchanges cripto (PSAVs) como instituições Tipo 3",
+  'usdc-lead': {
+    title: "USDC ultrapassa Tether e teste Hyundai avança para Circle e Visa",
     sub: "O que é e como a Brosbnk deve reagir",
-    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer em relação à Resolução BCB nº 580/2026, que classifica as sociedades prestadoras de serviços de ativos virtuais (PSAVs/exchanges cripto) como instituições financeiras Tipo 3, com exigências prudenciais a partir de 2027.",
+    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer diante do USDC ultrapassando o USDT em volume (recorde de US$1,79 tri em junho de 2026, ~70% do volume ajustado) e do teste de remessa transfronteiriça da Hyundai via stablecoin, que agora avança para uma parceria com Circle e Visa.",
     html: [
       "<h4>O que aconteceu, em linguagem simples</h4>",
-      "<p>O Banco Central publicou a Resolução BCB nº 580/2026 em 1º de julho, enquadrando as exchanges cripto e seus conglomerados como instituições Tipo 3 — a mesma categoria de corretoras e distribuidoras de valores mobiliários. A partir de 1º de janeiro de 2027, essas empresas terão de cumprir exigências de capital mínimo, gestão de risco e divulgação periódica de informações.</p>",
+      "<p>O USDC, stablecoin da Circle, passou a dominar o mercado: cerca de 70% do volume ajustado no primeiro semestre de 2026 (US$90,8 tri acumulados), contra ~25% do USDT, com o mercado batendo recorde de US$1,79 tri em junho. Ao mesmo tempo, a Hyundai testou uma remessa corporativa via stablecoin — US$20 mil dos EUA ao México em ~7 minutos, contra horas nos trilhos bancários — e prepara um novo teste com Circle e Visa.</p>",
       "<h4>Por que isso importa para a Brosbnk</h4>",
-      "<p>A Brosbnk atua em câmbio, pagamentos e serviços financeiros; qualquer parceria futura com exchanges cripto brasileiras passa a exigir due diligence sobre o enquadramento Tipo 3 e a capacidade dessas contrapartes de cumprir capital mínimo e reporte a partir de 2027.</p>",
+      "<p>Câmbio e pagamentos transfronteiriços são o núcleo da Brosbnk. O USDC está virando o trilho institucional de referência, e casos como o da Hyundai mostram demanda corporativa real (não especulativa) — exatamente o perfil de cliente da Brosbnk.</p>",
       "<h4>Plano passo a passo</h4>",
-      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Mapear contrapartes cripto atuais ou potenciais</strong><span>Listar qualquer PSAV com a qual a Brosbnk já opera ou pretende operar.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Checar adequação ao Tipo 3</strong><span>Perguntar diretamente se essas PSAVs já se preparam para capital mínimo e gestão de risco.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Usar como filtro de due diligence</strong><span>Priorizar apenas contrapartes que sinalizem adequação, evitando exchanges que possam sair do mercado em 2027.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Documentar o critério</strong><span>Registrar formalmente a exigência de enquadramento Tipo 3 como padrão de compliance da Brosbnk.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Comunicar como diferencial</strong><span>Usar a exigência regulatória como argumento comercial de solidez junto a clientes corporativos.</span></div></div>"
+      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Escolher um corredor de alto volume</strong><span>Priorizar Brasil-EUA ou Brasil-México, onde o ganho de tempo/custo é maior.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Padronizar o USDC como trilho</strong><span>Adotar o USDC (regulado e auditado) como stablecoin de referência do piloto.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Selecionar 2-3 clientes corporativos</strong><span>Buscar clientes com operações internacionais recorrentes, inspirado no case Hyundai.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Validar compliance por jurisdição</strong><span>Confirmar as normas aplicáveis em cada ponta antes de operar valores reais.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Medir e comunicar</strong><span>Comparar tempo/custo com o câmbio tradicional e usar o resultado como argumento comercial.</span></div></div>"
     ].join("")
   },
-  'genius-act-deadline': {
+  'genius-deadline': {
+    title: "Reta final do GENIUS Act: 4 dias para o prazo",
+    sub: "O que é e como a Brosbnk deve reagir",
+    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer diante da reta final do GENIUS Act nos EUA (prazo de 18/07/2026 sem regras finais publicadas) e das minutas que já revelam capital mínimo de US$5 milhões por emissor e janela de 120 dias de adequação.",
+    html: [
+      "<h4>O que aconteceu, em linguagem simples</h4>",
+      "<p>Faltam poucos dias para o prazo legal de 18/07 em que as agências dos EUA precisam publicar as regras finais do GENIUS Act, que define quais emissores de stablecoin podem operar no país. As regras finais ainda não saíram, mas as minutas já mostram a direção: capital mínimo de US$5 milhões por emissor, reservas e liquidez mais rígidas, sem seguro de depósito para quem detém o token, e cerca de 120 dias para se adequar após a publicação. Não há plano B automático se o prazo não for cumprido.</p>",
+      "<h4>Por que isso importa para a Brosbnk</h4>",
+      "<p>Isso define, na prática, qual stablecoin americana será considerada 'segura' para uso institucional em corredores Brasil-EUA — critério direto para qualquer estratégia futura de tesouraria ou liquidação da Brosbnk via stablecoin.</p>",
+      "<h4>Plano passo a passo</h4>",
+      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Acompanhar o desfecho de 18/07</strong><span>Verificar se as regras finais saem no prazo ou se há vácuo regulatório.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Transformar as minutas em checklist</strong><span>Usar capital US$5M, reservas e janela de 120 dias como critérios de seleção de emissor.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Priorizar emissores já capitalizados</strong><span>Tratar USDC/Circle como referência por já deter charter bancário federal.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Preparar dois cenários</strong><span>Regras publicadas a tempo vs. vácuo regulatório, com plano para cada um.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Evitar compromissos precipitados</strong><span>Não fechar integração de longo prazo com emissor sem sinalização clara de conformidade.</span></div></div>"
+    ].join("")
+  },
+  'latam-reg': {
+    title: "LatAm: Panamá reconhece cripto e Colômbia inicia reporte CARF",
+    sub: "O que é e como a Brosbnk deve reagir",
+    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer diante do Anteproyecto de Ley N° 314 do Panamá — que reconhece ativos digitais como meio de pagamento — e do início do reporte fiscal cripto da DIAN na Colômbia sob o padrão CARF da OCDE.",
+    html: [
+      "<h4>O que aconteceu, em linguagem simples</h4>",
+      "<p>Dois movimentos regulatórios na América Latina: no Panamá, o Anteproyecto de Ley N° 314 reconhece ativos digitais (Bitcoin, Ethereum, stablecoins) como meio de pagamento válido em contratos e cria licenciamento de provedores de serviço cripto. Na Colômbia, a DIAN passou a exigir que exchanges reportem dados detalhados de usuários (saldos, volumes, transferências) seguindo o padrão internacional CARF, com o primeiro relatório anual devido até maio de 2027.</p>",
+      "<h4>Por que isso importa para a Brosbnk</h4>",
+      "<p>São mercados de câmbio e pagamentos onde a Brosbnk atua ou pode atuar. O Panamá pode virar um hub aberto para liquidação via stablecoin; a Colômbia eleva o custo de compliance e premia quem já tem reporte automatizado.</p>",
+      "<h4>Plano passo a passo</h4>",
+      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Acompanhar o Anteproyecto 314</strong><span>Monitorar a tramitação na Assembleia Nacional do Panamá com assessoria local.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Avaliar o Panamá como corredor-piloto</strong><span>Estudar parceria ou licença local para liquidação via stablecoin antes que vire hub regional.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Montar reporte CARF automatizado</strong><span>Preparar a infraestrutura de reporte fiscal cripto exigida na Colômbia como diferencial competitivo.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Validar o marco vigente com o jurídico</strong><span>Confirmar obrigações efetivas nas duas jurisdições antes de operar.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Posicionar-se cedo com clientes</strong><span>Sinalizar a clientes da região que a Brosbnk é ponte de câmbio confiável enquanto as regras amadurecem.</span></div></div>"
+    ].join("")
+  },
+  'ai-enterprise': {
+    title: "Era do piloto acabou: 84% dos bancos rodam IA em nível corporativo",
+    sub: "O que é e como a Brosbnk deve reagir",
+    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer diante do benchmark da nCino mostrando que 84% das instituições dos EUA já rodam IA em nível corporativo e de Anthropic e FIS embarcando agentes de IA diretamente no core bancário.",
+    html: [
+      "<h4>O que aconteceu, em linguagem simples</h4>",
+      "<p>Um benchmark da nCino com 150 executivos bancários mostra que a fase de pilotos acabou: 84% das instituições dos EUA já usam IA em nível corporativo — 91% IA generativa, 87% preditiva e 81% agêntica. Ao mesmo tempo, Anthropic e FIS demonstraram agentes de IA embarcados diretamente nos fluxos de core banking, com implantações iniciais em curso e disponibilidade ampla prevista para o segundo semestre de 2026.</p>",
+      "<h4>Por que isso importa para a Brosbnk</h4>",
+      "<p>Define o novo patamar de maturidade esperado: IA deixa de ser projeto isolado e vira camada operacional integrada, incluindo compliance, KYC/AML e automação de câmbio. Fornecedores de core já entregam isso 'pronto', reduzindo a barreira para fintechs menores.</p>",
+      "<h4>Plano passo a passo</h4>",
+      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Revisar o piloto atual</strong><span>Avaliar o que já funciona no piloto de IA em KYC/AML de onboarding.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Desenhar um roadmap operacional</strong><span>Planejar a expansão da IA para camada operacional, não apenas pilotos pontuais.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Incluir triagem de comex</strong><span>Levar a automação auditável para triagem de comércio exterior e monitoramento de câmbio.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Avaliar fornecedores de core com IA embarcada</strong><span>Verificar se o provedor de core banking já oferece agentes de IA integrados.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Manter revisão humana e medir</strong><span>Garantir revisão humana obrigatória e documentar resultados para reguladores e clientes.</span></div></div>"
+    ].join("")
+  },
+  'bc-tipo3': {
+    title: "BC classifica exchanges cripto como IF Tipo 3 (Resolução 580)",
+    sub: "O que é e como a Brosbnk deve reagir",
+    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer diante da Resolução BCB nº 580/2026, que classifica as PSAVs (exchanges cripto) como instituições financeiras Tipo 3, com exigências prudenciais a partir de 01/01/2027.",
+    html: [
+      "<h4>O que aconteceu, em linguagem simples</h4>",
+      "<p>O Banco Central publicou a Resolução BCB nº 580/2026, enquadrando as prestadoras de serviços de ativos virtuais (PSAVs) e seus conglomerados como instituições financeiras Tipo 3, sob o princípio 'mesma atividade, mesmo risco, mesma regulação'. A partir de 01/01/2027, elas terão de cumprir capital mínimo, gestão de risco e divulgação periódica, nos moldes de corretoras e distribuidoras.</p>",
+      "<h4>Por que isso importa para a Brosbnk</h4>",
+      "<p>Qualquer parceria ou produto futuro da Brosbnk que toque exchanges cripto brasileiras passa a exigir due diligence sobre o enquadramento Tipo 3 e a capacidade dessas contrapartes de cumprir capital mínimo e reporte a partir de 2027.</p>",
+      "<h4>Plano passo a passo</h4>",
+      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Mapear contrapartes cripto</strong><span>Levantar as PSAVs atuais ou potenciais da Brosbnk.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Checar preparação para 2027</strong><span>Confirmar com cada PSAV se já se prepara para capital mínimo e gestão de risco.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Usar o Tipo 3 como filtro</strong><span>Priorizar apenas contrapartes aderentes ao enquadramento.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Documentar o critério</strong><span>Formalizar isso como padrão de compliance da Brosbnk.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Comunicar como diferencial</strong><span>Apresentar a exigência regulatória como sinal de solidez a clientes corporativos.</span></div></div>"
+    ].join("")
+  },
+  'genius-1807': {
     title: "Prazo final do GENIUS Act vence em 18/07",
     sub: "O que é e como a Brosbnk deve reagir",
-    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer em relação ao prazo final de 18 de julho de 2026 para os reguladores dos EUA regulamentarem o GENIUS Act, sem mecanismo de fallback caso o prazo não seja cumprido.",
+    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer diante do prazo final do GENIUS Act (18/07/2026), sem mecanismo de fallback, e da Circle já tendo recebido carta de trust bank da OCC.",
     html: [
       "<h4>O que aconteceu, em linguagem simples</h4>",
-      "<p>Reguladores dos EUA (OCC, Federal Reserve, FDIC, FinCEN/OFAC) têm até 18 de julho de 2026 para transformar o GENIUS Act em regras operacionais definindo quais emissores de stablecoin podem atuar no país. A lei não prevê nenhum mecanismo automático de fallback caso o prazo não seja cumprido. A Circle (USDC) já se antecipou, obtendo carta de trust bank da OCC em 10/07/2026.</p>",
+      "<p>Reguladores dos EUA têm até 18/07 para transformar o GENIUS Act em regras operacionais definindo quais emissores de stablecoin podem atuar no país, sem nenhum mecanismo de fallback caso o prazo não seja cumprido. Em paralelo, a Circle (USDC) recebeu em 10/07 sua carta de trust bank da OCC, podendo gerir diretamente as reservas do USDC.</p>",
       "<h4>Por que isso importa para a Brosbnk</h4>",
-      "<p>Define, na prática, qual stablecoin americana será considerada \"segura\" para uso institucional em corredores de câmbio Brasil-EUA — critério direto para qualquer estratégia futura de tesouraria ou liquidação da Brosbnk via stablecoin.</p>",
+      "<p>Define qual stablecoin americana será considerada 'segura' para uso institucional em corredores Brasil-EUA — critério direto para tesouraria ou liquidação via stablecoin.</p>",
       "<h4>Plano passo a passo</h4>",
-      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Acompanhar o desfecho desta semana</strong><span>Monitorar se os órgãos cumprem o prazo de 18/07 ou deixam o vácuo regulatório se instalar.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Priorizar emissores já adiantados</strong><span>Tratar a Circle/USDC como referência por já deter carta de trust bank federal.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Evitar compromissos de longo prazo agora</strong><span>Adiar qualquer integração ampla com emissores sem sinalização clara de conformidade.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Preparar dois cenários</strong><span>Um plano para regras publicadas a tempo, outro para o vácuo regulatório se o prazo passar.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Revisar junto ao CLARITY Act</strong><span>Acompanhar em paralelo a tramitação do CLARITY Act, que trata de temas complementares no Senado.</span></div></div>"
+      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Acompanhar o prazo de 18/07</strong><span>Verificar o desfecho nesta semana.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Tratar USDC/Circle como referência</strong><span>Por já deter carta de trust bank federal.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Evitar compromissos frágeis</strong><span>Não fechar longo prazo com emissores sem conformidade clara.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Preparar dois cenários</strong><span>Regras a tempo vs. vácuo regulatório.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Revisar o CLARITY Act em paralelo</strong><span>Acompanhar temas complementares em tramitação.</span></div></div>"
     ].join("")
   },
-  'stablecoin-usdc-share': {
-    title: "Mercado de stablecoins encolhe, mas USDC ganha espaço sobre USDT",
+  'stablecoin-shrink': {
+    title: "Mercado de stablecoins encolhe US$10bi, mas USDC ganha espaço",
     sub: "O que é e como a Brosbnk deve reagir",
-    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer em relação à contração de US$ 10 bilhões no mercado global de stablecoins desde maio de 2026 e ao ganho de share da USDC sobre a USDT no Brasil.",
+    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer diante da contração de ~US$10 bilhões no mercado de stablecoins desde maio de 2026 e do ganho de participação do USDC sobre o USDT.",
     html: [
       "<h4>O que aconteceu, em linguagem simples</h4>",
-      "<p>A capitalização de mercado das stablecoins caiu cerca de US$ 10 bilhões desde maio de 2026, mas analistas não veem motivo para alarme — episódio semelhante ocorreu entre dezembro de 2025 e fevereiro de 2026 e foi revertido. No Brasil, a USDC vem ganhando espaço sobre a USDT graças a auditorias mensais públicas e ao enquadramento no GENIUS Act e na MiCA europeia.</p>",
+      "<p>A capitalização das stablecoins caiu ~US$10 bilhões desde maio (USDT de ~US$190bi para ~US$184bi; USDC de ~US$80bi para ~US$73bi), mas analistas não veem alarme — um episódio parecido entre dez/2025 e fev/2026 foi revertido. No Brasil, o USDC vem ganhando espaço sobre o USDT por auditorias mensais públicas e enquadramento no GENIUS Act e na MiCA.</p>",
       "<h4>Por que isso importa para a Brosbnk</h4>",
-      "<p>Sinaliza contração pontual de liquidez no mercado de stablecoins que a Brosbnk usa (ou pode usar) como referência de câmbio digital, e reforça que a escolha entre USDT e USDC deve considerar não só volume histórico, mas transparência regulatória.</p>",
+      "<p>Sinaliza contração pontual de liquidez e reforça que a escolha entre USDT e USDC deve considerar transparência regulatória, não só volume.</p>",
       "<h4>Plano passo a passo</h4>",
-      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Revisar a stablecoin de referência</strong><span>Avaliar qualquer piloto ou produto de câmbio digital que hoje use USDT por padrão.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Priorizar USDC como padrão</strong><span>Migrar a preferência para USDC pela transparência de auditoria e conformidade regulatória.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Monitorar profundidade de liquidez</strong><span>Acompanhar se a contração amplia spreads em operações de maior volume.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Comunicar a escolha como diferencial</strong><span>Explicar a clientes corporativos por que a Brosbnk prioriza stablecoin regulada.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Acompanhar o próximo trimestre</strong><span>Verificar se a contração se reverte, como no episódio de dez/25-fev/26.</span></div></div>"
+      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Revisar a stablecoin de referência</strong><span>Checar qualquer piloto que use USDT por padrão.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Migrar preferência para USDC</strong><span>Pela transparência de auditoria e conformidade.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Monitorar spreads</strong><span>Ver se a contração amplia spreads em maior volume.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Comunicar a escolha</strong><span>Explicar a clientes por que a Brosbnk prioriza stablecoin regulada.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Acompanhar o próximo trimestre</strong><span>Ver se a contração se reverte, como no episódio anterior.</span></div></div>"
     ].join("")
   },
-  'hsbc-google-ai': {
+  'hsbc-google': {
     title: "HSBC firma parceria plurianual com Google Cloud para IA",
     sub: "O que é e como a Brosbnk deve reagir",
-    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer em relação à parceria plurianual do HSBC com o Google Cloud para embutir IA como camada operacional em suas operações globais, com mais de 200 casos de uso planejados.",
+    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer diante da parceria plurianual do HSBC com o Google Cloud para embutir IA como camada operacional, com mais de 200 casos de uso em dois anos.",
     html: [
       "<h4>O que aconteceu, em linguagem simples</h4>",
-      "<p>O HSBC firmou parceria plurianual com o Google Cloud para tornar a IA uma camada operacional séria, com planos para mais de 200 casos de uso em dois anos usando os modelos Gemini. O movimento acompanha a abertura do AFAC 2026, competição internacional que testa IA aplicada a serviços financeiros reais, com apoio de Ant Group, NVIDIA e universidades.</p>",
+      "<p>O HSBC firmou parceria plurianual com o Google Cloud para embutir IA como camada operacional em suas operações globais, com planos para +200 casos de uso em dois anos via modelos Gemini. O movimento acompanha o AFAC 2026, que posiciona a IA financeira como disciplina prática e comercialmente implantável.</p>",
       "<h4>Por que isso importa para a Brosbnk</h4>",
-      "<p>Define o novo patamar de maturidade esperado do mercado para uso de IA em operações financeiras — de piloto isolado para camada operacional integrada, incluindo compliance, KYC/AML e automação de processos de câmbio.</p>",
+      "<p>Define o novo patamar de maturidade esperado: IA como camada operacional integrada (compliance, KYC/AML, automação de câmbio), não piloto isolado.</p>",
       "<h4>Plano passo a passo</h4>",
-      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Revisar o piloto atual de IA em KYC/AML</strong><span>Avaliar o que já funciona no piloto de onboarding auditável.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Desenhar um roadmap de camada operacional</strong><span>Planejar expansão gradual, inspirada no modelo HSBC-Google Cloud.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Incluir triagem de comex</strong><span>Estender a automação auditável para análise de documentos de comércio exterior.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Manter revisão humana obrigatória</strong><span>Preservar controle humano em toda decisão automatizada, como padrão de governança.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Medir e comunicar resultados</strong><span>Acompanhar métricas de risco e eficiência, documentando para reguladores e clientes.</span></div></div>"
-    ].join("")
-  },
-  'bc-561-efx': {
-    title: "BC restringe stablecoins em pagamentos internacionais (Resolução 561)",
-    sub: "O que é e como a Brosbnk deve reagir",
-    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer em relação à Resolução BCB nº 561/2026, que proíbe o uso de stablecoins na liquidação eFX com contraparte no exterior a partir de 1º de outubro de 2026.",
-    html: [
-      "<h4>O que aconteceu, em linguagem simples</h4>",
-      "<p>O Banco Central publicou a Resolução BCB nº 561/2026: a partir de 1º de outubro de 2026, provedores de eFX ficam proibidos de liquidar operações com contraparte no exterior usando stablecoins — a liquidação passa a exigir câmbio tradicional ou conta de não residente.</p>",
-      "<h4>Por que isso importa para a Brosbnk</h4>",
-      "<p>Qualquer fluxo próprio ou de parceiros que hoje (ou no futuro) use stablecoin como ponte de liquidação com contraparte no exterior deixa de ser permitido a partir de outubro.</p>",
-      "<h4>Plano passo a passo</h4>",
-      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Mapear todo fluxo eFX via stablecoin</strong><span>Levantar fluxos internos ou de parceiros hoje liquidados dessa forma.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Redesenhar para câmbio tradicional</strong><span>Migrar para liquidação via câmbio tradicional ou conta de não residente.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Fechar a auditoria até agosto</strong><span>Garantir folga antes do prazo de 01/10/2026.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Comunicar clientes corporativos</strong><span>Sinalizar adesão total à Resolução 561.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Monitorar novos detalhamentos</strong><span>Acompanhar se o BC amplia o alcance da norma antes da vigência.</span></div></div>"
-    ].join("")
-  },
-  'swift-ledger-ready': {
-    title: "Swift confirma ledger blockchain pronto para uso",
-    sub: "O que é e como a Brosbnk deve reagir",
-    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer em relação à Swift confirmar que seu ledger blockchain está pronto para uso, com 17 bancos pilotando pagamentos tokenizados 24/7.",
-    html: [
-      "<h4>O que aconteceu, em linguagem simples</h4>",
-      "<p>A Swift confirmou que seu ledger blockchain para liquidação 24/7 de pagamentos transfronteiriços está pronto para uso operacional. Dezessete bancos de seis continentes vão pilotar transações ao vivo com depósitos tokenizados.</p>",
-      "<h4>Por que isso importa para a Brosbnk</h4>",
-      "<p>A Swift é a espinha dorsal das liquidações internacionais usadas pela Brosbnk hoje; a passagem de piloto para operacional redefine o padrão de velocidade esperado pelo mercado.</p>",
-      "<h4>Plano passo a passo</h4>",
-      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Mapear o parceiro bancário atual</strong><span>Verificar se está entre os 17 do piloto operacional.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Pedir acesso antecipado</strong><span>Negociar como cliente institucional.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Priorizar o corredor de maior volume</strong><span>Focar no corredor de câmbio mais relevante da carteira.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Medir tempo e custo</strong><span>Acompanhar por 30 dias antes de expandir.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Usar como diferencial comercial</strong><span>Comunicar a liquidação 24/7 a clientes de comex.</span></div></div>"
-    ].join("")
-  },
-  'decripto-obrigatoria': {
-    title: "DeCripto torna-se obrigatória no Brasil",
-    sub: "O que é e como a Brosbnk deve reagir",
-    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer em relação à nova declaração DeCripto da Receita Federal, obrigatória a partir de julho de 2026, seguindo o padrão CARF da OCDE.",
-    html: [
-      "<h4>O que aconteceu, em linguagem simples</h4>",
-      "<p>Passa a ser obrigatória a declaração DeCripto da Receita Federal, seguindo o padrão CARF da OCDE, exigindo de exchanges e provedores de cripto — inclusive estrangeiros que atendem clientes no Brasil — reporte equivalente ao de operadores domésticos.</p>",
-      "<h4>Por que isso importa para a Brosbnk</h4>",
-      "<p>Se a Brosbnk oferece ou intermedia operações com criptoativos, passa a ter obrigação de reporte formal equivalente à de exchanges tradicionais, mesmo que a operação cripto seja complementar ao core de câmbio.</p>",
-      "<h4>Plano passo a passo</h4>",
-      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Checar enquadramento</strong><span>Verificar com compliance se algum produto se enquadra como provedor de serviço de criptoativos.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Levantar dados exigidos</strong><span>Mapear quais dados de transação e usuário precisam ser reportados.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Priorizar adequação de sistemas</strong><span>Implementar nas próximas semanas.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Documentar o processo</strong><span>Preparar para eventual auditoria da Receita Federal.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Comunicar a parceiros</strong><span>Usar a adequação como selo de solidez regulatória junto a bancos parceiros.</span></div></div>"
-    ].join("")
-  },
-  'genius-kyc-proposal': {
-    title: "EUA propõem KYC para emissores de stablecoin",
-    sub: "O que é e como a Brosbnk deve reagir",
-    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer em relação à proposta conjunta de FinCEN, OCC, Fed, FDIC e NCUA de exigir identificação de clientes (CIP) de emissores de stablecoin sob o GENIUS Act.",
-    html: [
-      "<h4>O que aconteceu, em linguagem simples</h4>",
-      "<p>FinCEN, OCC, Federal Reserve, FDIC e NCUA publicaram proposta conjunta exigindo que emissores de stablecoin permitidos nos EUA — caso de USDC e USDT — implementem programas de identificação de clientes (CIP) em relações diretas de emissão, resgate, conversão e custódia.</p>",
-      "<h4>Por que isso importa para a Brosbnk</h4>",
-      "<p>Define quais emissores de stablecoin americanos serão considerados \"seguros\" para parcerias institucionais — relevante para qualquer estratégia futura da Brosbnk de usar USDC/USDT como ferramenta de tesouraria ou liquidação.</p>",
-      "<h4>Plano passo a passo</h4>",
-      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Acompanhar o período de comentários</strong><span>Monitorar junto a associações do setor até 21/08/2026.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Mapear emissores adiantados</strong><span>Identificar quem já sinaliza adesão voluntária ao CIP (ex. Circle).</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Priorizar parcerias alinhadas</strong><span>Selecionar apenas emissores já próximos do padrão emergente.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Antecipar esforço de compliance</strong><span>Preparar-se para quando a regra final sair, prevista para 2027.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Revisar junto ao CLARITY Act</strong><span>Acompanhar em paralelo a tramitação de temas complementares.</span></div></div>"
+      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Revisar o piloto atual</strong><span>Avaliar o que já funciona em KYC/AML de onboarding.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Desenhar roadmap operacional</strong><span>Inspirado no modelo HSBC-Google Cloud.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Incluir triagem de comex</strong><span>Ampliar a automação auditável.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Manter revisão humana</strong><span>Em toda decisão automatizada.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Medir e documentar</strong><span>Resultados para reguladores e clientes.</span></div></div>"
     ].join("")
   },
   'ia-study': {
@@ -1066,7 +1025,11 @@ function openDive(key) {
   var originalLabel = 'Copiar pergunta para a IA';
   askBtn.textContent = originalLabel;
   askBtn.onclick = function() {
-    // Copia o contexto para uso em qualquer assistente de IA, sem abrir outro site.
+    // Se o painel estiver embutido no Cowork/Claude, envia direto ao chat.
+    if (typeof sendPrompt === 'function') {
+      try { sendPrompt(d.prompt); askBtn.textContent = '✓ Enviado ao Claude!'; setTimeout(function(){ askBtn.textContent = originalLabel; }, 3000); return; } catch (e) {}
+    }
+    // Fallback: copia o contexto para uso em qualquer assistente de IA, sem abrir outro site.
     var legacyCopyPrompt = function() {
       var ta = document.createElement('textarea');
       ta.value = d.prompt;
