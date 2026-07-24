@@ -253,7 +253,7 @@
   <div class="nav-item" data-page="tendencias">⚡ Tendências</div>
   <div class="nav-item" data-page="alertas">⚠️ Alertas</div>
   <div class="nav-item" data-page="arquivo">🗄️ Arquivo</div>
-  <div class="sidebar-footer" id="last-updated">Atualizado em 23/07/2026</div>
+  <div class="sidebar-footer" id="last-updated">Atualizado em 24/07/2026</div>
 </div>
 
 <div class="main">
@@ -264,9 +264,9 @@
     <div class="page-subtitle">IA, Blockchain, Criptoativos, Pagamentos Internacionais, Regulamentação, Lei de Criptoativos/Criptomoedas e Câmbio com Stablecoins — desenvolvimentos das últimas 24-48h com impacto para a Brosbnk</div>
 
     <div class="stats-grid">
-      <div class="stat-card"><div class="stat-label">Notícias hoje</div><div class="stat-value" id="news-today-count" style="color:#2f6fed">4</div><div class="stat-sub" style="color:#1f9d55">8 temas monitorados</div></div>
-      <div class="stat-card"><div class="stat-label">Impacto alto</div><div class="stat-value" id="high-impact-count" style="color:#d0302f">3</div><div class="stat-sub">requerem avaliação</div></div>
-      <div class="stat-card"><div class="stat-label">Ações recomendadas</div><div class="stat-value" id="recommendation-count" style="color:#b8860b">4</div><div class="stat-sub">concretas, por notícia</div></div>
+      <div class="stat-card"><div class="stat-label">Notícias hoje</div><div class="stat-value" id="news-today-count" style="color:#2f6fed">3</div><div class="stat-sub" style="color:#1f9d55">8 temas monitorados</div></div>
+      <div class="stat-card"><div class="stat-label">Impacto alto</div><div class="stat-value" id="high-impact-count" style="color:#d0302f">2</div><div class="stat-sub">requerem avaliação</div></div>
+      <div class="stat-card"><div class="stat-label">Ações recomendadas</div><div class="stat-value" id="recommendation-count" style="color:#b8860b">3</div><div class="stat-sub">concretas, por notícia</div></div>
       <div class="stat-card"><div class="stat-label">Temas</div><div class="stat-value" style="font-size:13px;line-height:1.5;color:#1f9d55">IA · Blockchain · Cripto · Pagamentos · Regulamentação · Lei Cripto · Câmbio Stablecoins</div></div>
     </div>
 
@@ -274,70 +274,55 @@
 
     <div class="card" id="news-1">
       <div class="card-top">
-        <div class="card-title">Banco Central enquadra exchanges/VASP como instituições financeiras (Resolução BCB nº 580/2026)</div>
+        <div class="card-title">Faster Payments Council publica roteiro de stablecoins para pagamentos cross-border</div>
         <div class="badge badge-alto">Impacto: Alto</div>
       </div>
-      <div class="card-meta">Regulamentação · Lei de Criptoativos · Brasil · 23/07/2026 · Fonte: Symplexia Labs / Agência Brasil</div>
-      <div class="card-body">A Resolução BCB nº 580/2026 traz as prestadoras de serviços de ativos virtuais (SPSAVs) para dentro do regime prudencial do BC, classificando-as como instituições Tipo 3 no Segmento S4 até 30/06/2028. Prazo para protocolar autorização: 30/10/2026; exigências prudenciais (capital, gestão de riscos, divulgação) a partir de 01/01/2027.</div>
+      <div class="card-meta">Pagamentos Internacionais · Câmbio com Stablecoins · 22/07/2026 · Fonte: U.S. Faster Payments Council</div>
+      <div class="card-body">Em 22/07, o U.S. Faster Payments Council publicou o relatório "Stablecoins as a Cross-Border Payment Method", comparando stablecoins conformes ao GENIUS Act ao correspondent banking tradicional e detalhando dois modelos: transferência direta entre as partes e liquidação indireta (back-end), em que instituições e fintechs usam stablecoin apenas como trilho interno de settlement.</div>
       <div class="card-footer">
-        <span><span class="rec-label">Recomendação:</span> mapear com o jurídico regulatório se o produto da Brosbnk cai no perímetro VASP e, se sim, protocolar autorização antes de 30/10/2026.</span>
+        <span><span class="rec-label">Recomendação:</span> adotar o modelo de liquidação indireta (back-end) como blueprint de um piloto de câmbio via stablecoin — cliente não toca no ativo, só a liquidez cruza a fronteira.</span>
       </div>
       <div class="card-actions" style="margin-top:10px;">
-        <a class="link-btn" href="https://news.symplexia.com/pt-br/2026/07/nova-economia/cryptomoedas/banco-central-do-brasil-publica-nova-regra-e-enquadra-exchanges-cripto-como-instituicoes-financeiras/" target="_blank" rel="noopener">Ler matéria original ↗</a>
-        <button class="dive-btn" onclick="openDive('bcb-580')">🔍 Mergulhar</button>
+        <a class="link-btn" href="https://www.einpresswire.com/article/928589455/u-s-faster-payments-council-publishes-report-exploring-stablecoins-for-cross-border-payments" target="_blank" rel="noopener">Ler matéria original ↗</a>
+        <button class="dive-btn" onclick="openDive('fpc-stablecoin')">🔍 Mergulhar</button>
       </div>
     </div>
 
     <div class="card" id="news-2">
       <div class="card-top">
-        <div class="card-title">GENIUS Act entra em regulamentação: OCC e FDIC publicam regras de stablecoins de pagamento</div>
+        <div class="card-title">Regulamentação do GENIUS Act perde o prazo de 18/07 e prolonga incerteza sobre stablecoins</div>
         <div class="badge badge-alto">Impacto: Alto</div>
       </div>
-      <div class="card-meta">Regulamentação · Câmbio com Stablecoins · Estados Unidos · 23/07/2026 · Fonte: OCC / FDIC</div>
-      <div class="card-body">OCC e FDIC avançaram as regras de implementação do GENIUS Act — a lei federal de stablecoins de pagamento — com prazo de regulamentação em julho/2026 e enforcement até janeiro/2027. As normas definem reservas, relatórios semanais/trimestrais e tratamento de emissores estrangeiros de stablecoin.</div>
+      <div class="card-meta">Regulamentação · Câmbio com Stablecoins · Estados Unidos · 18-22/07/2026 · Fonte: CryptoDaily / Bloomberg</div>
+      <div class="card-body">O prazo de 18/07 para OCC, FDIC, Fed, FinCEN e NCUA finalizarem as regras de capital, reserva e licenciamento de emissores de stablecoin sob o GENIUS Act não foi cumprido; o NPRM de Customer Identification Program (CIP) para emissores de stablecoin de pagamento segue em consulta pública até 21/08/2026. A definição de quais stablecoins serão "seguras" para uso institucional fica em aberto por mais algumas semanas.</div>
       <div class="card-footer">
-        <span><span class="rec-label">Recomendação:</span> montar shortlist de stablecoins que estarão em conformidade (reserva 1:1, emissor licenciado) e restringir qualquer piloto de câmbio via stablecoin a esses emissores.</span>
+        <span><span class="rec-label">Recomendação:</span> não travar contratos de liquidação sobre regra ainda não vigente; usar a janela para concluir due diligence da shortlist de emissores.</span>
       </div>
       <div class="card-actions" style="margin-top:10px;">
-        <a class="link-btn" href="https://www.occ.gov/news-issuances/bulletins/2026/bulletin-2026-24.html" target="_blank" rel="noopener">Ler matéria original ↗</a>
-        <button class="dive-btn" onclick="openDive('genius-rules')">🔍 Mergulhar</button>
+        <a class="link-btn" href="https://cryptodaily.co.uk/2026/07/genius-act-missed-deadline-stablecoin-uncertainty" target="_blank" rel="noopener">Ler matéria original ↗</a>
+        <button class="dive-btn" onclick="openDive('genius-miss')">🔍 Mergulhar</button>
       </div>
     </div>
 
     <div class="card" id="news-3">
       <div class="card-top">
-        <div class="card-title">Stablecoins viram trilho do comércio exterior: B2B em mercados emergentes cresce 733% e LATAM lidera</div>
-        <div class="badge badge-alto">Impacto: Alto</div>
-      </div>
-      <div class="card-meta">Câmbio com Stablecoins · Pagamentos Internacionais / Comex · Global · 23/07/2026 · Fonte: DMCC Future of Trade 2026 / OpenFX</div>
-      <div class="card-body">Relatório DMCC Future of Trade 2026 e dados de mercado mostram stablecoins e tokenização migrando para o centro do trade finance: pagamentos B2B com stablecoin em mercados emergentes cresceram 733% a/a, 71% das empresas latino-americanas já usam stablecoins para liquidação cross-border e a Visa liquidou US$ 4,5 bi anualizados em stablecoins.</div>
-      <div class="card-footer">
-        <span><span class="rec-label">Recomendação:</span> desenhar produto de liquidação cross-border via stablecoin para 2-3 clientes de comex de maior volume, começando por corredor LATAM e condicionado ao enquadramento VASP.</span>
-      </div>
-      <div class="card-actions" style="margin-top:10px;">
-        <a class="link-btn" href="https://www.asiabiztoday.com/2026/07/16/stablecoins-tokenisation-global-trade-finance-dmcc-future-of-trade-2026/" target="_blank" rel="noopener">Ler matéria original ↗</a>
-        <button class="dive-btn" onclick="openDive('stablecoin-trade')">🔍 Mergulhar</button>
-      </div>
-    </div>
-
-    <div class="card" id="news-4">
-      <div class="card-top">
-        <div class="card-title">Mastercard e Sunrate definem "pagamentos globais agênticos" com IA gerindo câmbio e compliance</div>
+        <div class="card-title">EUA e Reino Unido lançam blueprint transatlântico com 10 propostas para stablecoins e tokenização</div>
         <div class="badge badge-medio">Impacto: Médio</div>
       </div>
-      <div class="card-meta">Inteligência Artificial · Pagamentos Internacionais · Global · 23/07/2026 · Fonte: Let's Money</div>
-      <div class="card-body">Mastercard e Sunrate publicaram "Beyond Automation: Defining Agentic Global Payments", cobrindo o pagamento corporativo internacional ponta a ponta — cadastro de fornecedor, contas a pagar/receber, roteamento da transação, gestão cambial, triagem de compliance e conciliação — executados por agentes de IA.</div>
+      <div class="card-meta">Regulamentação · Pagamentos Internacionais · Global · Julho/2026 · Fonte: PYMNTS</div>
+      <div class="card-body">O Tesouro dos EUA e o HM Treasury do Reino Unido divulgaram, via Transatlantic Taskforce for Markets of the Future, um blueprint conjunto com 10 propostas para alinhar as abordagens dos dois países sobre stablecoins, tokenização e infraestrutura financeira digital, pavimentando mercados cross-border mais integrados entre os dois maiores centros financeiros do Ocidente.</div>
       <div class="card-footer">
-        <span><span class="rec-label">Recomendação:</span> especificar um endpoint de câmbio programável (cotação + execução + compliance) que um agente possa consumir, começando por um piloto interno de conciliação com IA auditável.</span></div>
+        <span><span class="rec-label">Recomendação:</span> tratar o padrão EUA-UK como o modelo que provavelmente será exportado para LATAM; alinhar desde já o desenho do produto de câmbio via stablecoin a esses princípios.</span>
+      </div>
       <div class="card-actions" style="margin-top:10px;">
-        <a class="link-btn" href="https://www.letsmoney.com.br/internacional/mastercard-sunrate-agentic-global-payments/" target="_blank" rel="noopener">Ler matéria original ↗</a>
-        <button class="dive-btn" onclick="openDive('mastercard-sunrate')">🔍 Mergulhar</button>
+        <a class="link-btn" href="https://www.pymnts.com/cryptocurrency/2026/us-uk-open-door-to-cross-border-stablecoins/" target="_blank" rel="noopener">Ler matéria original ↗</a>
+        <button class="dive-btn" onclick="openDive('us-uk-blueprint')">🔍 Mergulhar</button>
       </div>
     </div>
 
     <div class="insight-box">
       <div class="insight-title">Insight estratégico</div>
-      <div class="insight-body">O dia tem um eixo claro: o trilho de stablecoin para câmbio e comex está deixando de ser experimento e virando infraestrutura — com LATAM na frente da adoção B2B e Visa liquidando bilhões. Mas o portão para a Brosbnk usar esse trilho no Brasil é regulatório: a Resolução BCB 580/2026 fixa 30/10/2026 como prazo de autorização VASP, e o GENIUS Act define quais stablecoins americanas serão "seguras". A leitura acionável é sequenciar: primeiro resolver o enquadramento no Brasil, depois escolher emissores em conformidade com o GENIUS Act, e só então abrir o produto de liquidação cross-border para clientes de comex — na ordem inversa, a operação nasce fora da lei.</div>
+      <div class="insight-body">A regulação cross-border de stablecoins está virando infraestrutura de política pública: o FPC define o "como" (modelo de liquidação indireta) e EUA-UK alinham o "padrão" global — mas o calendário derrapa, com o GENIUS Act perdendo o prazo de 18/07. Pano de fundo: bitcoin recuou para ~US$ 65 mil e ether para ~US$ 1.877 (24/07), com US$ 225 mi de saída dos ETFs de BTC. A leitura para a Brosbnk: desenhar o produto sobre o modelo de settlement back-end e emissores conformes, sem assinar contrato sobre regra que ainda não vigora.</div>
     </div>
   </div>
 
@@ -360,25 +345,12 @@
       <div class="timeline-item" data-region="brasil">
         <div class="timeline-dot"></div>
         <div class="card" style="margin-bottom:0;">
-          <div class="card-top"><div class="card-title">Resolução BCB nº 580/2026 — VASP/exchanges no regime prudencial</div><div class="badge badge-critico">Crítico</div></div>
-          <div class="card-meta"><span class="badge badge-regiao">Brasil</span> · noticiado em 23/07/2026 · prazo de autorização 30/10/2026</div>
-          <div class="card-body">O BC enquadra as prestadoras de serviços de ativos virtuais (SPSAVs) como instituições Tipo 3, mantidas no Segmento S4 até 30/06/2028. Autorização deve ser protocolada até 30/10/2026 e as exigências prudenciais (capital, gestão de riscos, divulgação) passam a valer em 01/01/2027.</div>
+          <div class="card-top"><div class="card-title">BC restringe stablecoins no câmbio: Resolução BCB 561/2026 (vigência 01/10/2026)</div><div class="badge badge-critico">Crítico</div></div>
+          <div class="card-meta"><span class="badge badge-regiao">Brasil</span> · vigência 01/10/2026</div>
+          <div class="card-body">A Resolução BCB nº 561/2026 altera o regime de eFX e proíbe o uso de ativos virtuais como canal de liquidação entre o prestador de eFX e a contraparte no exterior — a liquidação deve ocorrer via operação de câmbio ou conta de não residente em reais. O BC também sinalizou norma que exige reter operações de stablecoin acima de US$ 10 mil por até 24h antes de liberá-las ao exterior ou a autocustódia.</div>
           <div class="card-footer stacked">
-            <div><span class="impact-label">Impacto no mercado:</span> profissionaliza e afunila o setor cripto brasileiro — capital, governança e capacidade de reporte passam a decidir quem permanece; players informais tendem a sair.</div>
-            <div><span class="opp-label">Oportunidade Brosbnk:</span> como fintech que já opera controles bancários, a Brosbnk absorve o enquadramento com custo marginal menor que um player nativo em cripto; protocolar autorização cedo vira selo de confiança e diferencial comercial. Confirmar o texto oficial do ato antes de qualquer decisão de infraestrutura.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="timeline-item" data-region="eua">
-        <div class="timeline-dot"></div>
-        <div class="card" style="margin-bottom:0;">
-          <div class="card-top"><div class="card-title">GENIUS Act — OCC e FDIC publicam regras de implementação</div><div class="badge badge-critico">Crítico</div></div>
-          <div class="card-meta"><span class="badge badge-regiao">Estados Unidos</span> · regulamentação em julho/2026 · enforcement até jan/2027</div>
-          <div class="card-body">OCC (NPR, bulletin 2026-24) e FDIC avançaram as regras de emissão de stablecoins de pagamento: reservas, relatórios semanais/trimestrais e requisitos para emissores estrangeiros. Enforcement começa até janeiro de 2027.</div>
-          <div class="card-footer stacked">
-            <div><span class="impact-label">Impacto no mercado:</span> define, na prática, quais stablecoins de pagamento serão consideradas "seguras" para uso institucional nos EUA, separando emissores em conformidade dos que ficarão de fora.</div>
-            <div><span class="opp-label">Oportunidade Brosbnk:</span> montar shortlist de stablecoins conformes ao GENIUS Act e restringir qualquer estratégia de liquidação a esses emissores, reduzindo risco de compliance antes do enforcement de 2027.</div>
+            <div><span class="impact-label">Impacto no mercado:</span> fecha o cerco cambial às stablecoins no Brasil e unifica em 01/10/2026 o prazo de adequação para incumbentes e fintechs; quem depende de liquidação via ativo virtual precisa redesenhar o fluxo.</div>
+            <div><span class="opp-label">Oportunidade Brosbnk:</span> validar o texto oficial com o jurídico e ajustar o desenho de produto de câmbio para o modelo de liquidação indireta permitido; sair adequada antes de 01/10/2026 vira selo de confiança frente a concorrentes ainda expostos.</div>
           </div>
         </div>
       </div>
@@ -386,12 +358,12 @@
       <div class="timeline-item" data-region="brasil">
         <div class="timeline-dot"></div>
         <div class="card" style="margin-bottom:0;">
-          <div class="card-top"><div class="card-title">Alegação sobre “Resolução BCB nº 561/2026” (eFX e stablecoins)</div><div class="badge badge-verificar">Verificar vigência</div></div>
-          <div class="card-meta"><span class="badge badge-regiao">Brasil</span> · vigência apontada para 1º/10/2026</div>
-          <div class="card-body">Análises jurídicas indicam que a Resolução BCB nº 561/2026 alteraria as regras de eFX para vedar liquidação por ativos virtuais (stablecoins incluídas) a partir de 1º/10/2026. Distinta da 580/2026 (VASP): esta trata da perna de liquidação do pagamento internacional. Validar número, texto e vigência em fonte oficial.</div>
+          <div class="card-top"><div class="card-title">Checker Finance levanta US$ 8 milhões</div><div class="badge badge-discussao">Em discussão</div></div>
+          <div class="card-meta"><span class="badge badge-regiao">Brasil / América Latina</span> · 20 de maio de 2026</div>
+          <div class="card-body">Investimento estratégico para expandir infraestrutura de pagamentos cross-border e liquidez de stablecoins na América Latina, com foco especial no Brasil.</div>
           <div class="card-footer stacked">
-            <div><span class="impact-label">Impacto no mercado:</span> se confirmada, corredores que hoje liquidam via stablecoin precisam migrar para câmbio ou conta de não residente antes de outubro.</div>
-            <div><span class="opp-label">Oportunidade Brosbnk:</span> inventariar corredores que liquidam em stablecoin e abordar comercialmente a carteira de concorrentes que dependem do trilho cripto, com oferta já conforme.</div>
+            <div><span class="impact-label">Impacto no mercado:</span> mais capital entrando em infraestrutura cross-border sinaliza interesse de investidores na liquidez via stablecoin na região; o enquadramento brasileiro precisa ser analisado separadamente em fonte oficial.</div>
+            <div><span class="opp-label">Oportunidade Brosbnk:</span> observar se a Checker Finance vira parceira ou concorrente direta em corredores de câmbio; avaliar parceria de liquidez antes que ela feche contratos exclusivos com bancos locais.</div>
           </div>
         </div>
       </div>
@@ -401,10 +373,23 @@
         <div class="card" style="margin-bottom:0;">
           <div class="card-top"><div class="card-title">Colômbia prepara lei integral para ativos digitais</div><div class="badge badge-discussao">Em discussão</div></div>
           <div class="card-meta"><span class="badge badge-regiao">Colômbia</span> · Julho de 2026</div>
-          <div class="card-body">Projeto de lei no Senado (sen. Gustavo Moreno) busca criar marco para proveedores de serviços de ativos virtuais (PSAV). O Decreto 1297/2023 já formalizou o registro PSAV; stablecoins e DeFi seguem em zona cinzenta até a aprovação e o Banco de la República proíbe uso direto de cripto para quitar obrigações comerciais.</div>
+          <div class="card-body">Governo colombiano tem projeto de lei pronto para criar o primeiro marco normativo abrangente para criptoativos, stablecoins e tokens, com foco em proteção ao consumidor e estabilidade financeira. Stablecoins e DeFi seguem em zona cinzenta até a aprovação, e o Banco de la República já proíbe uso direto de cripto para quitar obrigações comerciais.</div>
           <div class="card-footer stacked">
-            <div><span class="impact-label">Impacto no mercado:</span> enquanto a lei não passa, liquidação via stablecoin no corredor colombiano opera sob incerteza jurídica.</div>
-            <div><span class="opp-label">Oportunidade Brosbnk:</span> o corredor Brasil-Colômbia via câmbio tradicional segue como opção mais segura; posicionar a Brosbnk cedo como ponte de câmbio confiável antes que a lei defina as regras.</div>
+            <div><span class="impact-label">Impacto no mercado:</span> enquanto a lei não passa, pagamentos internacionais em cripto seguem limitados na Colômbia — qualquer liquidação via stablecoin nesse corredor opera sob incerteza jurídica.</div>
+            <div><span class="opp-label">Oportunidade Brosbnk:</span> o corredor Brasil-Colômbia via câmbio tradicional segue como opção mais segura enquanto a regulação cripto amadurece; posicionar a Brosbnk cedo junto a clientes colombianos como ponte de câmbio confiável antes que a lei defina as regras do jogo.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-region="colombia">
+        <div class="timeline-dot"></div>
+        <div class="card" style="margin-bottom:0;">
+          <div class="card-top"><div class="card-title">Alegação sobre DIAN Resolução 000240 e criptoativos</div><div class="badge badge-verificar">Não verificado</div></div>
+          <div class="card-meta"><span class="badge badge-regiao">Colômbia</span> · Início de 2026</div>
+          <div class="card-body">A obrigação, o número do ato e sua relação direta com o CARF precisam ser confirmados no texto oficial da DIAN antes de uso operacional.</div>
+          <div class="card-footer stacked">
+            <div><span class="impact-label">Impacto no mercado:</span> aumenta o custo de compliance para qualquer empresa que movimenta cripto na Colômbia, favorecendo quem já tem infraestrutura de reporte automatizado.</div>
+            <div><span class="opp-label">Oportunidade Brosbnk:</span> se a Brosbnk atuar ou pretende atuar na Colômbia, adequar-se cedo ao CARF vira vantagem competitiva frente a concorrentes que ainda não têm reporte automatizado.</div>
           </div>
         </div>
       </div>
@@ -412,12 +397,25 @@
       <div class="timeline-item" data-region="panama">
         <div class="timeline-dot"></div>
         <div class="card" style="margin-bottom:0;">
-          <div class="card-top"><div class="card-title">Panamá — Anteprojeto de Lei nº 314 (Marco Integral de Tecnologias Financeiras)</div><div class="badge badge-discussao">Em discussão</div></div>
-          <div class="card-meta"><span class="badge badge-regiao">Panamá</span> · apresentado em jan/2026</div>
-          <div class="card-body">Primeiro projeto de regulação integral do ecossistema fintech panamenho: inclui criptoativos, stablecoins e NFTs sob supervisão, com regime tributário especial via Dirección General de Ingresos. A Cidade do Panamá já permite pagar impostos/multas municipais em BTC, ETH, USDC e USDT.</div>
+          <div class="card-top"><div class="card-title">Anteprojeto 314 avança como caminho principal do Panamá para cripto/fintech</div><div class="badge badge-discussao">Em discussão</div></div>
+          <div class="card-meta"><span class="badge badge-regiao">Panamá</span> · Janeiro-Julho de 2026</div>
+          <div class="card-body">Após tentativas anteriores de lei cripto barradas no Judiciário, o Anteproyecto de Ley No. 314 (apresentado em 13/01/2026) segue como a via legislativa para criar um marco integrado de ativos virtuais, pagamentos digitais e sandbox regulatório. Números, títulos e escopo devem ser confirmados em fonte oficial antes de uso operacional.</div>
           <div class="card-footer stacked">
-            <div><span class="impact-label">Impacto no mercado:</span> se aprovado, o Panamá pode virar um dos mercados mais abertos da região para liquidação via stablecoin, atraindo volume que hoje passa pelo Brasil ou pela Colômbia.</div>
-            <div><span class="opp-label">Oportunidade Brosbnk:</span> acompanhar a tramitação e avaliar operação ou parceria no Panamá cedo, para não ficar de fora caso o país vire hub regional de pagamentos via stablecoin.</div>
+            <div><span class="impact-label">Impacto no mercado:</span> se aprovado, o Panamá se torna um dos mercados mais abertos da região para liquidação via stablecoin, podendo atrair volume de câmbio que hoje passa pelo Brasil ou pela Colômbia.</div>
+            <div><span class="opp-label">Oportunidade Brosbnk:</span> acompanhar a tramitação e avaliar abrir operação ou parceria no Panamá cedo, para não ficar de fora caso o país vire hub regional de pagamentos via stablecoin.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-region="panama">
+        <div class="timeline-dot"></div>
+        <div class="card" style="margin-bottom:0;">
+          <div class="card-top"><div class="card-title">Alegação sobre “SBP Rule 1-2026” no Panamá</div><div class="badge badge-verificar">Não verificado</div></div>
+          <div class="card-meta"><span class="badge badge-regiao">Panamá</span> · 27 de janeiro de 2026</div>
+          <div class="card-body">O ato específico e sua aplicação a fintechs e provedores de cripto não foram confirmados em fonte oficial na revisão inicial.</div>
+          <div class="card-footer stacked">
+            <div><span class="impact-label">Impacto no mercado:</span> eleva a barreira de entrada para fintechs no Panamá — quem não tiver compliance robusto de AML/CTF fica de fora do acesso bancário.</div>
+            <div><span class="opp-label">Ação Brosbnk:</span> confirmar o ato e seu escopo com assessoria panamenha antes de transformar a alegação em requisito de compliance.</div>
           </div>
         </div>
       </div>
@@ -425,12 +423,38 @@
       <div class="timeline-item" data-region="eua">
         <div class="timeline-dot"></div>
         <div class="card" style="margin-bottom:0;">
-          <div class="card-top"><div class="card-title">CLARITY Act segue travado no Senado dos EUA</div><div class="badge badge-discussao">Em discussão</div></div>
-          <div class="card-meta"><span class="badge badge-regiao">Estados Unidos</span> · sem cloture · prazo real 07/08/2026</div>
-          <div class="card-body">A principal lei de estrutura de mercado cripto dos EUA continua sem moção de cloture, travada por disputas de ética/insider trading, imunidade de desenvolvedores DeFi e yield de stablecoin. A janela realista de 2026 se fecha no recesso de agosto.</div>
+          <div class="card-top"><div class="card-title">GENIUS Act perde o prazo de regulamentação de 18/07/2026</div><div class="badge badge-critico">Crítico</div></div>
+          <div class="card-meta"><span class="badge badge-regiao">Estados Unidos</span> · 18-22 de julho de 2026</div>
+          <div class="card-body">As agências federais não cumpriram o prazo de 18/07 para finalizar regras de capital, reserva e licenciamento de emissores de stablecoin. O NPRM de Customer Identification Program (CIP) para emissores de stablecoin de pagamento segue em consulta pública até 21/08/2026, estendendo a incerteza sobre quais stablecoins serão "seguras" para uso institucional.</div>
           <div class="card-footer stacked">
-            <div><span class="impact-label">Impacto no mercado:</span> enquanto não aprovada, estratégias de liquidação com contraparte americana operam sob incerteza sobre quem regula o quê.</div>
-            <div><span class="opp-label">Oportunidade Brosbnk:</span> preparar planos para os dois cenários (aprovação/fracasso) e usar a espera para fechar due diligence com parceiros americanos antes da decisão.</div>
+            <div><span class="impact-label">Impacto no mercado:</span> o atraso prolonga a zona cinzenta — emissores e fintechs seguem sem a régua final de conformidade, e contratos de liquidação firmados agora correm risco de precisar ser refeitos.</div>
+            <div><span class="opp-label">Oportunidade Brosbnk:</span> usar a janela para concluir due diligence de emissores conformes (reserva 1:1, licenciados) sem assinar contratos sobre regra que ainda não vigora.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-region="eua">
+        <div class="timeline-dot"></div>
+        <div class="card" style="margin-bottom:0;">
+          <div class="card-top"><div class="card-title">CLARITY Act trava no Senado dos EUA</div><div class="badge badge-discussao">Em discussão</div></div>
+          <div class="card-meta"><span class="badge badge-regiao">Estados Unidos</span> · Senado volta em 13/07/2026</div>
+          <div class="card-body">A principal lei de regulação do mercado cripto dos EUA segue travada por três disputas (ética/insider trading, imunidade de desenvolvedores DeFi e yield de stablecoin); o Senado tem poucas semanas úteis antes do recesso de agosto para aprová-la.</div>
+          <div class="card-footer stacked">
+            <div><span class="impact-label">Impacto no mercado:</span> enquanto não aprovada, qualquer estratégia de liquidação via stablecoin com contraparte americana opera sob incerteza jurídica.</div>
+            <div><span class="opp-label">Oportunidade Brosbnk:</span> preparar planos para os dois cenários (aprovação/fracasso) e usar a espera para fechar due diligence com parceiros americanos antes da decisão sair.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-region="global">
+        <div class="timeline-dot"></div>
+        <div class="card" style="margin-bottom:0;">
+          <div class="card-top"><div class="card-title">EUA e Reino Unido publicam blueprint transatlântico para stablecoins</div><div class="badge badge-discussao">Em discussão</div></div>
+          <div class="card-meta"><span class="badge badge-regiao">Global</span> · Julho de 2026</div>
+          <div class="card-body">Tesouro dos EUA e HM Treasury divulgaram, via Transatlantic Taskforce for Markets of the Future, um blueprint conjunto com 10 propostas para alinhar as abordagens sobre stablecoins, tokenização e infraestrutura financeira digital entre os dois maiores centros financeiros do Ocidente.</div>
+          <div class="card-footer stacked">
+            <div><span class="impact-label">Impacto no mercado:</span> alinhamento regulatório reduz fricção cross-border entre EUA e UK e cria um padrão de fato que tende a ser exportado para outras jurisdições, inclusive na América Latina.</div>
+            <div><span class="opp-label">Oportunidade Brosbnk:</span> alinhar o produto de câmbio via stablecoin ao padrão emergente EUA-UK desde já, antes que ele vire referência global e a adaptação fique mais cara.</div>
           </div>
         </div>
       </div>
@@ -453,11 +477,11 @@
     <div class="insight-box">
       <div class="insight-title">Impacto para BROSBNK</div>
       <ul class="action-list">
-        <li><span class="arrow">→</span>Brasil: avaliar enquadramento VASP na Resolução BCB 580/2026 e, se aplicável, protocolar autorização antes de 30/10/2026</li>
-        <li><span class="arrow">→</span>Brasil (eFX): validar em fonte oficial a vedação de stablecoin na liquidação e reconstruir corredores afetados antes de 1º/10/2026</li>
-        <li><span class="arrow">→</span>Estados Unidos: priorizar apenas stablecoins conformes ao GENIUS Act e manter dois planos para o CLARITY Act</li>
-        <li><span class="arrow">→</span>Colômbia / Panamá: validar com o jurídico o marco vigente antes de planejar adequações ou corredores</li>
-        <li><span class="arrow">→</span>Preparação para APIs de agentes de IA: desenvolver endpoints de câmbio programável para transações agênticas</li>
+        <li><span class="arrow">→</span>Brasil: validar a Resolução BCB 561/2026 e o prazo de 01/10/2026 antes de alterar o fluxo de liquidação de câmbio</li>
+        <li><span class="arrow">→</span>Colômbia: validar com o jurídico o marco vigente e as obrigações efetivas de reporte à DIAN</li>
+        <li><span class="arrow">→</span>Panamá: conferir os atos diretamente na Assembleia Nacional e na SBP antes de planejar adequações</li>
+        <li><span class="arrow">→</span>Estados Unidos: com o GENIUS Act atrasado, concluir due diligence de emissores sem assinar contratos sobre regra não vigente</li>
+        <li><span class="arrow">→</span>Global: alinhar o produto ao blueprint EUA-UK e preparar APIs para agentes de IA</li>
       </ul>
     </div>
   </div>
@@ -468,23 +492,28 @@
     <div class="page-subtitle">Principais tendências tecnológicas e de mercado que moldam o futuro dos pagamentos internacionais</div>
     <div class="section-heading"><span class="bar"></span>Tendências principais</div>
     <div class="card">
-      <div class="card-top"><div class="card-title">Stablecoins como trilho do comércio exterior (B2B)</div><div class="badge badge-alto">Impacto: Alto</div></div>
-      <div class="card-body">Pagamentos B2B com stablecoin em mercados emergentes crescem 733% a/a e 71% das empresas latino-americanas já usam stablecoins para liquidação cross-border. Adoção puxada por traders e importadores/exportadores tradicionais, não só por firmas cripto-nativas.</div>
-      <div class="card-meta" style="margin-top:8px;">2026</div>
-    </div>
-    <div class="card">
-      <div class="card-top"><div class="card-title">Pagamentos por agentes de IA</div><div class="badge badge-alto">Impacto: Alto</div></div>
-      <div class="card-body">Mastercard, Sunrate e Visa lançam frameworks para transações iniciadas por agentes de IA, cobrindo gestão cambial e compliance ponta a ponta. 53% das empresas americanas permitiriam que agentes negociassem termos em seu nome.</div>
+      <div class="card-top"><div class="card-title">Stablecoins como trilho de settlement back-end</div><div class="badge badge-alto">Impacto: Alto</div></div>
+      <div class="card-body">Relatórios de mercado (FPC) e bancos apontam a liquidação indireta via stablecoin — cliente não toca no ativo, só a liquidez cruza a fronteira — como o modelo dominante para pagamentos cross-border conformes.</div>
       <div class="card-meta" style="margin-top:8px;">2026-2027</div>
     </div>
     <div class="card">
-      <div class="card-top"><div class="card-title">Convergência regulatória global de stablecoins</div><div class="badge badge-medio">Impacto: Médio</div></div>
-      <div class="card-body">GENIUS Act (EUA), regime prudencial do BC (Brasil) e projetos na Colômbia e no Panamá criam frameworks para stablecoins e ativos virtuais, aproximando pagamentos tradicionais e tokenizados sob supervisão.</div>
+      <div class="card-top"><div class="card-title">Pagamentos por agentes de IA</div><div class="badge badge-alto">Impacto: Alto</div></div>
+      <div class="card-body">Mastercard e Visa lançam frameworks para transações iniciadas por agentes de IA. 53% das empresas americanas permitiriam que agentes negociassem termos em seu nome.</div>
+      <div class="card-meta" style="margin-top:8px;">2026-2027</div>
+    </div>
+    <div class="card">
+      <div class="card-top"><div class="card-title">Adoção de stablecoins em mercados emergentes</div><div class="badge badge-alto">Impacto: Alto</div></div>
+      <div class="card-body">Meta, Stripe e outras plataformas começam a oferecer pagamentos em USDC em Colômbia, Filipinas e outros mercados emergentes.</div>
+      <div class="card-meta" style="margin-top:8px;">2026</div>
+    </div>
+    <div class="card">
+      <div class="card-top"><div class="card-title">Convergência regulatória global</div><div class="badge badge-medio">Impacto: Médio</div></div>
+      <div class="card-body">Reino Unido, EUA e outros mercados desenvolvidos criam frameworks unificados para pagamentos tradicionais e tokenizados — o blueprint transatlântico EUA-UK é o exemplo mais recente.</div>
       <div class="card-meta" style="margin-top:8px;">2026-2027</div>
     </div>
     <div class="insight-box">
       <div class="insight-title">Dinâmica de mercado</div>
-      <div class="insight-body">Visa liquidou US$ 4,5 bi anualizados em stablecoins (jan/2026) · Crescimento B2B: +733% a/a em mercados emergentes · LATAM: 71% das empresas já usam stablecoins em liquidação cross-border, mas stablecoins ainda são só ~1% dos fluxos globais de pagamento.</div>
+      <div class="insight-body">Stablecoins em circulação: ~US$ 310 bi (19/07/2026) · USDT ~US$ 184 bi · USDC ~US$ 73 bi · stablecoins ainda representam ~1% dos fluxos globais de pagamento — espaço de crescimento amplo.</div>
     </div>
   </div>
 
@@ -500,15 +529,15 @@
     <div class="section-heading"><span class="bar"></span>Itens de ação prioritários</div>
     <div class="priority-item">
       <div class="priority-num">1</div>
-      <div class="priority-text"><strong>Avaliar enquadramento VASP (Resolução BCB 580/2026)</strong><span>Confirmar se o produto cai no perímetro e, se sim, protocolar autorização antes de 30/10/2026</span></div>
+      <div class="priority-text"><strong>Adequar o fluxo de câmbio à Resolução BCB 561/2026 (prazo 01/10/2026)</strong><span>Validar o texto oficial e migrar liquidação para o modelo permitido antes da vigência</span></div>
     </div>
     <div class="priority-item">
       <div class="priority-num">2</div>
-      <div class="priority-text"><strong>Reconstruir liquidação de corredores em stablecoin (eFX)</strong><span>Validar a vedação em fonte oficial e migrar para câmbio/conta de não residente antes de 1º/10/2026</span></div>
+      <div class="priority-text"><strong>Concluir due diligence de emissores de stablecoin</strong><span>GENIUS Act atrasado: montar shortlist conforme sem travar contratos sobre regra não vigente</span></div>
     </div>
     <div class="priority-item" style="border-bottom:none;">
       <div class="priority-num">3</div>
-      <div class="priority-text"><strong>Definir shortlist de stablecoins conformes ao GENIUS Act</strong><span>Restringir pilotos de câmbio a emissores licenciados antes do enforcement de 2027</span></div>
+      <div class="priority-text"><strong>Desenhar produto de liquidação indireta (back-end)</strong><span>Usar o modelo do relatório FPC como blueprint de um piloto de câmbio via stablecoin</span></div>
     </div>
   </div>
 
@@ -517,71 +546,32 @@
     <div class="page-title">Arquivo</div>
     <div class="page-subtitle">Histórico completo de notícias de todos os briefings diários — clique na data para abrir ou fechar</div>
     <div class="stats-grid" style="grid-template-columns: repeat(2,1fr);">
-      <div class="stat-card"><div class="stat-label">Briefings arquivados</div><div class="stat-value" id="archive-group-count" style="color:#2f6fed">4</div><div class="stat-sub">desde 10/07/2026</div></div>
-      <div class="stat-card"><div class="stat-label">Notícias acumuladas</div><div class="stat-value" id="archive-news-count" style="color:#1f9d55">16</div><div class="stat-sub">em todos os briefings</div></div>
+      <div class="stat-card"><div class="stat-label">Briefings arquivados</div><div class="stat-value" id="archive-group-count" style="color:#2f6fed">3</div><div class="stat-sub">desde 10/07/2026</div></div>
+      <div class="stat-card"><div class="stat-label">Notícias acumuladas</div><div class="stat-value" id="archive-news-count" style="color:#1f9d55">11</div><div class="stat-sub">em todos os briefings</div></div>
     </div>
 
-    <div class="section-heading archive-date-heading" id="head-20260723" onclick="toggleArchive('arch-20260723')"><span class="bar"></span>23/07/2026<span class="count-badge">4 notícias</span><span class="chevron">▾</span></div>
-    <div class="archive-group" id="arch-20260723">
+    <div class="section-heading archive-date-heading" id="head-20260724" onclick="toggleArchive('arch-20260724')"><span class="bar"></span>24/07/2026<span class="count-badge">3 notícias</span><span class="chevron">▾</span></div>
+    <div class="archive-group" id="arch-20260724">
       <div class="card">
-        <div class="card-top"><div class="card-title">Banco Central enquadra exchanges/VASP como instituições financeiras (Resolução BCB nº 580/2026)</div><div class="badge badge-alto">Impacto: Alto</div></div>
-        <div class="card-meta">Regulamentação · Lei de Criptoativos · Brasil · 23/07/2026 · Fonte: Symplexia Labs / Agência Brasil</div>
-        <div class="card-body">A Resolução BCB nº 580/2026 traz as SPSAVs para o regime prudencial do BC como instituições Tipo 3 (S4 até 30/06/2028). Prazo de autorização: 30/10/2026; exigências prudenciais a partir de 01/01/2027.</div>
-        <div class="card-footer"><span><span class="rec-label">Recomendação:</span> mapear com o jurídico se o produto cai no perímetro VASP e protocolar autorização antes de 30/10/2026.</span></div>
-        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://news.symplexia.com/pt-br/2026/07/nova-economia/cryptomoedas/banco-central-do-brasil-publica-nova-regra-e-enquadra-exchanges-cripto-como-instituicoes-financeiras/" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('bcb-580')">🔍 Mergulhar</button></div>
+        <div class="card-top"><div class="card-title">Faster Payments Council publica roteiro de stablecoins para pagamentos cross-border</div><div class="badge badge-alto">Impacto: Alto</div></div>
+        <div class="card-meta">Pagamentos Internacionais · Câmbio com Stablecoins · 22/07/2026 · Fonte: U.S. Faster Payments Council</div>
+        <div class="card-body">Em 22/07, o FPC publicou "Stablecoins as a Cross-Border Payment Method", comparando stablecoins conformes ao GENIUS Act ao correspondent banking e detalhando dois modelos: transferência direta e liquidação indireta (back-end).</div>
+        <div class="card-footer"><span><span class="rec-label">Recomendação:</span> adotar o modelo de liquidação indireta como blueprint de um piloto de câmbio via stablecoin.</span></div>
+        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://www.einpresswire.com/article/928589455/u-s-faster-payments-council-publishes-report-exploring-stablecoins-for-cross-border-payments" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('fpc-stablecoin')">🔍 Mergulhar</button></div>
       </div>
       <div class="card">
-        <div class="card-top"><div class="card-title">GENIUS Act entra em regulamentação: OCC e FDIC publicam regras de stablecoins de pagamento</div><div class="badge badge-alto">Impacto: Alto</div></div>
-        <div class="card-meta">Regulamentação · Câmbio com Stablecoins · Estados Unidos · 23/07/2026 · Fonte: OCC / FDIC</div>
-        <div class="card-body">OCC e FDIC avançaram as regras do GENIUS Act (reservas, relatórios, emissores estrangeiros), com regulamentação em julho/2026 e enforcement até janeiro/2027.</div>
-        <div class="card-footer"><span><span class="rec-label">Recomendação:</span> montar shortlist de stablecoins conformes e restringir pilotos a esses emissores.</span></div>
-        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://www.occ.gov/news-issuances/bulletins/2026/bulletin-2026-24.html" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('genius-rules')">🔍 Mergulhar</button></div>
+        <div class="card-top"><div class="card-title">Regulamentação do GENIUS Act perde o prazo de 18/07 e prolonga incerteza sobre stablecoins</div><div class="badge badge-alto">Impacto: Alto</div></div>
+        <div class="card-meta">Regulamentação · Câmbio com Stablecoins · Estados Unidos · 18-22/07/2026 · Fonte: CryptoDaily / Bloomberg</div>
+        <div class="card-body">O prazo de 18/07 para OCC, FDIC, Fed, FinCEN e NCUA finalizarem as regras de stablecoin não foi cumprido; o NPRM de CIP segue em consulta até 21/08/2026, mantendo em aberto quais stablecoins serão "seguras".</div>
+        <div class="card-footer"><span><span class="rec-label">Recomendação:</span> não travar contratos sobre regra não vigente; concluir due diligence da shortlist de emissores.</span></div>
+        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://cryptodaily.co.uk/2026/07/genius-act-missed-deadline-stablecoin-uncertainty" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('genius-miss')">🔍 Mergulhar</button></div>
       </div>
       <div class="card">
-        <div class="card-top"><div class="card-title">Stablecoins viram trilho do comércio exterior: B2B em mercados emergentes cresce 733% e LATAM lidera</div><div class="badge badge-alto">Impacto: Alto</div></div>
-        <div class="card-meta">Câmbio com Stablecoins · Pagamentos Internacionais / Comex · Global · 23/07/2026 · Fonte: DMCC Future of Trade 2026 / OpenFX</div>
-        <div class="card-body">B2B com stablecoin em mercados emergentes +733% a/a; 71% das empresas latino-americanas já liquidam cross-border em stablecoin; Visa liquidou US$ 4,5 bi anualizados.</div>
-        <div class="card-footer"><span><span class="rec-label">Recomendação:</span> desenhar produto de liquidação cross-border via stablecoin para 2-3 clientes de comex, começando por LATAM.</span></div>
-        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://www.asiabiztoday.com/2026/07/16/stablecoins-tokenisation-global-trade-finance-dmcc-future-of-trade-2026/" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('stablecoin-trade')">🔍 Mergulhar</button></div>
-      </div>
-      <div class="card">
-        <div class="card-top"><div class="card-title">Mastercard e Sunrate definem "pagamentos globais agênticos" com IA gerindo câmbio e compliance</div><div class="badge badge-medio">Impacto: Médio</div></div>
-        <div class="card-meta">Inteligência Artificial · Pagamentos Internacionais · Global · 23/07/2026 · Fonte: Let's Money</div>
-        <div class="card-body">Documento "Beyond Automation: Defining Agentic Global Payments" cobre pagamento corporativo internacional ponta a ponta — gestão cambial, triagem de compliance e conciliação por agentes de IA.</div>
-        <div class="card-footer"><span><span class="rec-label">Recomendação:</span> especificar endpoint de câmbio programável para agentes, começando por piloto de conciliação com IA auditável.</span></div>
-        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://www.letsmoney.com.br/internacional/mastercard-sunrate-agentic-global-payments/" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('mastercard-sunrate')">🔍 Mergulhar</button></div>
-      </div>
-    </div>
-
-    <div class="section-heading archive-date-heading collapsed" id="head-20260722" onclick="toggleArchive('arch-20260722')" style="margin-top:32px;"><span class="bar"></span>22/07/2026<span class="count-badge">4 notícias</span><span class="chevron">▾</span></div>
-    <div class="archive-group collapsed" id="arch-20260722">
-      <div class="card">
-        <div class="card-top"><div class="card-title">Contagem regressiva do eFX: Resolução BCB 561/2026 proíbe stablecoin na liquidação a partir de 1º de outubro</div><div class="badge badge-critico">Impacto: Crítico</div></div>
-        <div class="card-meta">Câmbio com Stablecoins · Regulamentação · Brasil · 22/07/2026 · Fonte: Exame / Machado Meyer</div>
-        <div class="card-body">A Resolução BCB nº 561/2026 determina que a liquidação entre o prestador de eFX e sua contraparte no exterior ocorra exclusivamente por câmbio ou conta de não residente em reais — vedando ativos virtuais, stablecoins incluídas. Vigência em 1º/10/2026.</div>
-        <div class="card-footer"><span><span class="rec-label">Recomendação:</span> inventariar em 5 dias úteis os corredores que liquidam em stablecoin e migrar para câmbio/conta de não residente antes de 1º/10.</span></div>
-        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://exame.com/future-of-money/bc-confirma-que-stablecoins-nao-podem-ser-usadas-em-operacoes-de-efx/" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('efx-561')">🔍 Mergulhar</button></div>
-      </div>
-      <div class="card">
-        <div class="card-top"><div class="card-title">CLARITY Act não é votado e impasse ético persiste no Senado dos EUA</div><div class="badge badge-critico">Impacto: Crítico</div></div>
-        <div class="card-meta">Lei de Criptoativos · Regulamentação · Estados Unidos · 22/07/2026 · Fonte: KuCoin / CryptoSlate</div>
-        <div class="card-body">A votação prometida não ocorreu e não há moção de cloture apresentada; seguem as disputas sobre imunidade de desenvolvedores DeFi e yield de stablecoin. O prazo real passa a ser 7 de agosto, início do recesso.</div>
-        <div class="card-footer"><span><span class="rec-label">Recomendação:</span> trocar o gatilho de assinatura de "acordo anunciado" para "cloture aprovada" e fixar 07/08 como corte.</span></div>
-        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://www.kucoin.com/news/flash/u-s-senate-delays-clarity-act-vote-amid-white-house-ethics-dispute" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('clarity-impasse')">🔍 Mergulhar</button></div>
-      </div>
-      <div class="card">
-        <div class="card-top"><div class="card-title">GENIUS Act completa um ano sem regras finais: reguladores dos EUA perdem o prazo de 18/07</div><div class="badge badge-alto">Impacto: Alto</div></div>
-        <div class="card-meta">Lei de Criptomoedas · Câmbio com Stablecoins · Estados Unidos · 22/07/2026 · Fonte: Crypto Briefing / crypto.news</div>
-        <div class="card-body">O prazo de um ano para as regras finais do GENIUS Act venceu em 18/07 sem regra final (10 propostas, nenhuma final). Pela Seção 20, a lei passa a vincular emissores em 18/01/2027 ou 120 dias após as regras finais, o que ocorrer primeiro.</div>
-        <div class="card-footer"><span><span class="rec-label">Recomendação:</span> exigir plano de conformidade datado e cláusula de saída sem multa por não enquadramento em 18/01/2027.</span></div>
-        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://cryptobriefing.com/us-regulators-miss-genius-act-stablecoin-deadline/" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('genius-prazo')">🔍 Mergulhar</button></div>
-      </div>
-      <div class="card">
-        <div class="card-top"><div class="card-title">Nubank, Itaú, Bradesco e BB lideram o primeiro ranking Evident de IA da América Latina</div><div class="badge badge-medio">Impacto: Médio</div></div>
-        <div class="card-meta">Inteligência Artificial · América Latina · 21/07/2026 · Fonte: Rio Times / Money Times</div>
-        <div class="card-body">A Evident publicou o primeiro índice de maturidade em IA para bancos da América Latina. Nubank, Itaú, Bradesco e BB lideram; o Brasil sedia 7 das 20 instituições avaliadas. Eixos: talento, inovação, transparência e governança.</div>
-        <div class="card-footer"><span><span class="rec-label">Recomendação:</span> documentar governança auditável de IA em câmbio e publicar relatório curto de uso responsável.</span></div>
-        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://www.riotimesonline.com/nubank-itau-top-a-new-artificial-intelligence-bank-ranking/" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('ranking-ia')">🔍 Mergulhar</button></div>
+        <div class="card-top"><div class="card-title">EUA e Reino Unido lançam blueprint transatlântico com 10 propostas para stablecoins e tokenização</div><div class="badge badge-medio">Impacto: Médio</div></div>
+        <div class="card-meta">Regulamentação · Pagamentos Internacionais · Global · Julho/2026 · Fonte: PYMNTS</div>
+        <div class="card-body">Tesouro dos EUA e HM Treasury divulgaram, via Transatlantic Taskforce for Markets of the Future, blueprint conjunto com 10 propostas para alinhar stablecoins, tokenização e infraestrutura financeira digital.</div>
+        <div class="card-footer"><span><span class="rec-label">Recomendação:</span> tratar o padrão EUA-UK como modelo que será exportado para LATAM e alinhar o produto desde já.</span></div>
+        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://www.pymnts.com/cryptocurrency/2026/us-uk-open-door-to-cross-border-stablecoins/" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('us-uk-blueprint')">🔍 Mergulhar</button></div>
       </div>
     </div>
 
@@ -671,140 +661,55 @@
 
 <script>
 var diveData = {
-  'bcb-580': {
-    title: "Resolução BCB nº 580/2026 enquadra exchanges/VASP",
+  'fpc-stablecoin': {
+    title: "FPC: stablecoins para pagamentos cross-border",
     sub: "O que é e como a Brosbnk deve reagir",
-    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer em relação à Resolução BCB nº 580/2026, que enquadra as prestadoras de serviços de ativos virtuais (SPSAVs) como instituições financeiras Tipo 3 no regime prudencial do Banco Central, com prazo de autorização até 30/10/2026 e exigências prudenciais a partir de 01/01/2027.",
+    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer em relação ao relatório do U.S. Faster Payments Council 'Stablecoins as a Cross-Border Payment Method', que compara stablecoins conformes ao GENIUS Act ao correspondent banking e descreve dois modelos: transferência direta e liquidação indireta (back-end).",
     html: [
       "<h4>O que aconteceu, em linguagem simples</h4>",
-      "<p>O Banco Central publicou uma regra que trata as empresas de ativos virtuais (exchanges e prestadoras de serviços cripto, as SPSAVs) quase como bancos: elas entram no regime prudencial como instituições Tipo 3 e ficam no Segmento S4 até 30 de junho de 2028. Quem quiser operar precisa protocolar pedido de autorização até 30 de outubro de 2026, e a partir de 1º de janeiro de 2027 valem exigências de capital, gestão de riscos e divulgação de informações.</p>",
+      "<p>Em 22/07/2026, o U.S. Faster Payments Council publicou um relatório analisando como stablecoins conformes ao GENIUS Act podem melhorar pagamentos internacionais frente ao correspondent banking tradicional. O relatório descreve dois modelos: (1) transferência direta de stablecoin entre as partes e (2) liquidação indireta, em que a instituição ou fintech usa stablecoin só como trilho interno de settlement — o cliente nunca toca no ativo.</p>",
       "<h4>Por que isso importa para a Brosbnk</h4>",
-      "<p>Se a Brosbnk oferece — ou pretende oferecer — custódia, negociação, intermediação ou liquidação de ativos virtuais (por exemplo, câmbio via stablecoin), passa a precisar dessa autorização VASP. É a diferença entre poder ou não usar o trilho cripto legalmente no Brasil.</p>",
+      "<p>Câmbio e comex são o core da Brosbnk. O modelo de liquidação indireta permite capturar a economia de custo e velocidade do stablecoin sem expor o cliente ao ativo virtual — o que reduz atrito regulatório tanto no Brasil quanto nos EUA.</p>",
       "<h4>Plano passo a passo</h4>",
-      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Confirmar o perímetro</strong><span>Com o jurídico regulatório, definir se as atividades atuais e planejadas da Brosbnk caem na definição de SPSAV.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Ler o texto oficial</strong><span>Obter a Resolução BCB 580/2026 na fonte oficial e validar número, escopo e cronograma antes de qualquer decisão.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Montar o dossiê de autorização</strong><span>Preparar capital, governança, controles internos e capacidade de reporte para protocolar antes de 30/10/2026.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Transformar em diferencial</strong><span>Usar a autorização como selo de confiança junto a clientes corporativos, enquanto concorrentes informais saem do mercado.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Preparar 2027</strong><span>Ajustar capital e políticas de divulgação para as exigências prudenciais que começam em 01/01/2027.</span></div></div>"
+      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Ler e mapear o relatório</strong><span>Extrair do documento do FPC os requisitos operacionais dos dois modelos e escolher o de liquidação indireta como base.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Escolher um corredor piloto</strong><span>Selecionar um corredor LATAM de alto volume onde a economia de custo seja mais evidente.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Restringir a emissores conformes</strong><span>Usar apenas stablecoins com reserva 1:1 e emissor licenciado, cruzando com as regras do BC (561/2026).</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Desenhar o fluxo back-end</strong><span>Estruturar a operação para que só a liquidez cruze a fronteira via stablecoin, com o cliente recebendo/pagando em moeda fiduciária.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Medir contra o câmbio tradicional</strong><span>Rodar o piloto por um trimestre comparando custo e tempo de liquidação antes de escalar.</span></div></div>"
     ].join("")
   },
-  'genius-rules': {
-    title: "GENIUS Act entra em regulamentação (OCC/FDIC)",
+  'genius-miss': {
+    title: "GENIUS Act perde o prazo de regulamentação",
     sub: "O que é e como a Brosbnk deve reagir",
-    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer em relação à entrada em regulamentação do GENIUS Act nos EUA, com OCC e FDIC publicando regras de emissão de stablecoins de pagamento (reservas, relatórios, emissores estrangeiros) e enforcement previsto até janeiro de 2027.",
+    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer em relação ao GENIUS Act ter perdido o prazo de 18/07/2026 para finalizar as regras de stablecoin, com o NPRM de Customer Identification Program (CIP) ainda em consulta até 21/08/2026.",
     html: [
       "<h4>O que aconteceu, em linguagem simples</h4>",
-      "<p>O GENIUS Act é a lei federal americana que regula stablecoins de pagamento. Agora os reguladores (OCC e FDIC) publicaram as regras que dizem, na prática, como um emissor de stablecoin precisa se comportar: manter reservas, enviar relatórios semanais e trimestrais e — se for emissor estrangeiro — cumprir requisitos extras. A fiscalização começa até janeiro de 2027.</p>",
+      "<p>As agências federais americanas (OCC, FDIC, Fed, FinCEN e NCUA) deveriam finalizar até 18/07/2026 as regras de capital, reserva e licenciamento de emissores de stablecoin sob o GENIUS Act, mas não cumpriram o prazo. O NPRM que trata da identificação de clientes (CIP) para emissores de stablecoin de pagamento segue em consulta pública até 21/08/2026.</p>",
       "<h4>Por que isso importa para a Brosbnk</h4>",
-      "<p>Isso separa as stablecoins americanas em dois grupos: as que estarão em conformidade e serão consideradas seguras para uso institucional, e as que não estarão. Qualquer estratégia da Brosbnk de liquidar câmbio via stablecoin depende de escolher o grupo certo.</p>",
+      "<p>Sem a régua final de conformidade, ainda não há certeza sobre quais stablecoins americanas serão consideradas 'seguras' para uso institucional. Qualquer contrato de liquidação firmado agora corre o risco de precisar ser refeito quando as regras saírem.</p>",
       "<h4>Plano passo a passo</h4>",
-      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Montar a shortlist</strong><span>Listar as stablecoins com reserva 1:1 e emissor licenciado que tendem a cumprir o GENIUS Act.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Restringir pilotos</strong><span>Só permitir testes de liquidação via stablecoin com emissores da shortlist.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Cruzar com o Brasil</strong><span>Verificar como o uso desses emissores se encaixa nas regras do BC (Resolução 580/2026 e regras de eFX).</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Falar com emissores cedo</strong><span>Iniciar due diligence com emissores conformes antes do enforcement de 2027, quando a concorrência aumenta.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Monitorar o calendário</strong><span>Acompanhar as datas de enforcement para não travar contratos sobre regra ainda não vigente.</span></div></div>"
+      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Designar um responsável</strong><span>Alguém do compliance para acompanhar o Federal Register e o andamento do NPRM até 21/08.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Montar a shortlist de emissores</strong><span>Listar stablecoins com reserva 1:1 e emissor licenciado que tendem a cumprir a regra final.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Avançar due diligence, não contratos</strong><span>Concluir a análise de risco dos emissores sem assinar contrato definitivo sobre regra não vigente.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Cruzar com as regras brasileiras</strong><span>Verificar como o uso desses emissores se encaixa na Resolução BCB 561/2026 e no regime de eFX.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Preparar cláusulas de adaptação</strong><span>Deixar contratos futuros com gatilhos de ajuste para quando a regulamentação final for publicada.</span></div></div>"
     ].join("")
   },
-  'stablecoin-trade': {
-    title: "Stablecoins viram trilho do comércio exterior",
+  'us-uk-blueprint': {
+    title: "Blueprint transatlântico EUA-UK de stablecoins",
     sub: "O que é e como a Brosbnk deve reagir",
-    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer diante do avanço das stablecoins como trilho de liquidação no comércio exterior — pagamentos B2B em mercados emergentes crescendo 733% ao ano, 71% das empresas latino-americanas já usando stablecoins em liquidação cross-border e a Visa liquidando US$ 4,5 bilhões anualizados.",
+    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer em relação ao blueprint conjunto do Tesouro dos EUA e do HM Treasury do Reino Unido, com 10 propostas para alinhar stablecoins, tokenização e infraestrutura financeira digital.",
     html: [
       "<h4>O que aconteceu, em linguagem simples</h4>",
-      "<p>Relatórios de mercado (incluindo o DMCC Future of Trade 2026) mostram que stablecoins deixaram de ser só coisa de investidor cripto e viraram forma real de pagar e receber no comércio internacional. Traders, importadores e exportadores tradicionais estão usando stablecoins para liquidar operações mais rápido e mais barato — e a América Latina lidera essa adoção, com 71% das empresas já usando.</p>",
+      "<p>O Tesouro dos EUA e o HM Treasury do Reino Unido, via Transatlantic Taskforce for Markets of the Future, divulgaram um blueprint conjunto com 10 propostas para alinhar as abordagens dos dois países sobre stablecoins, tokenização e infraestrutura financeira digital, pavimentando mercados cross-border mais integrados.</p>",
       "<h4>Por que isso importa para a Brosbnk</h4>",
-      "<p>Comércio exterior e câmbio são o coração do negócio da Brosbnk. Se os clientes de comex começam a liquidar via stablecoin com outros provedores, a Brosbnk perde volume e vê a margem do câmbio tradicional ser pressionada — mas também tem a chance de oferecer esse trilho antes dos concorrentes locais.</p>",
+      "<p>Quando os dois maiores centros financeiros do Ocidente alinham regras, criam um padrão de fato que costuma ser exportado para outras jurisdições, inclusive na América Latina. Adaptar o produto cedo a esse padrão reduz custo futuro de conformidade.</p>",
       "<h4>Plano passo a passo</h4>",
-      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Resolver o portão regulatório</strong><span>Confirmar o enquadramento VASP (Resolução 580/2026) e as regras de eFX antes de desenhar o produto.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Escolher o corredor certo</strong><span>Começar por um corredor LATAM de alto volume, onde a adoção já é maior.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Selecionar 2-3 clientes</strong><span>Priorizar clientes de comex de maior volume dispostos a um piloto.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Usar só emissores conformes</strong><span>Liquidar apenas com stablecoins alinhadas ao GENIUS Act e às regras brasileiras.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Medir custo e tempo</strong><span>Comparar o piloto com o câmbio tradicional por um trimestre antes de escalar.</span></div></div>"
-    ].join("")
-  },
-  'mastercard-sunrate': {
-    title: "Mastercard e Sunrate definem pagamentos globais agênticos",
-    sub: "O que é e como a Brosbnk deve reagir",
-    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer em relação ao documento da Mastercard e Sunrate 'Beyond Automation: Defining Agentic Global Payments', que descreve o pagamento corporativo internacional ponta a ponta (cadastro de fornecedor, contas a pagar/receber, roteamento, gestão cambial, triagem de compliance e conciliação) executado por agentes de IA.",
-    html: [
-      "<h4>O que aconteceu, em linguagem simples</h4>",
-      "<p>Mastercard e Sunrate publicaram um documento que descreve como agentes de IA podem cuidar de todo o ciclo de um pagamento internacional de empresa: cadastrar o fornecedor, escolher a rota, gerir o câmbio, passar pela triagem de compliance e conciliar no fim. Ou seja, a IA deixa de só automatizar tarefas e passa a conduzir o pagamento de ponta a ponta.</p>",
-      "<h4>Por que isso importa para a Brosbnk</h4>",
-      "<p>Gestão cambial e triagem de compliance no pagamento internacional são exatamente o que a Brosbnk faz. Se agentes de IA viram o canal por onde as empresas iniciam pagamentos, quem não tiver uma API pronta para esses agentes fica fora do fluxo.</p>",
-      "<h4>Plano passo a passo</h4>",
-      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Piloto interno primeiro</strong><span>Aplicar IA auditável na conciliação de câmbio, onde o risco é menor e o ganho é medível.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Especificar o endpoint</strong><span>Desenhar uma API de câmbio programável: cotação, execução e checagem de compliance num único fluxo.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Definir governança</strong><span>Exigir consentimento explícito, limites e log auditável para qualquer operação iniciada por agente.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Testar com um cliente</strong><span>Rodar com um cliente corporativo que já usa automação de contas a pagar.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Acompanhar os padrões</strong><span>Seguir os frameworks de Mastercard/Visa para garantir interoperabilidade quando virarem padrão de mercado.</span></div></div>"
-    ].join("")
-  },
-  'efx-561': {
-    title: "Resolução BCB 561/2026 tira a stablecoin do eFX",
-    sub: "O que é e como a Brosbnk deve reagir",
-    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer diante da Resolução BCB nº 561/2026, que veda o uso de ativos virtuais (stablecoins incluídas) na liquidação de operações de eFX a partir de 1º de outubro de 2026.",
-    html: [
-      "<h4>O que aconteceu, em linguagem simples</h4>",
-      "<p>O Banco Central determinou que a liquidação de pagamentos internacionais (eFX) com a contraparte no exterior só pode ocorrer por operação de câmbio ou por conta de não residente em reais — não mais por stablecoin. A regra vale a partir de 1º de outubro de 2026.</p>",
-      "<h4>Por que isso importa para a Brosbnk</h4>",
-      "<p>Atinge diretamente a perna de liquidação do produto de pagamentos internacionais. Todo corredor que hoje liquida via stablecoin precisa ser reconstruído sobre câmbio ou conta de não residente antes de outubro.</p>",
-      "<h4>Plano passo a passo</h4>",
-      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Inventariar corredores</strong><span>Listar em 5 dias úteis cada corredor e contraparte que liquida em stablecoin, com volume mensal.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Definir a rota substituta</strong><span>Escolher, por corredor, entre câmbio ou conta de não residente, comparando custo.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Renegociar com contrapartes</strong><span>Reservar pelo menos seis semanas para a nova forma de recebimento.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Reprecificar antes de comunicar</strong><span>Calcular o novo spread e decidir o que é absorvido e o que é repassado.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Abordar a carteira dos concorrentes</strong><span>Ofertar liquidação já conforme antes de 1º/10.</span></div></div>"
-    ].join("")
-  },
-  'clarity-impasse': {
-    title: "CLARITY Act sem cloture no Senado",
-    sub: "O que é e como a Brosbnk deve reagir",
-    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer diante do CLARITY Act não ter sido votado na semana prometida, sem moção de cloture, com o prazo real deslocado para 7 de agosto de 2026.",
-    html: [
-      "<h4>O que aconteceu, em linguagem simples</h4>",
-      "<p>Apesar de um acordo político anunciado, a votação do CLARITY Act não ocorreu e não há moção de cloture — o passo que abre a votação em plenário. Seguem as disputas sobre imunidade de desenvolvedores DeFi e yield de stablecoin. O prazo realista passa a ser 7 de agosto.</p>",
-      "<h4>Por que isso importa para a Brosbnk</h4>",
-      "<p>Anúncio político e lei aprovada são coisas diferentes. Assinar contrato com parceiro americano agora significa assumir um risco que o próprio Senado ainda não assumiu.</p>",
-      "<h4>Plano passo a passo</h4>",
-      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Trocar o gatilho</strong><span>A condição de assinatura passa de 'acordo anunciado' para 'cloture aprovada'.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Manter minutas prontas</strong><span>Deixar contratos revisados e prontos, sem assinar, à espera do gatilho.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Negociar na janela de fraqueza</strong><span>Usar as semanas para renegociar exclusividade, piso de volume e cláusula de risco regulatório.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Fixar data de corte</strong><span>Sem cloture até 07/08, dossiês voltam para a gaveta e orçamento vai para o eFX.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Corrigir o caso-base</strong><span>Atualizar o board antes que a decisão de investimento seja tomada sobre o cenário otimista.</span></div></div>"
-    ].join("")
-  },
-  'genius-prazo': {
-    title: "GENIUS Act perde o prazo de 18/07 sem regra final",
-    sub: "O que é e como a Brosbnk deve reagir",
-    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer diante de os reguladores dos EUA terem perdido o prazo de um ano do GENIUS Act (18/07/2026) sem publicar as regras finais de stablecoin, sabendo que a lei vincula emissores em 18/01/2027.",
-    html: [
-      "<h4>O que aconteceu, em linguagem simples</h4>",
-      "<p>O prazo de um ano para as regras finais do GENIUS Act venceu em 18 de julho de 2026 sem regra final — foram 10 propostas e nenhuma conclusão. Mas perder o prazo não adia a lei: ela passa a vincular emissores em 18 de janeiro de 2027, ou 120 dias após as regras finais, o que vier primeiro.</p>",
-      "<h4>Por que isso importa para a Brosbnk</h4>",
-      "<p>Qualquer emissor de stablecoin considerado parceiro de liquidação terá de estar enquadrado em janeiro de 2027 numa norma cujo texto final ainda não existe. O risco é do emissor, mas o prejuízo operacional é da Brosbnk se o parceiro não se enquadrar no meio de um corredor em produção.</p>",
-      "<h4>Plano passo a passo</h4>",
-      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Exigir cronograma datado</strong><span>Pedir por escrito a cada emissor candidato marcos de conformidade até 18/01/2027.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Cláusula de saída</strong><span>Incluir em todo contrato saída sem multa vinculada ao não enquadramento na data.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Evitar emissor único</strong><span>Garantir mais de um emissor por corredor enquanto a regra final não sair.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Acompanhar reserva e yield</strong><span>Monitorar nas propostas os pontos que afetam custo de liquidação.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Priorizar a data mais próxima</strong><span>A obrigação americana é jan/2027; a brasileira, out/2026 — a engenharia vai para a mais próxima.</span></div></div>"
-    ].join("")
-  },
-  'ranking-ia': {
-    title: "Ranking Evident de IA: bancos brasileiros lideram na LatAm",
-    sub: "O que é e como a Brosbnk deve reagir",
-    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer diante do primeiro ranking Evident de maturidade em IA para bancos da América Latina, liderado por Nubank, Itaú, Bradesco e BB, que avalia talento, inovação, transparência e governança.",
-    html: [
-      "<h4>O que aconteceu, em linguagem simples</h4>",
-      "<p>A Evident publicou o primeiro índice de maturidade em IA para bancos da América Latina. Nubank, Itaú, Bradesco e Banco do Brasil lideram, e o Brasil sedia 7 das 20 instituições avaliadas. O índice mede quatro eixos: talento, inovação, transparência e governança.</p>",
-      "<h4>Por que isso importa para a Brosbnk</h4>",
-      "<p>Maturidade em IA vira métrica pública comparável. Cliente corporativo de câmbio e investidor passam a ter uma régua para perguntar onde a Brosbnk está — e a régua não é só volume de modelos.</p>",
-      "<h4>Plano passo a passo</h4>",
-      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Ler a metodologia</strong><span>Estimar onde a Brosbnk pontuaria hoje em talento, inovação, transparência e governança.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Escolher um eixo só</strong><span>Governança auditável de IA aplicada a câmbio e compliance.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Documentar o que já existe</strong><span>Política de uso, log de decisão auditável e revisão humana obrigatória.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Publicar um relatório curto</strong><span>Transparência é eixo avaliado; um documento público move mais a agulha que um novo modelo.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Levar à mesa comercial</strong><span>Usar a governança documentada como argumento com clientes de comex.</span></div></div>"
+      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Ler as 10 propostas</strong><span>Identificar quais tocam liquidação cross-border e emissão/uso de stablecoin.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Traçar o gap</strong><span>Comparar o desenho atual (ou planejado) do produto da Brosbnk com o padrão EUA-UK.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Priorizar convergência</strong><span>Adotar desde já os princípios que provavelmente serão replicados no Brasil e na LATAM.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Monitorar a difusão</strong><span>Acompanhar se BCB, Colômbia e Panamá sinalizam adoção de princípios semelhantes.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Usar como argumento institucional</strong><span>Posicionar a Brosbnk junto a parceiros e clientes como aderente a padrões internacionais.</span></div></div>"
     ].join("")
   },
   'ia-study': {
@@ -813,15 +718,15 @@ var diveData = {
     prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer em relação ao estudo da PYMNTS Intelligence mostrando que empresas de pagamentos tratam a adoção de IA como um teste de risco e ROI, e não como um rollout amplo.",
     html: [
       "<h4>O que aconteceu, em linguagem simples</h4>",
-      "<p>Um estudo da PYMNTS Intelligence mostra que, diferente de outros setores, as empresas de pagamentos estão colocando a IA bem perto da camada onde o dinheiro se move — fraude, conciliação, compliance — e exigindo que ela prove valor antes de ganhar mais responsabilidade. 80% citam redução de risco e compliance como razão para investir, e 70% citam margem.</p>",
+      "<p>Um estudo da PYMNTS Intelligence mostra que as empresas de pagamentos estão colocando a IA perto da camada onde o dinheiro se move — fraude, conciliação, compliance — e exigindo que ela prove valor antes de ganhar mais responsabilidade. 80% citam redução de risco e compliance como razão para investir, e 70% citam margem e rentabilidade.</p>",
       "<h4>Por que isso importa para a Brosbnk</h4>",
-      "<p>A Brosbnk lida todos os dias com fluxos que exigem compliance, prevenção a fraude e conciliação em câmbio — exatamente as áreas onde o setor concentra IA de forma mais cautelosa e auditável.</p>",
+      "<p>A Brosbnk lida diariamente com compliance, prevenção a fraude e conciliação em câmbio — exatamente onde o setor concentra IA de forma cautelosa e auditável.</p>",
       "<h4>Plano passo a passo</h4>",
       "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Escolher um fluxo de alto volume</strong><span>Priorizar KYC/AML no onboarding de clientes de câmbio como primeiro piloto de IA.</span></div></div>",
       "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Definir governança antes de ligar o modelo</strong><span>Exigir log de decisão auditável e revisão humana obrigatória em cada aprovação automatizada.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Medir o que interessa ao regulador</strong><span>Acompanhar taxa de falso positivo, tempo de aprovação e taxa de fraude.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Usar o piloto como case de compliance</strong><span>Documentar o processo para mostrar ao BC e a clientes o rigor de controle.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Só então expandir</strong><span>Ampliar IA para outras decisões apenas após validar governança no piloto.</span></div></div>"
+      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Medir o que interessa ao regulador</strong><span>Acompanhar falso positivo, tempo de aprovação e taxa de fraude, não só produtividade.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Usar o piloto como case de compliance</strong><span>Documentar o processo para mostrar ao BC e a clientes o mesmo rigor de um banco tradicional.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Só então expandir</strong><span>Ampliar IA para crédito ou aprovação de operações apenas depois de validar a governança.</span></div></div>"
     ].join("")
   },
   'itau-swift': {
@@ -830,47 +735,47 @@ var diveData = {
     prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer em relação ao Itaú Unibanco ser o único banco brasileiro a pilotar a rede blockchain da Swift para pagamentos internacionais 24/7 com depósitos tokenizados.",
     html: [
       "<h4>O que aconteceu, em linguagem simples</h4>",
-      "<p>O Itaú Unibanco é o único banco brasileiro entre os 17 bancos que vão testar transações ao vivo na nova rede blockchain da Swift, movimentando depósitos tokenizados 24 horas por dia.</p>",
+      "<p>O Itaú Unibanco é o único banco brasileiro entre os 17 bancos que vão testar transações ao vivo na nova rede blockchain da Swift, movimentando depósitos tokenizados 24 horas por dia antes da liquidação final pelos sistemas atuais.</p>",
       "<h4>Por que isso importa para a Brosbnk</h4>",
-      "<p>Se o Itaú ganha liquidação 24/7, o padrão de velocidade esperado pelos clientes de câmbio no Brasil muda — e isso afeta quem depende de bancos correspondentes tradicionais, como a Brosbnk.</p>",
+      "<p>O Itaú é um dos maiores bancos correspondentes do Brasil. Se ele ganha liquidação 24/7, o padrão de velocidade esperado pelos clientes de câmbio muda antes mesmo de outros bancos adotarem a tecnologia.</p>",
       "<h4>Plano passo a passo</h4>",
       "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Mapear a relação com o Itaú</strong><span>Verificar se já existe relação de correspondente bancário.</span></div></div>",
       "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Perguntar sobre elegibilidade</strong><span>Consultar se clientes institucionais podem acessar o novo ledger tokenizado.</span></div></div>",
       "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Priorizar o corredor de maior volume</strong><span>Focar no corredor Brasil-EUA.</span></div></div>",
       "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Transformar em argumento comercial</strong><span>Usar a liquidação mais rápida como diferencial junto a clientes de comex.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Acompanhar a interoperabilidade</strong><span>Monitorar se o 24/7 funciona entre bancos com ledgers distintos.</span></div></div>"
+      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Acompanhar a interoperabilidade</strong><span>Monitorar se o pagamento 24/7 funciona entre bancos com ledgers distintos.</span></div></div>"
     ].join("")
   },
   'clarity-act': {
     title: "CLARITY Act travado no Senado dos EUA",
     sub: "O que é e como a Brosbnk deve reagir",
-    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer em relação ao CLARITY Act — a principal lei de regulação do mercado cripto nos EUA — estar travado no Senado.",
+    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer em relação ao CLARITY Act estar travado no Senado às vésperas do retorno do recesso em 13 de julho de 2026.",
     html: [
       "<h4>O que aconteceu, em linguagem simples</h4>",
-      "<p>O CLARITY Act, principal proposta de estrutura de mercado cripto dos EUA, está parado no Senado sem votação, travado por disputas de ética/insider trading, imunidade de desenvolvedores DeFi e yield de stablecoin.</p>",
+      "<p>O CLARITY Act, principal proposta de regulação do mercado cripto nos EUA, está parado no Senado sem votação, travado por três disputas: ética/insider trading, imunidade de desenvolvedores DeFi e yield de stablecoin.</p>",
       "<h4>Por que isso importa para a Brosbnk</h4>",
-      "<p>A clareza regulatória nos EUA define o ambiente de compliance para qualquer fintech que usa stablecoins como ponte de liquidação, incluindo a Brosbnk.</p>",
+      "<p>A clareza regulatória nos EUA define o ambiente de compliance para qualquer fintech que usa stablecoins como ponte de liquidação em câmbio.</p>",
       "<h4>Plano passo a passo</h4>",
-      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Nomear um responsável</strong><span>Designar alguém do compliance/jurídico para acompanhar a tramitação semanalmente.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Nomear um responsável</strong><span>Acompanhar a tramitação semanalmente.</span></div></div>",
       "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Preparar dois planos</strong><span>Um para aprovação e outro para fracasso em 2026.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Cenário de aprovação</strong><span>Acelerar conversas com emissores de stablecoin regulados nos EUA.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Cenário de fracasso</strong><span>Manter estratégia conservadora e postergar investimento em infraestrutura.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Acompanhar o GENIUS Act</strong><span>Seguir a regulamentação do GENIUS Act, que corre em paralelo.</span></div></div>"
+      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Cenário de aprovação</strong><span>Acelerar conversas com emissores regulados nos EUA.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Cenário de fracasso</strong><span>Manter estratégia conservadora e postergar investimento até 2027.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Revisar o GENIUS Act</strong><span>Acompanhar em paralelo o atraso da regulamentação do GENIUS Act.</span></div></div>"
     ].join("")
   },
   'pix-fednow': {
     title: "Tesouro dos EUA sonda integração Pix-FedNow",
     sub: "O que é e como a Brosbnk deve reagir",
-    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer em relação ao Tesouro dos EUA ter perguntado, em audiência do USTR, sobre os ganhos de integrar o Pix ao FedNow.",
+    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer em relação ao Tesouro dos EUA ter perguntado sobre os ganhos de integrar o Pix ao FedNow.",
     html: [
       "<h4>O que aconteceu, em linguagem simples</h4>",
-      "<p>Em audiência do USTR sobre a investigação Section 301 contra práticas digitais do Brasil, o Tesouro dos EUA perguntou que ganho o país teria ao integrar-se ao Pix. Brasileiros sugeriram conectar o Pix ao FedNow.</p>",
+      "<p>Em audiência do USTR sobre a investigação Section 301, o Tesouro dos EUA perguntou que ganho o país teria ao integrar-se ao Pix. Representantes brasileiros sugeriram conectar o Pix ao FedNow.</p>",
       "<h4>Por que isso importa para a Brosbnk</h4>",
-      "<p>Uma ponte Pix-FedNow reduziria fricção e custo em pagamentos entre Brasil e EUA — o corredor onde a Brosbnk atua em câmbio.</p>",
+      "<p>Uma ponte Pix-FedNow reduziria fricção e custo no corredor Brasil-EUA, onde a Brosbnk atua em câmbio e pagamentos internacionais.</p>",
       "<h4>Plano passo a passo</h4>",
-      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Acompanhar a Section 301</strong><span>Monitorar via associações do setor (ABfintechs, ABcripto).</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Mapear o produto de câmbio</strong><span>Identificar qual fluxo Brasil-EUA migraria para trilho instantâneo.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Simular o impacto no volume</strong><span>Estimar quanto do câmbio tradicional migraria.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Acompanhar a investigação Section 301</strong><span>Monitorar junto a associações do setor.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Mapear o produto de câmbio</strong><span>Identificar o que poderia migrar para trilho instantâneo.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Simular o impacto no volume</strong><span>Estimar quanto migraria para pagamentos instantâneos.</span></div></div>",
       "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Não esperar a ponte pronta</strong><span>Preparar a operação agora.</span></div></div>",
       "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Comunicar clientes estratégicos</strong><span>Sinalizar que a Brosbnk acompanha a mudança.</span></div></div>"
     ].join("")
@@ -878,17 +783,17 @@ var diveData = {
   'swift-network': {
     title: "Swift lança plataforma blockchain com 17 bancos globais",
     sub: "O que é e como a Brosbnk deve reagir",
-    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer em relação à Swift ter lançado uma nova plataforma blockchain para transações tokenizadas, com 17 bancos pilotando transações ao vivo.",
+    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer em relação à Swift ter lançado uma nova plataforma blockchain para transações tokenizadas, com 17 bancos se preparando para pilotar transações ao vivo.",
     html: [
       "<h4>O que aconteceu, em linguagem simples</h4>",
-      "<p>A Swift lançou uma nova plataforma blockchain para transações tokenizadas. Dezessete bancos — incluindo HSBC, UBS, Wells Fargo e Citi — pilotam transações ao vivo na rede.</p>",
+      "<p>A Swift lançou uma nova plataforma blockchain para transações tokenizadas. Dezessete bancos — incluindo HSBC, UBS, Wells Fargo e Citi — vão pilotar transações ao vivo.</p>",
       "<h4>Por que isso importa para a Brosbnk</h4>",
-      "<p>A Swift é a espinha dorsal das liquidações internacionais que a Brosbnk usa; migrar para trilhos tokenizados redefine o padrão de settlement do setor.</p>",
+      "<p>A Swift é a espinha dorsal das liquidações internacionais que a Brosbnk usa; uma migração para trilhos tokenizados redefine o padrão de settlement do setor.</p>",
       "<h4>Plano passo a passo</h4>",
-      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Mapear o parceiro bancário atual</strong><span>Descobrir se ele está entre os 17 participantes.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Pedir acesso antecipado</strong><span>Falar com o gerente de relacionamento sobre o piloto.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Escolher rota de teste de baixo risco</strong><span>Selecionar um corredor de baixo volume.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Medir o ganho real</strong><span>Acompanhar tempo e custo de liquidação por 30 dias.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Mapear o parceiro bancário atual</strong><span>Descobrir se ele está entre os 17 do piloto.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Pedir acesso antecipado</strong><span>Falar com o gerente de relacionamento.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Escolher rota de baixo risco</strong><span>Selecionar um corredor de baixo volume para testar.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Medir o ganho real</strong><span>Acompanhar tempo e custo por 30 dias.</span></div></div>",
       "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Decidir sobre expansão</strong><span>Usar os resultados para decidir se amplia.</span></div></div>"
     ].join("")
   },
@@ -900,13 +805,13 @@ var diveData = {
       "<h4>O que aconteceu, em linguagem simples</h4>",
       "<p>O Citigroup ampliou seu serviço de pagamentos instantâneos internacionais para bancos parceiros, permitindo liquidação em tempo real fora da rede interna do banco.</p>",
       "<h4>Por que isso importa para a Brosbnk</h4>",
-      "<p>Pressiona o padrão de velocidade esperado de qualquer fintech de pagamentos e pode ser porta de entrada para herdar liquidação instantânea via parceria.</p>",
+      "<p>Isso pressiona o padrão de velocidade esperado de qualquer fintech de pagamentos e pode ser porta de entrada para liquidação instantânea via parceria.</p>",
       "<h4>Plano passo a passo</h4>",
       "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Contatar o Citi</strong><span>Falar com o time de correspondent banking.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Levantar rotas prioritárias</strong><span>Mapear as rotas de maior volume.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Levantar rotas prioritárias</strong><span>Mapear as de maior volume da carteira.</span></div></div>",
       "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Priorizar 1-2 rotas</strong><span>Selecionar as de maior potencial de ganho.</span></div></div>",
       "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Avaliar custo de integração</strong><span>Estimar o esforço técnico.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Comunicar clientes estratégicos</strong><span>Avisar clientes-chave quando a integração avançar.</span></div></div>"
+      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Comunicar clientes estratégicos</strong><span>Avisar clientes-chave quando avançar.</span></div></div>"
     ].join("")
   },
   'circle-trust': {
@@ -915,13 +820,13 @@ var diveData = {
     prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer em relação à Circle, emissora do USDC, ter obtido aprovação para operar como trust bank federal nos EUA.",
     html: [
       "<h4>O que aconteceu, em linguagem simples</h4>",
-      "<p>A Circle, emissora do USDC, obteve aprovação para operar como trust bank federal nos EUA, formalizando entrada no sistema bancário regulado.</p>",
+      "<p>A Circle, emissora do USDC, obteve aprovação para operar como trust bank federal nos EUA, formalizando sua entrada no sistema bancário regulado.</p>",
       "<h4>Por que isso importa para a Brosbnk</h4>",
-      "<p>Stablecoins regulados como o USDC são cada vez mais usados como trilho de liquidação em câmbio — mas a Circle licenciada também pode virar concorrente.</p>",
+      "<p>Stablecoins regulados como o USDC são cada vez mais usados como trilho de liquidação em câmbio — mas a Circle licenciada também pode virar concorrente por clientes corporativos.</p>",
       "<h4>Plano passo a passo</h4>",
-      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Checar compliance</strong><span>Confirmar quais normas brasileiras se aplicam ao uso de USDC.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Checar compliance</strong><span>Confirmar quais normas brasileiras se aplicam ao uso de USDC fora do Brasil.</span></div></div>",
       "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Mapear corredores</strong><span>Identificar corredores com maior fricção cambial.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Estudar integração técnica</strong><span>Avaliar o esforço de integração com USDC.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Estudar integração técnica</strong><span>Avaliar o esforço de integração com USDC via Circle.</span></div></div>",
       "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Rodar piloto controlado</strong><span>Testar com um cliente antes de escalar.</span></div></div>",
       "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Monitorar como concorrente</strong><span>Acompanhar se a Circle passa a competir por clientes corporativos.</span></div></div>"
     ].join("")
@@ -934,12 +839,12 @@ var diveData = {
       "<h4>O que aconteceu, em linguagem simples</h4>",
       "<p>A Hyundai se tornou a primeira grande empresa sul-coreana a implementar transferências internas via stablecoin, movendo capital entre operações internacionais.</p>",
       "<h4>Por que isso importa para a Brosbnk</h4>",
-      "<p>É sinal de demanda corporativa real por stablecoins como ferramenta de tesouraria internacional — adjacência direta dos clientes de câmbio da Brosbnk.</p>",
+      "<p>É sinal de demanda corporativa real por stablecoins como ferramenta de tesouraria internacional — mercado adjacente aos clientes de câmbio da Brosbnk.</p>",
       "<h4>Plano passo a passo</h4>",
-      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Identificar clientes-alvo</strong><span>Selecionar 2-3 clientes corporativos com operações internacionais.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Identificar clientes-alvo</strong><span>Selecionar 2-3 clientes com operações internacionais.</span></div></div>",
       "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Desenhar a oferta piloto</strong><span>Estruturar tesouraria internacional via stablecoin.</span></div></div>",
       "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Definir limites de compliance</strong><span>Validar normas e autorizações em cada jurisdição.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Testar e medir</strong><span>Rodar por um trimestre e medir custo/tempo.</span></div></div>",
+      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Testar e medir</strong><span>Rodar por um trimestre medindo custo/tempo.</span></div></div>",
       "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Formalizar como produto</strong><span>Se validado, transformar em oferta permanente.</span></div></div>"
     ].join("")
   }
