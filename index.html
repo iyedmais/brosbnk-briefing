@@ -1,1118 +1,985 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BROSBNK Briefing Diário</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root { color-scheme: light; }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: Inter, system-ui, -apple-system, sans-serif;
-    background: #f7f8fa;
-    color: #14181f;
-    display: flex;
-    min-height: 100vh;
-  }
-  .sidebar {
-    width: 220px;
-    flex-shrink: 0;
-    background: #ffffff;
-    border-right: 1px solid #e2e5ea;
-    padding: 20px 14px;
-    display: flex;
-    flex-direction: column;
-    position: sticky;
-    top: 0;
-    height: 100vh;
-  }
-  .logo-wrap { margin-bottom: 30px; padding: 4px 6px 0; }
-  .logo-wrap svg { width: 185px; max-width: 100%; height: auto; display: block; }
-  .nav-item {
-    padding: 10px 12px;
-    font-size: 13.5px;
-    color: #6b7280;
-    border-radius: 8px;
-    cursor: pointer;
-    margin-bottom: 2px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    user-select: none;
-  }
-  .nav-item:hover { background: #f0f2f5; color: #14181f; }
-  .nav-item.active { background: #2f6fed; color: #fff; font-weight: 600; }
-  .sidebar-footer { margin-top: auto; font-size: 11px; color: #9aa1ac; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Brosbnk — Briefing Fintech Diário</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  .main { flex: 1; padding: 28px 36px; max-width: 980px; min-width: 0; }
-  .page-title { font-family: 'IBM Plex Mono', monospace; font-weight: 700; font-size: 26px; margin-bottom: 6px; }
-  .page-subtitle { color: #6b7280; font-size: 14px; margin-bottom: 22px; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f8f9fa;
+            color: #333;
+        }
 
-  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 28px; }
-  .stat-card { background: #fff; border: 1px solid #e2e5ea; border-radius: 10px; padding: 14px; min-width: 0; }
-  .stat-label { color: #6b7280; font-size: 12px; margin-bottom: 6px; }
-  .stat-value { font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 700; word-break: break-word; }
-  .stat-sub { font-size: 11px; margin-top: 4px; color: #6b7280; }
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
 
-  .section-heading { display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 700; margin: 24px 0 16px; }
-  .section-heading .bar { width: 3px; height: 18px; background: #2f6fed; display: inline-block; flex-shrink: 0; }
+        .sidebar {
+            width: 280px;
+            background: #fff;
+            border-right: 1px solid #e0e0e0;
+            padding: 32px 24px;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
 
-  .card { background: #fff; border: 1px solid #e2e5ea; border-radius: 10px; padding: 16px 18px; margin-bottom: 14px; box-shadow: 0 1px 2px rgba(20,24,31,0.04); }
-  .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; flex-wrap: wrap; }
-  .card-title { font-weight: 700; font-size: 15px; }
-  .badge { font-size: 11px; padding: 3px 9px; border-radius: 20px; white-space: nowrap; font-weight: 600; flex-shrink: 0; }
-  .badge-alto { background: rgba(31,157,85,0.12); color: #1f9d55; }
-  .badge-medio { background: rgba(184,134,11,0.12); color: #b8860b; }
-  .badge-critico { background: rgba(208,48,47,0.12); color: #d0302f; }
-  .badge-discussao { background: rgba(184,134,11,0.12); color: #b8860b; }
-  .badge-implementado { background: rgba(31,157,85,0.12); color: #1f9d55; }
-  .badge-regiao { background: rgba(47,111,237,0.12); color: #2f6fed; }
-  .badge-verificar { background: rgba(107,114,128,0.14); color: #4b5563; }
-  .verification-notice { margin: 0 0 20px; padding: 14px 16px; border: 1px solid #f0c36d; border-left: 4px solid #b8860b; border-radius: 8px; background: #fff9e8; color: #5f4a12; font-size: 12.5px; line-height: 1.55; }
-  .card-meta { color: #6b7280; font-size: 11px; margin: 4px 0 10px; }
-  .card-body { font-size: 13px; line-height: 1.6; color: #3c4450; }
-  .card-footer { margin-top: 10px; padding-top: 10px; border-top: 1px solid #e2e5ea; font-size: 12.5px; color: #3c4450; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
-  .card-footer.stacked { display: block; }
-  .card-footer.stacked > div { margin-bottom: 8px; }
-  .card-footer.stacked > div:last-child { margin-bottom: 0; }
-  .rec-label { color: #b8860b; font-weight: 600; }
-  .impact-label { color: #d0302f; font-weight: 600; }
-  .opp-label { color: #1f9d55; font-weight: 600; }
-  .card-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-  .link-btn {
-    font-size: 12px; color: #2f6fed; text-decoration: none; font-weight: 600;
-    display: inline-flex; align-items: center; gap: 4px;
-  }
-  .link-btn:hover { text-decoration: underline; }
-  .dive-btn {
-    font-size: 12px; font-weight: 600; color: #fff; background: #14181f;
-    border: none; border-radius: 20px; padding: 6px 14px; cursor: pointer;
-    display: inline-flex; align-items: center; gap: 6px;
-  }
-  .dive-btn:hover { background: #2f6fed; }
+        .sidebar-logo {
+            margin-bottom: 40px;
+        }
 
-  .insight-box { margin-top: 26px; background: #f0f2f5; border: 1px solid #e2e5ea; border-radius: 10px; padding: 16px 18px; }
-  .insight-title { font-weight: 700; font-size: 14px; margin-bottom: 10px; }
-  .insight-body { font-size: 13px; line-height: 1.6; color: #3c4450; }
+        .sidebar-logo svg {
+            width: 160px;
+            height: auto;
+        }
 
-  .filter-pills { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
-  .pill { padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer; background: #f0f2f5; color: #6b7280; user-select: none; }
-  .pill:hover { background: #e2e5ea; }
-  .pill.active { background: #2f6fed; color: #fff; }
-  .pill.active:hover { background: #2f6fed; }
+        .sidebar-nav {
+            list-style: none;
+        }
 
-  .timeline { position: relative; padding-left: 20px; }
-  .timeline::before { content: ''; position: absolute; left: 4px; top: 6px; bottom: 6px; width: 1px; background: #e2e5ea; }
-  .timeline-item { position: relative; margin-bottom: 18px; }
-  .timeline-item.hidden { display: none; }
-  .timeline-dot { position: absolute; left: -20px; top: 6px; width: 9px; height: 9px; border-radius: 50%; background: #2f6fed; }
-  .timeline-empty { display: none; color: #6b7280; font-size: 13px; padding: 20px 0; }
-  .timeline-empty.show { display: block; }
+        .sidebar-nav li {
+            margin-bottom: 12px;
+        }
 
-  .page { display: none; }
-  .page.active { display: block; }
+        .sidebar-nav button {
+            width: 100%;
+            padding: 12px 16px;
+            border: none;
+            background: #f0f0f0;
+            color: #333;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
 
-  .action-list { list-style: none; }
-  .action-list li { display: flex; gap: 10px; padding: 8px 0; font-size: 13px; line-height: 1.5; color: #3c4450; }
-  .action-list .arrow { color: #2f6fed; font-weight: 700; flex-shrink: 0; }
+        .sidebar-nav button:hover {
+            background: #e0e0e0;
+        }
 
-  .priority-item { display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid #e2e5ea; }
-  .priority-num { width: 22px; height: 22px; border-radius: 50%; background: #14181f; color: #fff; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .priority-text strong { display: block; font-size: 13.5px; margin-bottom: 2px; }
-  .priority-text span { font-size: 12.5px; color: #6b7280; }
+        .sidebar-nav button.active {
+            background: #1a73e8;
+            color: white;
+        }
 
-  /* Arquivo: acordeão por data */
-  .archive-date-heading { cursor: pointer; user-select: none; }
-  .archive-date-heading:hover { opacity: 0.75; }
-  .archive-date-heading .chevron { margin-left: auto; color: #6b7280; font-size: 12px; transition: transform 0.2s ease; }
-  .archive-date-heading.collapsed .chevron { transform: rotate(-90deg); }
-  .archive-date-heading .count-badge { font-size: 11px; font-weight: 600; color: #6b7280; background: #f0f2f5; padding: 2px 8px; border-radius: 20px; }
-  .archive-group.collapsed { display: none; }
+        .main {
+            margin-left: 280px;
+            flex: 1;
+            padding: 40px;
+        }
 
-  /* Chat modal (Mergulhar) */
-  .chat-overlay {
-    display: none; position: fixed; inset: 0; background: rgba(20,24,31,0.5);
-    align-items: center; justify-content: center; z-index: 1000; padding: 20px;
-  }
-  .chat-overlay.open { display: flex; }
-  .chat-panel {
-    background: #fff; border-radius: 14px; width: 100%; max-width: 640px; max-height: 82vh;
-    display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.25);
-  }
-  .chat-header {
-    padding: 16px 20px; border-bottom: 1px solid #e2e5ea; display: flex;
-    justify-content: space-between; align-items: center; flex-shrink: 0; gap: 10px;
-  }
-  .chat-header-title { font-weight: 700; font-size: 15px; }
-  .chat-header-sub { font-size: 12px; color: #6b7280; margin-top: 2px; }
-  .chat-close { background: none; border: none; font-size: 20px; cursor: pointer; color: #6b7280; line-height: 1; padding: 4px 8px; flex-shrink: 0; }
-  .chat-close:hover { color: #14181f; }
-  .chat-body { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 18px 20px; font-size: 13.5px; line-height: 1.7; color: #262b33; }
-  .chat-body h4 { font-size: 13px; font-weight: 700; margin: 16px 0 6px; color: #14181f; }
-  .chat-body h4:first-child { margin-top: 0; }
-  .chat-step { display: flex; gap: 10px; margin-bottom: 12px; }
-  .chat-step-num { width: 20px; height: 20px; border-radius: 50%; background: #2f6fed; color: #fff; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
-  .chat-step-text strong { display: block; font-size: 13px; margin-bottom: 2px; }
-  .chat-step-text span { font-size: 12.5px; color: #6b7280; }
-  .chat-footer { padding: 14px 20px; border-top: 1px solid #e2e5ea; flex-shrink: 0; display: flex; gap: 8px; }
-  .chat-ask-btn {
-    flex: 1; background: #14181f; color: #fff; border: none; border-radius: 8px;
-    padding: 10px; font-size: 13px; font-weight: 600; cursor: pointer;
-  }
-  .chat-ask-btn:hover { background: #2f6fed; }
-  .chat-copy-btn {
-    background: #fff; color: #14181f; border: 1px solid #e2e5ea; border-radius: 8px;
-    padding: 10px 14px; font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap;
-  }
-  .chat-copy-btn:hover { background: #f0f2f5; }
+        .header {
+            margin-bottom: 40px;
+        }
 
-  /* Responsividade */
-  @media (max-width: 860px) {
-    body { flex-direction: column; }
-    .sidebar {
-      position: sticky;
-      top: 0;
-      width: 100%;
-      height: auto;
-      flex-direction: row;
-      align-items: center;
-      padding: 10px 12px;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      z-index: 100;
-      border-right: none;
-      border-bottom: 1px solid #e2e5ea;
-    }
-    .logo-wrap { margin-bottom: 0; margin-right: 10px; flex-shrink: 0; }
-    .logo-wrap svg { width: 110px; height: auto; }
-    .sidebar > .nav-item {
-      margin-bottom: 0;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-    .sidebar-footer { display: none; }
-    .main { padding: 20px 16px; max-width: 100%; }
-    .page-title { font-size: 22px; }
-    .stats-grid { grid-template-columns: repeat(2, 1fr); }
-  }
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+            color: #1a1a1a;
+        }
 
-  @media (max-width: 480px) {
-    .main { padding: 16px 12px; }
-    .page-title { font-size: 20px; }
-    .page-subtitle { font-size: 13px; }
-    .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-    .stat-card { padding: 10px; }
-    .stat-value { font-size: 19px; }
-    .card { padding: 13px 14px; }
-    .card-title { font-size: 14px; }
-    .card-top { gap: 6px; }
-    .card-footer { flex-direction: column; align-items: flex-start; }
-    .card-actions { width: 100%; justify-content: space-between; }
-    .priority-item { padding: 10px 0; }
-  }
-</style>
+        .header p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .stat-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .stat-card h3 {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-card .value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a73e8;
+        }
+
+        .stat-card .themes-list {
+            font-size: 12px;
+            color: #999;
+            line-height: 1.6;
+            margin-top: 8px;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .news-item {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            border-left: 4px solid #1a73e8;
+            margin-bottom: 20px;
+            border: 1px solid #e0e0e0;
+            position: relative;
+        }
+
+        .news-item.high-impact {
+            border-left-color: #d32f2f;
+        }
+
+        .news-item.medium-impact {
+            border-left-color: #f57c00;
+        }
+
+        .news-item.positive {
+            border-left-color: #388e3c;
+        }
+
+        .news-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .news-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a1a;
+            flex: 1;
+        }
+
+        .impact-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+            margin-left: 12px;
+        }
+
+        .impact-badge.high {
+            background: #ffebee;
+            color: #d32f2f;
+        }
+
+        .impact-badge.medium {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+
+        .impact-badge.positive {
+            background: #e8f5e9;
+            color: #388e3c;
+        }
+
+        .news-meta {
+            font-size: 13px;
+            color: #999;
+            margin-bottom: 16px;
+        }
+
+        .news-content {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 16px;
+        }
+
+        .news-content strong {
+            display: block;
+            margin-top: 12px;
+            color: #333;
+        }
+
+        .news-footer {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            border-color: #1a73e8;
+            color: #1a73e8;
+        }
+
+        .btn-primary {
+            background: #1a73e8;
+            color: white;
+            border-color: #1a73e8;
+        }
+
+        .btn-primary:hover {
+            background: #1565c0;
+        }
+
+        .timeline {
+            position: relative;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 40px;
+            margin-bottom: 24px;
+            opacity: 1;
+            transition: opacity 0.3s;
+        }
+
+        .timeline-item.hidden {
+            display: none;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            background: #1a73e8;
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 20px;
+            width: 2px;
+            height: calc(100% + 4px);
+            background: #e0e0e0;
+        }
+
+        .timeline-item:last-child::after {
+            display: none;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 16px;
+            border-radius: 8px;
+            border-left: 3px solid #1a73e8;
+        }
+
+        .timeline-content h4 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #1a1a1a;
+        }
+
+        .timeline-content p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+
+        .timeline-content .opp-label {
+            color: #388e3c;
+            font-weight: 600;
+            margin-top: 12px;
+        }
+
+        .filter-pills {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .filter-pill {
+            padding: 8px 16px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .filter-pill:hover {
+            border-color: #1a73e8;
+            color: #1a73e8;
+        }
+
+        .filter-pill.active {
+            background: #1a73e8;
+            color: white;
+            border-color: #1a73e8;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 32px;
+            border-radius: 12px;
+            max-width: 700px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .modal-section {
+            margin-bottom: 24px;
+        }
+
+        .modal-section h4 {
+            font-size: 14px;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .modal-section p {
+            font-size: 15px;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .plan-step {
+            background: #f5f5f5;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #555;
+            border-left: 3px solid #1a73e8;
+        }
+
+        .archive-group {
+            margin-bottom: 24px;
+        }
+
+        .archive-header {
+            padding: 16px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .archive-header:hover {
+            background: #e8e8e8;
+        }
+
+        .archive-content {
+            display: none;
+            padding-top: 16px;
+        }
+
+        .archive-content.expanded {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 20px;
+                border-right: none;
+                border-bottom: 1px solid #e0e0e0;
+            }
+
+            .main {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            .sidebar-nav {
+                display: flex;
+                gap: 8px;
+                flex-wrap: wrap;
+            }
+
+            .sidebar-nav button {
+                flex: 1;
+                min-width: 100px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
 </head>
 <body>
-<div class="sidebar">
-  <div class="logo-wrap" role="img" aria-label="BROSBNK">
-    <svg width="176" height="47" viewBox="0 0 675 179" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Logo BROSBNK">
-      <g clip-path="url(#clip0_brand)">
-        <path d="M38.4729 23.1168L0 0.452881V85.2757H38.4729V23.1168Z" fill="black"/>
-        <path d="M139.368 92.8956C138.536 103.967 134.129 114.048 127.292 121.992L154.626 149.326C168.391 134.337 177.082 114.623 178 92.8956H139.368Z" fill="#E2231D"/>
-        <path d="M56.0938 127.378L28.76 154.712C43.7489 168.477 63.4628 177.168 85.1902 178.086V139.454C74.1184 138.621 64.0381 134.215 56.0938 127.378Z" fill="#F7C500"/>
-        <path d="M92.8101 139.454V178.086C114.538 177.174 134.251 168.477 149.24 154.712L121.907 127.378C113.962 134.215 103.882 138.621 92.8101 139.454Z" fill="#03518F"/>
-        <path d="M38.6321 92.8956H0C0.911942 114.623 9.60905 134.337 23.3739 149.326L50.7076 121.992C43.8711 114.048 39.4644 103.967 38.6321 92.8956Z" fill="#009743"/>
-        <path d="M154.626 28.8455C152.906 26.9727 151.113 25.1794 149.24 23.4595C134.251 9.69474 114.537 1.00375 92.81 0.0856858C91.5492 0.0306021 90.2761 0 89.0031 0C87.73 0 86.457 0.0306021 85.1962 0.0856858C63.4687 0.997627 43.7548 9.69474 28.7659 23.4595C26.8931 25.1794 25.0998 26.9727 23.38 28.8455C9.60905 43.8344 0.911942 63.5483 0 85.2757H38.6321C39.4644 74.2039 43.8711 64.1236 50.7076 56.1793C52.3663 54.2514 54.1657 52.4519 56.0936 50.7933C64.0379 43.9568 74.1182 39.5501 85.19 38.7177C86.4509 38.6259 87.7178 38.5586 88.9969 38.5586C90.2761 38.5586 91.5492 38.6198 92.8038 38.7177C103.876 39.5501 113.956 43.9568 121.9 50.7933C123.828 52.4519 125.628 54.2514 127.286 56.1793C134.123 64.1236 138.529 74.2039 139.362 85.2757H177.994C177.082 63.5483 168.385 43.8344 154.62 28.8455H154.626Z" fill="black"/>
-      </g>
-      <g>
-        <path d="M254.615 80.0884C257.624 82.2169 259.973 84.8591 261.661 88.0151C263.423 91.1711 264.303 94.5839 264.303 98.2537C264.303 102.731 263.019 106.841 260.45 110.584C257.881 114.254 254.468 117.006 250.211 118.841C247.055 120.236 243.789 120.933 240.413 120.933H207.936C207.202 120.933 206.541 120.676 205.954 120.162C205.44 119.575 205.184 118.878 205.184 118.07V46.4001C205.184 45.6661 205.44 45.0423 205.954 44.5285C206.541 43.9413 207.202 43.6478 207.936 43.6478H235.679C239.129 43.6478 242.505 44.345 245.808 45.7395C249.918 47.6478 253.257 50.4368 255.826 54.1065C258.395 57.7763 259.679 61.8497 259.679 66.3268C259.679 71.3911 257.991 75.9783 254.615 80.0884ZM219.385 58.7304V73.9232C219.385 74.3636 219.532 74.7673 219.826 75.1342C220.193 75.4278 220.596 75.5746 221.037 75.5746H235.679C238.395 75.5746 240.707 74.6939 242.615 72.9324C244.523 71.0975 245.477 68.8957 245.477 66.3268C245.477 63.758 244.523 61.5928 242.615 59.8314C240.707 57.9965 238.395 57.079 235.679 57.079H221.037C220.596 57.079 220.193 57.2625 219.826 57.6295C219.532 57.9231 219.385 58.2901 219.385 58.7304ZM240.303 107.501C243.019 107.501 245.331 106.584 247.239 104.749C249.147 102.914 250.101 100.749 250.101 98.2537C250.101 95.6849 249.147 93.5197 247.239 91.7582C245.331 89.9233 243.019 89.0059 240.303 89.0059H221.037C220.596 89.0059 220.193 89.1894 219.826 89.5564C219.532 89.8499 219.385 90.2169 219.385 90.6573V105.85C219.385 106.29 219.532 106.694 219.826 107.061C220.193 107.355 220.596 107.501 221.037 107.501H240.303ZM327.613 65.4461C327.613 69.7764 326.512 73.7764 324.311 77.4462C322.182 81.1159 319.32 84.015 315.723 86.1435C315.063 86.5105 314.622 87.0609 314.402 87.7949C314.182 88.5288 314.255 89.2261 314.622 89.8866L330.145 116.749C330.439 117.336 330.549 117.96 330.476 118.621C330.402 119.208 330.109 119.722 329.595 120.162C329.081 120.602 328.457 120.823 327.723 120.823H317.705C316.677 120.823 315.87 120.382 315.283 119.502L298.769 90.7674C298.255 89.8132 297.448 89.3362 296.347 89.3362H292.934C292.2 89.3362 291.54 89.6298 290.953 90.2169C290.439 90.7307 290.182 91.3912 290.182 92.1986V118.07C290.182 118.804 289.888 119.465 289.301 120.052C288.787 120.566 288.164 120.823 287.43 120.823H278.732C277.998 120.823 277.338 120.566 276.751 120.052C276.237 119.465 275.98 118.804 275.98 118.07V46.6202C275.98 45.8129 276.237 45.1524 276.751 44.6386C277.338 44.0514 277.998 43.7578 278.732 43.7578H307.466C309.448 43.7578 311.356 44.0514 313.191 44.6386C315.1 45.1524 316.861 45.9597 318.476 47.0606C320.164 48.1615 321.595 49.5194 322.769 51.134C325.999 55.3176 327.613 60.0882 327.613 65.4461ZM292.934 55.7579C292.2 55.7579 291.54 56.0148 290.953 56.5286C290.439 57.0423 290.182 57.7029 290.182 58.5103V72.3819C290.182 73.1893 290.439 73.8498 290.953 74.3636C291.54 74.8774 292.2 75.1342 292.934 75.1342H303.613C306.476 75.1342 308.861 74.07 310.769 71.9416C312.751 69.8131 313.595 67.3177 313.301 64.4553C313.228 63.2075 312.898 62.0699 312.31 61.0424C311.723 59.9415 310.953 59.024 309.999 58.2901C309.118 57.4827 308.09 56.8589 306.916 56.4185C305.742 55.9781 304.531 55.7579 303.283 55.7579H292.934ZM387.616 43.7578C395.689 46.6203 402.258 51.5744 407.322 58.6203C412.46 65.5929 415.029 73.4828 415.029 82.2903C415.029 91.0977 412.46 99.061 407.322 106.18C402.184 113.226 395.542 118.107 387.395 120.823C383.065 122.291 378.661 123.025 374.184 123.025C369.781 123.025 365.414 122.291 361.083 120.823C352.936 118.107 346.294 113.226 341.156 106.18C336.019 99.061 333.45 91.0977 333.45 82.2903C333.45 76.492 334.624 70.9874 336.973 65.7764C339.322 60.4919 342.551 55.9781 346.661 52.235C350.845 48.4184 355.579 45.5927 360.863 43.7578C365.267 42.2165 369.707 41.4459 374.184 41.4459C378.735 41.4459 383.212 42.2165 387.616 43.7578ZM374.184 108.823C381.524 108.823 387.799 106.254 393.01 101.116C398.221 95.905 400.827 89.6298 400.827 82.2903C400.827 74.9507 398.221 68.7122 393.01 63.5745C387.799 58.3635 381.524 55.7579 374.184 55.7579C366.918 55.7579 360.68 58.3635 355.469 63.5745C350.257 68.7122 347.652 74.9507 347.652 82.2903C347.652 87.0609 348.826 91.5013 351.175 95.6115C353.597 99.7216 356.826 102.951 360.863 105.3C364.973 107.648 369.414 108.823 374.184 108.823ZM452.61 69.5195C454.298 70.1067 455.619 70.5837 456.573 70.9507C457.527 71.2443 458.922 71.7948 460.757 72.6021C462.665 73.4095 464.206 74.2168 465.38 75.0241C466.555 75.7581 467.913 76.7856 469.454 78.1067C470.995 79.3545 472.243 80.6756 473.197 82.0701C474.151 83.4646 474.995 85.1894 475.729 87.2444C476.537 89.2995 477.087 91.4646 477.381 93.7399C478.188 101.079 476.096 107.575 471.105 113.226C470.738 113.74 469.858 114.584 468.463 115.758C463.766 119.942 458.298 122.327 452.059 122.914C451.105 122.988 450.114 123.025 449.087 123.025C442.408 123.025 436.463 121.08 431.252 117.19C431.032 116.969 430.738 116.713 430.371 116.419C430.077 116.052 429.857 115.832 429.71 115.758C425.454 111.942 422.701 107.465 421.454 102.327C421.233 101.52 421.343 100.786 421.784 100.125C422.298 99.4647 422.958 99.0977 423.765 99.0243L432.573 98.1436C433.233 98.0702 433.821 98.217 434.334 98.584C434.922 98.9509 435.289 99.4647 435.435 100.125C436.243 102.767 437.821 105.006 440.169 106.841C443.252 109.116 446.738 110.07 450.628 109.703C454.518 109.336 457.674 107.722 460.096 104.859C462.591 101.997 463.619 98.7674 463.179 95.1711C462.958 93.2628 462.481 91.6481 461.747 90.327C461.087 88.9325 460.023 87.7582 458.555 86.804C457.087 85.7765 455.582 84.9692 454.041 84.382C452.573 83.7215 450.555 82.9875 447.986 82.1802C444.903 81.226 442.628 80.382 441.16 79.648C435.215 76.7856 431.105 73.0792 428.83 68.5287C426.554 63.9782 426.371 59.0607 428.279 53.7763C429.821 49.5194 432.683 46.1065 436.867 43.5377C442.591 40.0147 448.903 39.0606 455.802 40.6753C457.857 41.1156 460.023 42.0698 462.298 43.5377C467.876 47.0606 471.215 51.7212 472.316 57.5194C472.463 58.4002 472.28 59.1708 471.766 59.8314C471.252 60.4919 470.555 60.8222 469.674 60.8222L460.867 61.0424C459.399 61.0424 458.481 60.4185 458.114 59.1708C457.747 57.9231 457.05 56.8222 456.023 55.868C454.995 54.9139 454.188 54.3267 453.601 54.1065C453.087 53.813 452.646 53.6295 452.279 53.5561C450.078 53.0423 447.949 53.1891 445.894 53.9965C443.839 54.7304 442.445 56.0882 441.711 58.0699C441.564 58.5103 441.454 58.8772 441.38 59.1708C441.307 59.4644 441.234 59.9415 441.16 60.602C441.087 61.1892 441.16 61.7396 441.38 62.2534C441.6 62.7672 441.931 63.3543 442.371 64.0149C442.812 64.602 443.472 65.2259 444.353 65.8865C445.234 66.547 446.334 67.2076 447.656 67.8681C448.39 68.1617 450.041 68.7122 452.61 69.5195Z" fill="black"/>
-      </g>
-      <path d="M539.578 101.446C539.578 106.804 537.633 111.428 533.744 115.318C529.927 119.135 525.303 121.043 519.872 121.043H490.147C489.413 121.043 489.046 120.676 489.046 119.942V45.079C489.046 44.345 489.413 43.978 490.147 43.978H515.248C520.679 43.978 525.303 45.9597 529.12 49.923C533.01 53.8864 534.955 58.6203 534.955 64.125C534.955 67.2076 534.294 70.3636 532.973 73.5929C531.652 76.7489 529.927 79.2444 527.799 81.0792C527.432 81.3728 527.468 81.6297 527.909 81.8499C531.285 83.4646 534.074 86.1435 536.276 89.8866C538.478 93.5564 539.578 97.4096 539.578 101.446ZM494.661 50.4735V79.3178C494.661 79.8315 494.954 80.0884 495.541 80.0884H511.725C514.881 80.0884 517.817 79.3911 520.532 77.9966C523.248 76.5287 525.413 74.5104 527.028 71.9416C528.569 69.4461 529.303 66.8406 529.23 64.125C529.23 61.4094 528.606 59.024 527.358 56.969C526.184 54.8405 524.496 53.079 522.294 51.6845C520.165 50.29 517.817 49.5928 515.248 49.5928H495.541C494.954 49.5928 494.661 49.8863 494.661 50.4735ZM494.661 86.5839V114.547C494.661 115.135 494.954 115.428 495.541 115.428H519.872C524.569 115.428 528.312 113.557 531.101 109.813C533.964 106.07 534.698 101.85 533.303 97.1528C532.276 93.7032 530.257 90.9509 527.248 88.8958C524.312 86.7674 521.009 85.7031 517.34 85.7031H495.541C494.954 85.7031 494.661 85.9967 494.661 86.5839ZM557.074 63.1341V119.612C557.074 119.979 556.927 120.309 556.633 120.602C556.34 120.896 556.009 121.043 555.642 121.043H552.89C552.523 121.043 552.193 120.896 551.899 120.602C551.606 120.309 551.459 119.979 551.459 119.612V45.4092C551.459 45.0423 551.532 44.8221 551.679 44.7487C551.899 44.6753 552.12 44.8221 552.34 45.1891L595.496 103.428C595.716 103.722 595.9 103.832 596.046 103.758C596.267 103.685 596.377 103.465 596.377 103.098V45.4092C596.377 45.189 596.413 44.9689 596.487 44.7487C596.634 44.5285 596.817 44.345 597.037 44.1982C597.257 44.0514 597.514 43.978 597.808 43.978H600.56C600.927 43.978 601.258 44.1248 601.551 44.4184C601.845 44.712 601.991 45.0423 601.991 45.4092V120.823C601.991 121.263 601.881 121.483 601.661 121.483C601.514 121.557 601.331 121.447 601.111 121.153L557.954 62.914C557.734 62.547 557.514 62.4002 557.294 62.4736C557.147 62.547 557.074 62.7672 557.074 63.1341ZM622.9 96.1619V119.612C622.9 119.979 622.753 120.309 622.459 120.602C622.166 120.896 621.835 121.043 621.468 121.043H618.716C618.349 121.043 618.019 120.896 617.725 120.602C617.432 120.309 617.285 119.979 617.285 119.612V45.4092C617.285 45.0423 617.432 44.712 617.725 44.4184C618.019 44.1248 618.349 43.978 618.716 43.978H621.468C621.835 43.978 622.166 44.1248 622.459 44.4184C622.753 44.712 622.9 45.0423 622.9 45.4092V84.9325C622.9 85.2995 622.973 85.5196 623.12 85.593C623.34 85.6664 623.56 85.5563 623.78 85.2628L657.138 45.079C657.799 44.345 658.606 43.978 659.56 43.978H664.184C664.551 43.978 664.771 44.0881 664.845 44.3083C664.992 44.5285 664.955 44.7854 664.735 45.079L635.45 80.749C634.79 81.4829 634.79 82.2169 635.45 82.9508L667.377 119.942C667.597 120.236 667.671 120.492 667.597 120.713C667.524 120.933 667.267 121.043 666.827 121.043H662.313C661.359 121.043 660.551 120.676 659.891 119.942L631.707 87.1343C631.046 86.4004 630.386 86.4004 629.725 87.1343L623.89 93.7399C623.23 94.4004 622.9 95.2078 622.9 96.1619Z" fill="black"/>
-      <defs>
-        <filter id="filter0_brand" x="205.184" y="38.2532" width="281.408" height="92.7714" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-          <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-          <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-          <feOffset dx="4" dy="4"/>
-          <feGaussianBlur stdDeviation="2"/>
-          <feComposite in2="hardAlpha" operator="out"/>
-          <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.47 0"/>
-          <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_brand"/>
-          <feBlend mode="normal" in="SourceGraphic" in2="effect1_brand" result="shape"/>
-        </filter>
-        <clipPath id="clip0_brand">
-          <rect width="178" height="178.086" fill="white"/>
-        </clipPath>
-      </defs>
-    </svg>
-  </div>
-  <div class="nav-item active" data-page="briefing">📈 Briefing Diário</div>
-  <div class="nav-item" data-page="regulamentacoes">📄 Regulamentações</div>
-  <div class="nav-item" data-page="tendencias">⚡ Tendências</div>
-  <div class="nav-item" data-page="alertas">⚠️ Alertas</div>
-  <div class="nav-item" data-page="arquivo">🗄️ Arquivo</div>
-  <div class="sidebar-footer" id="last-updated">Atualizado em 27/07/2026</div>
-</div>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <svg viewBox="0 0 160 40" xmlns="http://www.w3.org/2000/svg">
+                    <!-- BROSBNK Logo -->
+                    <rect x="5" y="8" width="8" height="24" fill="#1a73e8" rx="1"/>
+                    <rect x="16" y="8" width="8" height="24" fill="#1a73e8" rx="1"/>
+                    <path d="M 30 32 Q 30 18 42 18 Q 54 18 54 26 Q 54 32 48 32 L 30 32 Z" fill="none" stroke="#1a73e8" stroke-width="2"/>
+                    <rect x="60" y="8" width="8" height="24" fill="#1a73e8" rx="1"/>
+                    <path d="M 73 32 L 73 18 M 73 22 Q 73 18 79 18 Q 85 18 85 22" fill="none" stroke="#1a73e8" stroke-width="2"/>
+                    <path d="M 95 32 L 95 18 M 95 24 Q 95 18 103 18 Q 110 18 110 24 L 110 32" fill="none" stroke="#1a73e8" stroke-width="2"/>
+                    <path d="M 120 32 L 120 18 L 128 18 Q 135 18 135 24 Q 135 30 128 30 L 120 30" fill="none" stroke="#1a73e8" stroke-width="2"/>
+                    <circle cx="145" cy="20" r="6" fill="#1a73e8"/>
+                    <path d="M 145 26 L 145 32" stroke="#1a73e8" stroke-width="2"/>
+                </svg>
+            </div>
+            <nav>
+                <ul class="sidebar-nav">
+                    <li><button class="nav-btn active" data-section="briefing">📰 Briefing Diário</button></li>
+                    <li><button class="nav-btn" data-section="regulamentacoes">⚖️ Regulamentações</button></li>
+                    <li><button class="nav-btn" data-section="tendencias">📈 Tendências</button></li>
+                    <li><button class="nav-btn" data-section="alertas">🔔 Alertas</button></li>
+                    <li><button class="nav-btn" data-section="arquivo">📁 Arquivo</button></li>
+                </ul>
+            </nav>
+        </aside>
 
-<div class="main">
+        <!-- Main Content -->
+        <main class="main">
+            <div class="header">
+                <h1>Painel Brosbnk</h1>
+                <p>Briefing fintech diário em tempo real — 28 de julho de 2026</p>
+            </div>
 
-  <!-- PAGE: Briefing Diário -->
-  <div class="page active" id="page-briefing">
-    <div class="page-title">Briefing Diário</div>
-    <div class="page-subtitle">IA, Blockchain, Criptoativos, Pagamentos Internacionais, Regulamentação, Lei de Criptoativos/Criptomoedas e Câmbio com Stablecoins — desenvolvimentos das últimas 24-48h com impacto para a Brosbnk</div>
+            <div class="stat-cards">
+                <div class="stat-card">
+                    <h3>Notícias hoje</h3>
+                    <div class="value">4</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Impacto alto</h3>
+                    <div class="value">2</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Temas monitorados</h3>
+                    <div class="value">8</div>
+                    <div class="themes-list">
+                        IA, Blockchain, Cripto, Pagamentos, Regulação, Lei Cripto, Cambio Stablecoin, Comex
+                    </div>
+                </div>
+            </div>
 
-    <div class="stats-grid">
-      <div class="stat-card"><div class="stat-label">Notícias hoje</div><div class="stat-value" id="news-today-count" style="color:#2f6fed">3</div><div class="stat-sub" style="color:#1f9d55">8 temas monitorados</div></div>
-      <div class="stat-card"><div class="stat-label">Impacto alto</div><div class="stat-value" id="high-impact-count" style="color:#d0302f">2</div><div class="stat-sub">requerem avaliação</div></div>
-      <div class="stat-card"><div class="stat-label">Ações recomendadas</div><div class="stat-value" id="recommendation-count" style="color:#b8860b">3</div><div class="stat-sub">concretas, por notícia</div></div>
-      <div class="stat-card"><div class="stat-label">Temas</div><div class="stat-value" style="font-size:13px;line-height:1.5;color:#1f9d55">IA · Blockchain · Cripto · Pagamentos · Regulamentação · Lei Cripto · Câmbio Stablecoins</div></div>
+            <!-- SEÇÃO: Briefing Diário -->
+            <section id="briefing" class="section active">
+                <h2 style="font-size: 24px; margin-bottom: 24px;">Briefing Diário — 28 de julho</h2>
+
+                <div class="news-item high-impact">
+                    <div class="news-header">
+                        <div class="news-title">Ant International fecha $1,2B para pagamentos transfronteiriços</div>
+                        <span class="impact-badge high">Alto impacto</span>
+                    </div>
+                    <div class="news-meta">📅 21 de julho de 2026 | 🏷️ Pagamentos Internacionais</div>
+                    <div class="news-content">
+                        <strong>Resumo:</strong> A Ant International (Alibaba/Ant Group) fechou rodada Series A de $1,2 bilhão para expandir globalmente suas capacidades de pagamentos transfronteiriços e comércio agentic. Capital será investido em inovação de produtos, cobertura geográfica e infraestrutura de IA.
+
+                        <strong>Relação com a Brosbnk:</strong> Competição direta em pagamentos B2B internacionais. Ant tem escala asiática massiva, agora com capital ilimitado.
+
+                        <strong>Impactos negativos:</strong> Compressão de margens em corretagem de câmbio; competidor com 100x mais recursos; risco de ganho de market share global.
+
+                        <strong>Oportunidades:</strong> Mercado cresce para $336B em 2031. Brosbnk deve focar em nicho LATAM + compliance local como moat defensivo.
+                    </div>
+                    <div class="news-footer">
+                        <a href="https://www.pymnts.com/news/investment-tracker/2026/ant-international-raises-1-2-billion-to-boost-cross-border-payments/" target="_blank" class="btn">🔗 Ler matéria original</a>
+                        <button class="btn btn-primary" onclick="openModal('ant')">🔍 Mergulhar</button>
+                    </div>
+                </div>
+
+                <div class="news-item high-impact">
+                    <div class="news-header">
+                        <div class="news-title">Brasil: Novas regulamentações de criptoativos entram em vigor</div>
+                        <span class="impact-badge high">Alto impacto</span>
+                    </div>
+                    <div class="news-meta">📅 1º de julho de 2026 | 🏷️ Regulamentação Brasil</div>
+                    <div class="news-content">
+                        <strong>Resumo:</strong> Novo framework regulatório brasileiro para provedores de ativos virtuais (VASPs) implementado. Novo formulário eletrônico DeCripto, limiar de reporte aumentado para R$ 35.000/mês. Prazo de conformidade: 30 de novembro de 2026.
+
+                        <strong>Relação com a Brosbnk:</strong> Brasil é mercado core. Afeta diretamente integração de stablecoins, compliance de clientes, viabilidade de produtos cripto.
+
+                        <strong>Impactos negativos:</strong> Custos operacionais de compliance; risco de sanções; possível interpretação restritiva de stablecoins.
+
+                        <strong>Oportunidades:</strong> Legitimidade competitiva; eliminação de players ilegais; Brosbnk pode oferecer compliance-as-a-service.
+                    </div>
+                    <div class="news-footer">
+                        <a href="https://www.theblock.co/post/378295/brazil-crypto-new-rules" target="_blank" class="btn">🔗 Ler matéria original</a>
+                        <button class="btn btn-primary" onclick="openModal('brasil')">🔍 Mergulhar</button>
+                    </div>
+                </div>
+
+                <div class="news-item medium-impact">
+                    <div class="news-header">
+                        <div class="news-title">USDC lidera em volume; Samsung Wallet integra stablecoins</div>
+                        <span class="impact-badge medium">Médio impacto</span>
+                    </div>
+                    <div class="news-meta">📅 23–24 de julho de 2026 | 🏷️ Stablecoins & Câmbio</div>
+                    <div class="news-content">
+                        <strong>Resumo:</strong> Circle's USDC atinge 70% do volume de transações de stablecoins (vs 25% USDT). Samsung Wallet anuncia integração de stablecoins, priorizando USDC, levando dólares digitais para bilhões de dispositivos.
+
+                        <strong>Relação com a Brosbnk:</strong> Muda dinâmica de stablecoin; Samsung Wallet torna mainstream; afeta estratégia de tesouro e pares de trading.
+
+                        <strong>Impactos negativos:</strong> Contração USDT $5,4B em 60 dias; risco se Circle (emissor USDC) enfrentar problemas.
+
+                        <strong>Oportunidades:</strong> Samsung Wallet = mainstream; USDC é novo standard; Brosbnk pode capturar volume de migração USDT→USDC.
+                    </div>
+                    <div class="news-footer">
+                        <a href="https://www.coindesk.com/business/2026/07/06/circle-s-usdc-is-leaving-tether-behind-in-the-stablecoin-volume-race" target="_blank" class="btn">🔗 Ler matéria original</a>
+                        <button class="btn btn-primary" onclick="openModal('usdc')">🔍 Mergulhar</button>
+                    </div>
+                </div>
+
+                <div class="news-item positive">
+                    <div class="news-header">
+                        <div class="news-title">Coinbase habilita pagamentos autônomos por IA com x402</div>
+                        <span class="impact-badge positive">Oportunidade</span>
+                    </div>
+                    <div class="news-meta">📅 23 de julho de 2026 | 🏷️ IA & Pagamentos</div>
+                    <div class="news-content">
+                        <strong>Resumo:</strong> Coinbase lança protocolo x402 e SDK permitindo que agentes IA autônomos façam pagamentos em USDC sem intermediário humano. Liberado para chamadas API, dados, serviços.
+
+                        <strong>Relação com a Brosbnk:</strong> Agentic commerce é mega-trend emergente. Brosbnk pode ser first-mover LATAM em pagamentos IA.
+
+                        <strong>Impactos negativos:</strong> Risco AML/KYC com IA autônoma; dependência de tech proprietária Coinbase.
+
+                        <strong>Oportunidades:</strong> Blue-ocean em LATAM; agentic commerce cresce exponencialmente 2026-2027; diferenciação via "agentic payment API".
+                    </div>
+                    <div class="news-footer">
+                        <button class="btn btn-primary" onclick="openModal('agentic')">🔍 Mergulhar</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SEÇÃO: Regulamentações -->
+            <section id="regulamentacoes" class="section">
+                <h2 style="font-size: 24px; margin-bottom: 24px;">Regulamentações por Região</h2>
+
+                <div class="filter-pills">
+                    <button class="filter-pill active" data-filter="todos">Todos</button>
+                    <button class="filter-pill" data-filter="brasil">🇧🇷 Brasil</button>
+                    <button class="filter-pill" data-filter="colombia">🇨🇴 Colômbia</button>
+                    <button class="filter-pill" data-filter="panama">🇵🇦 Panamá</button>
+                    <button class="filter-pill" data-filter="eua">🇺🇸 EUA</button>
+                    <button class="filter-pill" data-filter="global">🌍 Global</button>
+                    <button class="filter-pill" data-filter="critico">🔴 Crítico</button>
+                </div>
+
+                <div class="timeline">
+                    <div class="timeline-item" data-region="brasil" data-filter="critico">
+                        <div class="timeline-content">
+                            <h4>Lei 14.478/2022 — Framework de Ativos Virtuais Brasil</h4>
+                            <p><strong>Status:</strong> Ativo desde 2022 | <strong>Alterações recentes:</strong> 1º de julho de 2026</p>
+                            <p>Novo formulário eletrônico DeCripto; limiar de reporte aumentado para R$ 35.000/mês; prazo de conformidade até 30 de novembro de 2026.</p>
+                            <p><strong>Impacto no mercado:</strong> Legitimação de VASPs; eliminação de players não-regulados; aumento de custos de compliance.</p>
+                            <p class="opp-label">📌 Oportunidade Brosbnk: Ser bridge confiável entre clientes e reguladores; oferecer compliance-as-a-service; diferenciar-se por conformidade total até nov/2026.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item" data-region="colombia">
+                        <div class="timeline-content">
+                            <h4>Reforma AML/KYC para Criptoativos — Colômbia</h4>
+                            <p><strong>Status:</strong> Em discussão 2025-2026</p>
+                            <p>Colômbia está reformando leis AML/KYC focadas em atividades cripto. Foco em customer due diligence e reporte de transações suspeitas.</p>
+                            <p><strong>Impacto no mercado:</strong> Abertura regulatória; oportunidade para fintechs cripto-nativas.</p>
+                            <p class="opp-label">📌 Oportunidade Brosbnk: Primeira-mover em Colômbia com solução de pagamentos cripto-regulada; partnerships com bancos locais.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item" data-region="panama">
+                        <div class="timeline-content">
+                            <h4>Anteproyecto Ley N° 314 — Marco Fintech Panamá</h4>
+                            <p><strong>Status:</strong> Apresentado 13 de janeiro de 2026</p>
+                            <p>Primeira lei dedicada de fintech no Panamá, formalizando obrigações de VASP e CASP (Crypto Asset Service Provider).</p>
+                            <p><strong>Impacto no mercado:</strong> Oportunidade de hub cripto regulado na América Central.</p>
+                            <p class="opp-label">📌 Oportunidade Brosbnk: Estabelecer presença no Panamá como jurisdição base para operações LATAM; aproveitar reputação de compliance.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item" data-region="eua">
+                        <div class="timeline-content">
+                            <h4>CLARITY Act & Stablecoin Regulation — EUA</h4>
+                            <p><strong>Status:</strong> Ativo | <strong>GENIUS Act:</strong> Julho de 2025</p>
+                            <p>EUA aprovou legislação de stablecoin (GENIUS Act). Período de comentários para propostas fintech fechou em 27 de julho de 2026.</p>
+                            <p><strong>Impacto no mercado:</strong> Clareza regulatória; boom de lançamento de stablecoins de bancos/payment providers.</p>
+                            <p class="opp-label">📌 Oportunidade Brosbnk: Estudar CLARITY Act para possível expansão nos EUA; adotar standards US-grade para credibilidade global.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item" data-region="global" data-filter="critico">
+                        <div class="timeline-content">
+                            <h4>EU Instant Payments & DORA — Regulação Global</h4>
+                            <p><strong>Status:</strong> Implementação 2026</p>
+                            <p>UE obriga PSPs a suportarem transferências de crédito instantâneas 24/7 com verificação de payee. DORA implementado para resiliência operacional.</p>
+                            <p><strong>Impacto no mercado:</strong> Novo standard de velocidade; pressão competitiva global.</p>
+                            <p class="opp-label">📌 Oportunidade Brosbnk: Implementar instant settlement como diferencial competitivo; posicionar-se como fastest payment provider LATAM.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SEÇÃO: Tendências -->
+            <section id="tendencias" class="section">
+                <h2 style="font-size: 24px; margin-bottom: 24px;">Tendências Emergentes</h2>
+
+                <div class="news-item">
+                    <div class="news-header">
+                        <div class="news-title">Agentic Commerce & Autonomous AI Payments</div>
+                    </div>
+                    <div class="news-content">
+                        Agentes IA automaticamente pagando por serviços e dados é realidade agora (Coinbase x402). 2026-2027 será o boom. Impacto: APIs de pagamento precisam ser compatíveis com IA; nova camada de compliance (AML/KYC automático); novo mercado de middleware de pagamentos agentic.
+                    </div>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-header">
+                        <div class="news-title">Stablecoin como Moeda Padrão para Settlement</div>
+                    </div>
+                    <div class="news-content">
+                        USDC dominando volume de transações (70%) e Samsung Wallet + Coinbase integrando stablecoins mostram que cripto-nativo é agora mainstream. Impacto: demanda por integração USDC/USDT em wallets e payment processors; oportunidade de tesouro em stablecoins; risco de contração USDT.
+                    </div>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-header">
+                        <div class="news-title">Regulação Cripto Fragmentada Globalmente</div>
+                    </div>
+                    <div class="news-content">
+                        Brasil vai rigoroso (Lei 14.478), Colômbia está abrindo, Panamá inovando, EUA com CLARITY. Impacto: fintechs precisam de compliance multinacional; oportunidade para players que conseguem navegar múltiplas jurisdições; risco para players one-jurisdiction.
+                    </div>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-header">
+                        <div class="news-title">Instant Payments & Near-Zero Latency</div>
+                    </div>
+                    <div class="news-content">
+                        EU obrigando instant euros 24/7; expectativa global mudando de "dias" para "minutos". Impacto: pressão competitiva em velocidade de settlement; infraestrutura de blockchain/stablecoins tem vantagem; legacy banking perde relevância.
+                    </div>
+                </div>
+            </section>
+
+            <!-- SEÇÃO: Alertas -->
+            <section id="alertas" class="section">
+                <h2 style="font-size: 24px; margin-bottom: 24px;">Alertas Críticos</h2>
+
+                <div class="news-item high-impact">
+                    <div class="news-header">
+                        <div class="news-title">⚠️ Contração USDT — Liquidez sob Pressão</div>
+                        <span class="impact-badge high">Crítico</span>
+                    </div>
+                    <div class="news-content">
+                        USDT encolheu $5,4B em 60 dias (maior contração fora de crises em 4 anos). Circle (USDC) também em dificuldade (ação -67,7% YTD). Risco: estabilidade de stablecoins pode estar comprometida.
+                        <strong>Ação recomendada:</strong> Auditar tesouro de stablecoins; diversificar entre USDC e outros ativos; comunicar transparência aos clientes.
+                    </div>
+                </div>
+
+                <div class="news-item high-impact">
+                    <div class="news-header">
+                        <div class="news-title">⚠️ Prazo Crítico: Conformidade Brasil (30 nov 2026)</div>
+                        <span class="impact-badge high">Crítico</span>
+                    </div>
+                    <div class="news-content">
+                        Instituições fora de conformidade com Lei 14.478 até 30 de novembro devem cessar operações. Brosbnk tem ~4 meses para adaptar-se totalmente.
+                        <strong>Ação recomendada:</strong> Sprint imediato de compliance; auditoria interna; preparar DeCripto; comunicar progresso ao BC.
+                    </div>
+                </div>
+
+                <div class="news-item medium-impact">
+                    <div class="news-header">
+                        <div class="news-title">📌 Ant International Expansão LATAM</div>
+                        <span class="impact-badge medium">Médio impacto</span>
+                    </div>
+                    <div class="news-content">
+                        Com $1,2B em novo capital, Ant pode lançar agressivamente em Brasil, México, Colombia. Risco: ganho rápido de market share, compressão de margens.
+                        <strong>Ação recomendada:</strong> Monitorar sinais de entrada Ant em LATAM; preparar defesa via diferenciação (compliance local, UX local, partnerships).
+                    </div>
+                </div>
+            </section>
+
+            <!-- SEÇÃO: Arquivo -->
+            <section id="arquivo" class="section">
+                <h2 style="font-size: 24px; margin-bottom: 24px;">Arquivo de Briefings</h2>
+                <p style="color: #666; margin-bottom: 24px;">Estatísticas: <strong>2 briefings arquivados</strong> | <strong>8 notícias acumuladas</strong></p>
+
+                <div class="archive-group">
+                    <div class="archive-header" onclick="toggleArchive(this)">
+                        <span>📅 27 de julho de 2026</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="archive-content">
+                        <div class="news-item">
+                            <div class="news-title">Bitcoin e Ethereum em recuperação pós-geopolítica</div>
+                            <p style="font-size: 14px; color: #666; margin-top: 8px;">Conflito Irã reduz pressão de risco. Bitcoin acima de $65k, Ethereum $1,9k. Sentiment misto sobre H2 2026.</p>
+                        </div>
+                        <div class="news-item">
+                            <div class="news-title">Regulação MiCA EU — Transição pós-grandfathering</div>
+                            <p style="font-size: 14px; color: #666; margin-top: 8px;">1º de julho marcou fim do período transitório. Providers existentes em vários Member States agora sob compliance total.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="archive-group">
+                    <div class="archive-header" onclick="toggleArchive(this)">
+                        <span>📅 26 de julho de 2026</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="archive-content">
+                        <div class="news-item">
+                            <div class="news-title">Reddit implementa ferramentas de moderação com IA</div>
+                            <p style="font-size: 14px; color: #666; margin-top: 8px;">Bloqueando 23M spam views/dia, detectando 25k novos spam posts/comments diariamente com modelos LLM.</p>
+                        </div>
+                        <div class="news-item">
+                            <div class="news-title">World AI Conference Xangai — Xi Jinping keynote</div>
+                            <p style="font-size: 14px; color: #666; margin-top: 8px;">Fundação World Artificial Intelligence Cooperation Organization com 29 países. Moonshot AI Kimi K3 top coding leaderboard.</p>
+                        </div>
+                        <div class="news-item">
+                            <div class="news-title">GPT-5.6 Sol e Grok 4.5 lançados</div>
+                            <p style="font-size: 14px; color: #666; margin-top: 8px;">Maior dia competitivo IA desde GPT-4. Google atrasa Gemini 3.5 Pro para testes adicionais.</p>
+                        </div>
+                        <div class="news-item">
+                            <div class="news-title">Anthropic Claude Fable 5 — Restrições levantadas</div>
+                            <p style="font-size: 14px; color: #666; margin-top: 8px;">EUA removeu restrições de segurança; acesso restaurado para clientes após investigação.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
     </div>
 
-    <div class="section-heading"><span class="bar"></span>Notícias de hoje</div>
-
-    <div class="card" id="news-1">
-      <div class="card-top">
-        <div class="card-title">Grandes bancos dos EUA criam rede compartilhada de depósitos tokenizados</div>
-        <div class="badge badge-alto">Impacto: Alto</div>
-      </div>
-      <div class="card-meta">Blockchain / Pagamentos Internacionais · 27/07/2026 · Fonte: Dataconomy</div>
-      <div class="card-body">JPMorgan, Bank of America, Citi, HSBC e Wells Fargo articulam uma rede compartilhada ligando depósitos bancários tokenizados sobre trilhos blockchain, enquanto o setor discute o próximo salto — levar stablecoins do settlement institucional para o pagamento do dia a dia.</div>
-      <div class="card-footer">
-        <span><span class="rec-label">Recomendação:</span> avaliar como plugar a Brosbnk em trilhos de depósito tokenizado via banco parceiro antes que a liquidação 24/7 vire padrão de mercado.</span>
-      </div>
-      <div class="card-actions" style="margin-top:10px;">
-        <a class="link-btn" href="https://dataconomy.com/2026/07/27/stablecoins-solved-digital-settlement-now-comes-the-everyday-payments-test/" target="_blank" rel="noopener">Ler matéria original ↗</a>
-        <button class="dive-btn" onclick="openDive('tokenized-deposits')">🔍 Mergulhar</button>
-      </div>
-    </div>
-
-    <div class="card" id="news-2">
-      <div class="card-top">
-        <div class="card-title">Regras do GENIUS Act perdem o prazo de 18/07 e prolongam incerteza para stablecoins</div>
-        <div class="badge badge-alto">Impacto: Alto</div>
-      </div>
-      <div class="card-meta">Regulamentação / Lei de Criptoativos · 20/07/2026 · Fonte: Crypto Daily</div>
-      <div class="card-body">As seis agências federais não publicaram as regras finais de capital, reserva e licenciamento de stablecoins até o prazo legal de 18/07 (um ano após a sanção da lei). Sem regra final nem orientação interina, bancos que queriam emitir stablecoins ficam em compasso de espera; o KYC grau-bancário segue em consulta até 21/08.</div>
-      <div class="card-footer">
-        <span><span class="rec-label">Recomendação:</span> restringir por política interna qualquer liquidação em stablecoin a emissores já alinhados ao GENIUS Act e acompanhar a consulta até 21/08.</span>
-      </div>
-      <div class="card-actions" style="margin-top:10px;">
-        <a class="link-btn" href="https://cryptodaily.co.uk/2026/07/genius-act-missed-deadline-stablecoin-uncertainty" target="_blank" rel="noopener">Ler matéria original ↗</a>
-        <button class="dive-btn" onclick="openDive('genius-missed')">🔍 Mergulhar</button>
-      </div>
-    </div>
-
-    <div class="card" id="news-3">
-      <div class="card-top">
-        <div class="card-title">Capital acelera na infraestrutura de pagamentos com stablecoin: Cyclops e MoonPay</div>
-        <div class="badge badge-medio">Impacto: Médio</div>
-      </div>
-      <div class="card-meta">Criptoativos / Pagamentos · 22/07/2026 · Fonte: Hipther Fintech Pulse</div>
-      <div class="card-body">A Cyclops levantou US$ 20 milhões para expandir infraestrutura de pagamentos com stablecoin para comerciantes e provedores de pagamento, e a MoonPay adquiriu a Glide para simplificar depósitos cripto cross-chain — sinais de que o dinheiro está indo para o trilho que torna stablecoins usáveis no pagamento real.</div>
-      <div class="card-footer">
-        <span><span class="rec-label">Recomendação:</span> mapear fornecedores de infraestrutura de stablecoin (incl. Cyclops) como possíveis parceiros de liquidação antes que fechem exclusividade com concorrentes.</span>
-      </div>
-      <div class="card-actions" style="margin-top:10px;">
-        <a class="link-btn" href="https://hipther.com/latest-news/2026/07/22/115537/fintech-pulse-ai-careers-thunes-visa-stripe-gtn-payward-xstocks-shanghai-commercial-bank-and-planto-july-22-2026/" target="_blank" rel="noopener">Ler matéria original ↗</a>
-        <button class="dive-btn" onclick="openDive('stablecoin-funding')">🔍 Mergulhar</button>
-      </div>
-    </div>
-
-    <div class="insight-box">
-      <div class="insight-title">Insight estratégico</div>
-      <div class="insight-body">O fio do dia é a institucionalização dos trilhos: enquanto os maiores bancos dos EUA constroem uma rede de depósitos tokenizados e o capital corre para infraestrutura de stablecoin, a regra que deveria dar segurança jurídica (GENIUS Act) atrasa. Ganha quem preparar liquidação via stablecoin com compliance de banco agora, para plugar no trilho assim que a régua regulatória fechar.</div>
-    </div>
-  </div>
-
-  <!-- PAGE: Regulamentações -->
-  <div class="page" id="page-regulamentacoes">
-    <div class="page-title">Regulamentações</div>
-    <div class="page-subtitle">Timeline de regulamentações que impactam pagamentos internacionais — Brasil, Colômbia, Panamá, Estados Unidos e Global. Cada item traz o impacto no mercado e a oportunidade concreta para a Brosbnk.</div>
-    <div class="verification-notice"><strong>Revisão em andamento:</strong> itens sem link direto para ato, diário oficial ou autoridade competente são apenas sinais de monitoramento. Não devem fundamentar decisão jurídica, regulatória ou operacional até validação documental.</div>
-    <div class="filter-pills">
-      <div class="pill active" data-filter="todos">Todos</div>
-      <div class="pill" data-filter="brasil">Brasil</div>
-      <div class="pill" data-filter="colombia">Colômbia</div>
-      <div class="pill" data-filter="panama">Panamá</div>
-      <div class="pill" data-filter="eua">Estados Unidos</div>
-      <div class="pill" data-filter="global">Global</div>
-      <div class="pill" data-filter="critico">Crítico</div>
-    </div>
-    <div class="timeline">
-
-      <div class="timeline-item" data-region="brasil">
-        <div class="timeline-dot"></div>
-        <div class="card" style="margin-bottom:0;">
-          <div class="card-top"><div class="card-title">BC enquadra SPSAVs (exchanges) no arcabouço prudencial + DeCripto</div><div class="badge badge-critico">Crítico</div></div>
-          <div class="card-meta"><span class="badge badge-regiao">Brasil</span> · 01/07/2026</div>
-          <div class="card-body">Nova regra do Banco Central incorpora as prestadoras de serviços de ativos virtuais (SPSAVs) ao arcabouço prudencial; a partir de 01/01/2027 valem exigências de capital, gestão de risco e divulgação, com enquadramento no Segmento S4 até 30/06/2028. A Receita lançou a DeCripto (substitui a IN 1.888/2019), com reporte mensal — inclusive de exchanges estrangeiras que atendem brasileiros.</div>
-          <div class="card-footer stacked">
-            <div><span class="impact-label">Impacto no mercado:</span> eleva o custo de compliance e separa players regulados dos informais; exchanges estrangeiras passam a reportar mensalmente ao Fisco.</div>
-            <div><span class="opp-label">Oportunidade Brosbnk:</span> antecipar a adequação prudencial e de reporte antes de 2027 e usar o enquadramento pelo BC como selo de confiança frente a concorrentes informais.</div>
-          </div>
+    <!-- Modal de Deep Dive -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">✕</button>
+            <div id="modal-body"></div>
         </div>
-      </div>
-
-      <div class="timeline-item" data-region="eua">
-        <div class="timeline-dot"></div>
-        <div class="card" style="margin-bottom:0;">
-          <div class="card-top"><div class="card-title">GENIUS Act: regras finais em 18/07 e KYC bancário + blueprint EUA-UK</div><div class="badge badge-critico">Crítico</div></div>
-          <div class="card-meta"><span class="badge badge-regiao">Estados Unidos</span> · 18/07/2026</div>
-          <div class="card-body">Seis agências federais fecham as regras de capital, reserva e licenciamento (OCC: piso de US$ 5M; FDIC sem seguro para tokens). FinCEN, Fed, OCC, FDIC e NCUA propuseram KYC grau-bancário para emissores, com comentários até 21/08. Em paralelo, EUA e Reino Unido publicaram blueprint conjunto com 10 propostas para stablecoins cross-border.</div>
-          <div class="card-footer stacked">
-            <div><span class="impact-label">Impacto no mercado:</span> define quais stablecoins americanas serão "institucionais/seguras" e eleva a barreira para emissores, pressionando fintechs sem capital dedicado a consolidar ou sair.</div>
-            <div><span class="opp-label">Oportunidade Brosbnk:</span> firmar parceria apenas com emissores compliant com o GENIUS Act e usar o novo padrão KYC como base de um produto de câmbio via stablecoin já auditável.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="timeline-item" data-region="panama">
-        <div class="timeline-dot"></div>
-        <div class="card" style="margin-bottom:0;">
-          <div class="card-top"><div class="card-title">Panamá: Superintendência do Mercado de Valores debate escopo cripto (Opinião 4-2025)</div><div class="badge badge-discussao">Em discussão</div></div>
-          <div class="card-meta"><span class="badge badge-regiao">Panamá</span> · Julho de 2026</div>
-          <div class="card-body">A Superintendência discutiu o alcance regulatório e os riscos de criptoativos (fraude, lavagem, arbitragem regulatória) sob a Opinião 4-2025, enquanto o Anteprojeto de Lei 314 (licenciamento de VASP/CASP em linha com padrões FATF) segue em revisão em subcomissão. A adoção local de cripto cresce e exchanges globais ganham atenção.</div>
-          <div class="card-footer stacked">
-            <div><span class="impact-label">Impacto no mercado:</span> sinaliza que o Panamá caminha para licenciar VASPs; até a lei passar, a liquidação via stablecoin no país opera em zona cinzenta.</div>
-            <div><span class="opp-label">Oportunidade Brosbnk:</span> acompanhar a tramitação da Lei 314 e posicionar-se cedo para licenciamento, evitando ficar de fora caso o Panamá vire hub regional de câmbio via stablecoin.</div>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="timeline-item" data-region="brasil">
-        <div class="timeline-dot"></div>
-        <div class="card" style="margin-bottom:0;">
-          <div class="card-top"><div class="card-title">Alegação sobre “Resolução BCB nº 561/2026”</div><div class="badge badge-verificar">Não verificado</div></div>
-          <div class="card-meta"><span class="badge badge-regiao">Brasil</span> · 22 de maio de 2026</div>
-          <div class="card-body">O número, a vigência e o conteúdo atribuídos a esse ato não foram localizados nas fontes oficiais consultadas. A descrição anterior foi preservada somente como hipótese a confirmar.</div>
-          <div class="card-footer stacked">
-            <div><span class="impact-label">Impacto no mercado:</span> indeterminado até confirmação do ato e de seu alcance jurídico.</div>
-            <div><span class="opp-label">Ação Brosbnk:</span> solicitar validação ao jurídico regulatório e anexar o link oficial antes de classificar como crítico.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="timeline-item" data-region="brasil">
-        <div class="timeline-dot"></div>
-        <div class="card" style="margin-bottom:0;">
-          <div class="card-top"><div class="card-title">Checker Finance levanta US$ 8 milhões</div><div class="badge badge-discussao">Em discussão</div></div>
-          <div class="card-meta"><span class="badge badge-regiao">Brasil / América Latina</span> · 20 de maio de 2026</div>
-          <div class="card-body">Investimento estratégico para expandir infraestrutura de pagamentos cross-border e liquidez de stablecoins na América Latina, com foco especial no Brasil.</div>
-          <div class="card-footer stacked">
-            <div><span class="impact-label">Impacto no mercado:</span> mais capital entrando em infraestrutura cross-border sinaliza interesse de investidores na liquidez via stablecoin na região; o enquadramento brasileiro precisa ser analisado separadamente em fonte oficial.</div>
-            <div><span class="opp-label">Oportunidade Brosbnk:</span> observar se a Checker Finance vira parceira ou concorrente direta em corredores de câmbio; avaliar parceria de liquidez antes que ela feche contratos exclusivos com bancos locais.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="timeline-item" data-region="colombia">
-        <div class="timeline-dot"></div>
-        <div class="card" style="margin-bottom:0;">
-          <div class="card-top"><div class="card-title">Colômbia prepara lei integral para ativos digitais</div><div class="badge badge-discussao">Em discussão</div></div>
-          <div class="card-meta"><span class="badge badge-regiao">Colômbia</span> · Julho de 2026</div>
-          <div class="card-body">Governo colombiano tem projeto de lei pronto para criar o primeiro marco normativo abrangente para criptoativos, stablecoins e tokens, com foco em proteção ao consumidor e estabilidade financeira. Stablecoins e DeFi seguem em zona cinzenta até a aprovação, e o Banco de la República já proíbe uso direto de cripto para quitar obrigações comerciais.</div>
-          <div class="card-footer stacked">
-            <div><span class="impact-label">Impacto no mercado:</span> enquanto a lei não passa, pagamentos internacionais em cripto seguem limitados na Colômbia — qualquer liquidação via stablecoin nesse corredor opera sob incerteza jurídica.</div>
-            <div><span class="opp-label">Oportunidade Brosbnk:</span> o corredor Brasil-Colômbia via câmbio tradicional segue como opção mais segura enquanto a regulação cripto amadurece; posicionar a Brosbnk cedo junto a clientes colombianos como ponte de câmbio confiável antes que a lei defina as regras do jogo.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="timeline-item" data-region="colombia">
-        <div class="timeline-dot"></div>
-        <div class="card" style="margin-bottom:0;">
-          <div class="card-top"><div class="card-title">Alegação sobre DIAN Resolução 000240 e criptoativos</div><div class="badge badge-verificar">Não verificado</div></div>
-          <div class="card-meta"><span class="badge badge-regiao">Colômbia</span> · Início de 2026</div>
-          <div class="card-body">A obrigação, o número do ato e sua relação direta com o CARF precisam ser confirmados no texto oficial da DIAN antes de uso operacional.</div>
-          <div class="card-footer stacked">
-            <div><span class="impact-label">Impacto no mercado:</span> aumenta o custo de compliance para qualquer empresa que movimenta cripto na Colômbia, favorecendo quem já tem infraestrutura de reporte automatizado.</div>
-            <div><span class="opp-label">Oportunidade Brosbnk:</span> se a Brosbnk atuar ou pretende atuar na Colômbia, adequar-se cedo ao CARF vira vantagem competitiva frente a concorrentes que ainda não têm reporte automatizado.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="timeline-item" data-region="panama">
-        <div class="timeline-dot"></div>
-        <div class="card" style="margin-bottom:0;">
-          <div class="card-top"><div class="card-title">Alegação sobre Anteprojeto 314 de fintech no Panamá</div><div class="badge badge-verificar">Não verificado</div></div>
-          <div class="card-meta"><span class="badge badge-regiao">Panamá</span> · 13 de janeiro de 2026</div>
-          <div class="card-body">Não foi localizado, na pesquisa inicial, documento oficial que confirme simultaneamente número, título e conteúdo descritos. Manter apenas como pauta de pesquisa.</div>
-          <div class="card-footer stacked">
-            <div><span class="impact-label">Impacto no mercado:</span> se aprovada, o Panamá se torna um dos mercados mais abertos da região para liquidação via stablecoin, podendo atrair volume de câmbio que hoje passa pelo Brasil ou pela Colômbia.</div>
-            <div><span class="opp-label">Oportunidade Brosbnk:</span> acompanhar a tramitação e avaliar abrir operação ou parceria no Panamá cedo, para não ficar de fora caso o país vire hub regional de pagamentos via stablecoin.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="timeline-item" data-region="panama">
-        <div class="timeline-dot"></div>
-        <div class="card" style="margin-bottom:0;">
-          <div class="card-top"><div class="card-title">Alegação sobre “SBP Rule 1-2026” no Panamá</div><div class="badge badge-verificar">Não verificado</div></div>
-          <div class="card-meta"><span class="badge badge-regiao">Panamá</span> · 27 de janeiro de 2026</div>
-          <div class="card-body">O ato específico e sua aplicação a fintechs e provedores de cripto não foram confirmados em fonte oficial na revisão inicial.</div>
-          <div class="card-footer stacked">
-            <div><span class="impact-label">Impacto no mercado:</span> eleva a barreira de entrada para fintechs no Panamá — quem não tiver compliance robusto de AML/CTF fica de fora do acesso bancário.</div>
-            <div><span class="opp-label">Ação Brosbnk:</span> confirmar o ato e seu escopo com assessoria panamenha antes de transformar a alegação em requisito de compliance.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="timeline-item" data-region="eua">
-        <div class="timeline-dot"></div>
-        <div class="card" style="margin-bottom:0;">
-          <div class="card-top"><div class="card-title">CLARITY Act trava no Senado dos EUA</div><div class="badge badge-discussao">Em discussão</div></div>
-          <div class="card-meta"><span class="badge badge-regiao">Estados Unidos</span> · Senado volta em 13/07/2026</div>
-          <div class="card-body">A principal lei de regulação do mercado cripto dos EUA segue travada por três disputas (ética/insider trading, imunidade de desenvolvedores DeFi e yield de stablecoin); o Senado tem poucas semanas úteis antes do recesso de agosto para aprová-la.</div>
-          <div class="card-footer stacked">
-            <div><span class="impact-label">Impacto no mercado:</span> enquanto não aprovada, qualquer estratégia de liquidação via stablecoin com contraparte americana opera sob incerteza jurídica.</div>
-            <div><span class="opp-label">Oportunidade Brosbnk:</span> preparar planos para os dois cenários (aprovação/fracasso) e usar a espera para fechar due diligence com parceiros americanos antes da decisão sair.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="timeline-item" data-region="eua">
-        <div class="timeline-dot"></div>
-        <div class="card" style="margin-bottom:0;">
-          <div class="card-top"><div class="card-title">GENIUS Act perde o prazo de regulamentação de 18/07</div><div class="badge badge-critico">Crítico</div></div>
-          <div class="card-meta"><span class="badge badge-regiao">Estados Unidos</span> · Prazo perdido em 18 de julho de 2026</div>
-          <div class="card-body">As seis agências federais (OCC, FDIC, NCUA, Fed, FinCEN e Tesouro) não publicaram as regras finais de capital, reserva e licenciamento de stablecoins até o prazo legal de 18/07, um ano após a sanção da lei. Sem regra final nem orientação interina, emissores bancários ficam sem base para emitir; o KYC grau-bancário proposto segue em consulta pública até 21/08.</div>
-          <div class="card-footer stacked">
-            <div><span class="impact-label">Impacto no mercado:</span> prolonga a incerteza sobre quais stablecoins americanas serão "seguras" para uso institucional; emissores e fintechs ficam sem clareza para planejar liquidação em dólar.</div>
-            <div><span class="opp-label">Oportunidade Brosbnk:</span> restringir por política interna qualquer liquidação futura em stablecoin a emissores já alinhados ao padrão do GENIUS Act e participar da consulta de KYC até 21/08 via associações, ganhando tempo enquanto o mercado espera as regras.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="timeline-item" data-region="global">
-        <div class="timeline-dot"></div>
-        <div class="card" style="margin-bottom:0;">
-          <div class="card-top"><div class="card-title">Mastercard Agent Pay: primeiro pagamento por IA</div><div class="badge badge-implementado">Implementado</div></div>
-          <div class="card-meta"><span class="badge badge-regiao">Global</span> · Maio de 2026</div>
-          <div class="card-body">Primeira transação comercial iniciada por agente de IA realizada na Holanda. Framework permite que agentes de IA realizem pagamentos com consentimento explícito do consumidor.</div>
-          <div class="card-footer stacked">
-            <div><span class="impact-label">Impacto no mercado:</span> Mastercard valida pagamentos iniciados por agentes de IA como caso de uso real, não experimental — acelera a corrida de bancos e fintechs para abrir APIs a agentes autônomos.</div>
-            <div><span class="opp-label">Oportunidade Brosbnk:</span> sair na frente desenhando endpoints de pagamento programável para clientes corporativos de câmbio, antes que agentes de IA virem canal padrão de iniciação de operações.</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-    <div class="timeline-empty" id="timeline-empty">Nenhuma regulamentação encontrada para este filtro.</div>
-    <div class="insight-box">
-      <div class="insight-title">Impacto para BROSBNK</div>
-      <ul class="action-list">
-        <li><span class="arrow">→</span>Brasil: confirmar em fonte oficial o ato aplicável a eFX e stablecoins antes de alterar a operação</li>
-        <li><span class="arrow">→</span>Colômbia: validar com o jurídico o marco vigente e as obrigações efetivas de reporte à DIAN</li>
-        <li><span class="arrow">→</span>Panamá: conferir os atos diretamente na Assembleia Nacional e na SBP antes de planejar adequações</li>
-        <li><span class="arrow">→</span>Estados Unidos: preparar dois planos para o CLARITY Act e priorizar apenas stablecoins aprovadas pelo GENIUS Act</li>
-        <li><span class="arrow">→</span>Preparação para APIs de agentes de IA: desenvolver endpoints para transações programáveis</li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- PAGE: Tendências -->
-  <div class="page" id="page-tendencias">
-    <div class="page-title">Tendências</div>
-    <div class="page-subtitle">Principais tendências tecnológicas e de mercado que moldam o futuro dos pagamentos internacionais</div>
-    <div class="section-heading"><span class="bar"></span>Tendências principais</div>
-    <div class="card">
-      <div class="card-top"><div class="card-title">Pagamentos por agentes de IA</div><div class="badge badge-alto">Impacto: Alto</div></div>
-      <div class="card-body">Mastercard e Visa lançam frameworks para transações iniciadas por agentes de IA. 53% das empresas americanas permitiriam que agentes negociassem termos em seu nome.</div>
-      <div class="card-meta" style="margin-top:8px;">2026-2027</div>
-    </div>
-    <div class="card">
-      <div class="card-top"><div class="card-title">Adoção de stablecoins em mercados emergentes</div><div class="badge badge-alto">Impacto: Alto</div></div>
-      <div class="card-body">Meta, Stripe e outras plataformas começam a oferecer pagamentos em USDC em Colômbia, Filipinas e outros mercados emergentes.</div>
-      <div class="card-meta" style="margin-top:8px;">2026</div>
-    </div>
-    <div class="card">
-      <div class="card-top"><div class="card-title">Convergência regulatória global</div><div class="badge badge-medio">Impacto: Médio</div></div>
-      <div class="card-body">Reino Unido, EUA e outros mercados desenvolvidos criam frameworks unificados para pagamentos tradicionais e tokenizados.</div>
-      <div class="card-meta" style="margin-top:8px;">2026-2027</div>
-    </div>
-    <div class="insight-box">
-      <div class="insight-title">Dinâmica de mercado</div>
-      <div class="insight-body">Volume de stablecoins: $27.6T (Q1 2026, estimativa anual) · Crescimento YoY: +40% em mercados emergentes · Oportunidade de liquidez: $10T em potencial em 4 regiões principais.</div>
-    </div>
-  </div>
-
-  <!-- PAGE: Alertas -->
-  <div class="page" id="page-alertas">
-    <div class="page-title">Alertas &amp; notificações</div>
-    <div class="page-subtitle">Acompanhe eventos críticos e prazos importantes que requerem ação imediata</div>
-    <div class="stats-grid" style="grid-template-columns: repeat(3,1fr);">
-      <div class="stat-card"><div class="stat-label">Críticos</div><div class="stat-value" style="color:#d0302f">2</div><div class="stat-sub">requerem ação imediata</div></div>
-      <div class="stat-card"><div class="stat-label">Avisos</div><div class="stat-value" style="color:#b8860b">3</div><div class="stat-sub">monitorar próximas semanas</div></div>
-      <div class="stat-card"><div class="stat-label">Informações</div><div class="stat-value" style="color:#2f6fed">4</div><div class="stat-sub">atualizações de mercado</div></div>
-    </div>
-    <div class="section-heading"><span class="bar"></span>Itens de ação prioritários</div>
-    <div class="priority-item">
-      <div class="priority-num">1</div>
-      <div class="priority-text"><strong>Validar atos regulatórios citados no painel</strong><span>Obter texto oficial, vigência, alcance e parecer jurídico antes de mudar a infraestrutura</span></div>
-    </div>
-    <div class="priority-item">
-      <div class="priority-num">2</div>
-      <div class="priority-text"><strong>Mapear requisitos de autorização no Brasil</strong><span>Confirmar categoria, cronograma e capital aplicáveis diretamente nas normas do BCB</span></div>
-    </div>
-    <div class="priority-item" style="border-bottom:none;">
-      <div class="priority-num">3</div>
-      <div class="priority-text"><strong>Desenvolver APIs para agentes de IA</strong><span>Preparar endpoints para transações programáveis</span></div>
-    </div>
-  </div>
-
-  <!-- PAGE: Arquivo -->
-  <div class="page" id="page-arquivo">
-    <div class="page-title">Arquivo</div>
-    <div class="page-subtitle">Histórico completo de notícias de todos os briefings diários — clique na data para abrir ou fechar</div>
-    <div class="stats-grid" style="grid-template-columns: repeat(2,1fr);">
-      <div class="stat-card"><div class="stat-label">Briefings arquivados</div><div class="stat-value" id="archive-group-count" style="color:#2f6fed">4</div><div class="stat-sub">desde 10/07/2026</div></div>
-      <div class="stat-card"><div class="stat-label">Notícias acumuladas</div><div class="stat-value" id="archive-news-count" style="color:#1f9d55">15</div><div class="stat-sub">em todos os briefings</div></div>
     </div>
 
-    <div class="section-heading archive-date-heading" id="head-20260727" onclick="toggleArchive('arch-20260727')"><span class="bar"></span>27/07/2026<span class="count-badge">3 notícias</span><span class="chevron">▾</span></div>
-    <div class="archive-group" id="arch-20260727">
-    <div class="card">
-      <div class="card-top">
-        <div class="card-title">Grandes bancos dos EUA criam rede compartilhada de depósitos tokenizados</div>
-        <div class="badge badge-alto">Impacto: Alto</div>
-      </div>
-      <div class="card-meta">Blockchain / Pagamentos Internacionais · 27/07/2026 · Fonte: Dataconomy</div>
-      <div class="card-body">JPMorgan, Bank of America, Citi, HSBC e Wells Fargo articulam uma rede compartilhada ligando depósitos bancários tokenizados sobre trilhos blockchain, enquanto o setor discute o próximo salto — levar stablecoins do settlement institucional para o pagamento do dia a dia.</div>
-      <div class="card-footer">
-        <span><span class="rec-label">Recomendação:</span> avaliar como plugar a Brosbnk em trilhos de depósito tokenizado via banco parceiro antes que a liquidação 24/7 vire padrão de mercado.</span>
-      </div>
-      <div class="card-actions" style="margin-top:10px;">
-        <a class="link-btn" href="https://dataconomy.com/2026/07/27/stablecoins-solved-digital-settlement-now-comes-the-everyday-payments-test/" target="_blank" rel="noopener">Ler matéria original ↗</a>
-        <button class="dive-btn" onclick="openDive('tokenized-deposits')">🔍 Mergulhar</button>
-      </div>
-    </div>
+    <script>
+        // Navigation
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+                btn.classList.add('active');
+                const section = document.getElementById(btn.dataset.section);
+                if (section) section.classList.add('active');
+            });
+        });
 
-    <div class="card">
-      <div class="card-top">
-        <div class="card-title">Regras do GENIUS Act perdem o prazo de 18/07 e prolongam incerteza para stablecoins</div>
-        <div class="badge badge-alto">Impacto: Alto</div>
-      </div>
-      <div class="card-meta">Regulamentação / Lei de Criptoativos · 20/07/2026 · Fonte: Crypto Daily</div>
-      <div class="card-body">As seis agências federais não publicaram as regras finais de capital, reserva e licenciamento de stablecoins até o prazo legal de 18/07 (um ano após a sanção da lei). Sem regra final nem orientação interina, bancos que queriam emitir stablecoins ficam em compasso de espera; o KYC grau-bancário segue em consulta até 21/08.</div>
-      <div class="card-footer">
-        <span><span class="rec-label">Recomendação:</span> restringir por política interna qualquer liquidação em stablecoin a emissores já alinhados ao GENIUS Act e acompanhar a consulta até 21/08.</span>
-      </div>
-      <div class="card-actions" style="margin-top:10px;">
-        <a class="link-btn" href="https://cryptodaily.co.uk/2026/07/genius-act-missed-deadline-stablecoin-uncertainty" target="_blank" rel="noopener">Ler matéria original ↗</a>
-        <button class="dive-btn" onclick="openDive('genius-missed')">🔍 Mergulhar</button>
-      </div>
-    </div>
+        // Filters
+        document.querySelectorAll('.filter-pill').forEach(pill => {
+            pill.addEventListener('click', () => {
+                document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+                pill.classList.add('active');
+                const filter = pill.dataset.filter;
+                document.querySelectorAll('.timeline-item').forEach(item => {
+                    if (filter === 'todos' || item.dataset.region === filter || item.dataset.filter === filter) {
+                        item.classList.remove('hidden');
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                });
+            });
+        });
 
-    <div class="card">
-      <div class="card-top">
-        <div class="card-title">Capital acelera na infraestrutura de pagamentos com stablecoin: Cyclops e MoonPay</div>
-        <div class="badge badge-medio">Impacto: Médio</div>
-      </div>
-      <div class="card-meta">Criptoativos / Pagamentos · 22/07/2026 · Fonte: Hipther Fintech Pulse</div>
-      <div class="card-body">A Cyclops levantou US$ 20 milhões para expandir infraestrutura de pagamentos com stablecoin para comerciantes e provedores de pagamento, e a MoonPay adquiriu a Glide para simplificar depósitos cripto cross-chain — sinais de que o dinheiro está indo para o trilho que torna stablecoins usáveis no pagamento real.</div>
-      <div class="card-footer">
-        <span><span class="rec-label">Recomendação:</span> mapear fornecedores de infraestrutura de stablecoin (incl. Cyclops) como possíveis parceiros de liquidação antes que fechem exclusividade com concorrentes.</span>
-      </div>
-      <div class="card-actions" style="margin-top:10px;">
-        <a class="link-btn" href="https://hipther.com/latest-news/2026/07/22/115537/fintech-pulse-ai-careers-thunes-visa-stripe-gtn-payward-xstocks-shanghai-commercial-bank-and-planto-july-22-2026/" target="_blank" rel="noopener">Ler matéria original ↗</a>
-        <button class="dive-btn" onclick="openDive('stablecoin-funding')">🔍 Mergulhar</button>
-      </div>
-    </div>
-    </div>
+        // Modal
+        const modals = {
+            ant: {
+                title: 'Ant International: Estratégia Global de Pagamentos',
+                content: `
+                    <div class="modal-section">
+                        <h4>📊 O que aconteceu</h4>
+                        <p>Ant International levantou $1,2 bilhão em Series A para expandir pagamentos transfronteiriços e comércio agentic globalmente. Capital de Ant Group, Alibaba e instituições internacionais.</p>
+                    </div>
 
-    <div class="section-heading archive-date-heading collapsed" id="head-20260726" onclick="toggleArchive('arch-20260726')" style="margin-top:32px;"><span class="bar"></span>26/07/2026<span class="count-badge">4 notícias</span><span class="chevron">▾</span></div>
-    <div class="archive-group collapsed" id="arch-20260726">
-      <div class="card">
-        <div class="card-top"><div class="card-title">Visa lança plataforma de stablecoin em beta para bancos e fintechs</div><div class="badge badge-alto">Impacto: Alto</div></div>
-        <div class="card-meta">Câmbio com Stablecoins · 16/07/2026 · Fonte: Visa Newsroom</div>
-        <div class="card-body">A Visa abriu em beta uma plataforma para bancos e fintechs emitirem, gerirem e resgatarem stablecoins na rede global da Visa, como trilho de liquidação cross-border.</div>
-        <div class="card-footer"><span><span class="rec-label">Recomendação:</span> avaliar entrar na fila de acesso à plataforma Visa para corredores de câmbio.</span></div>
-        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://usa.visa.com/about-visa/newsroom/press-releases.releaseId.22491.html" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('visa-stablecoin')">🔍 Mergulhar</button></div>
-      </div>
-      <div class="card">
-        <div class="card-top"><div class="card-title">BC do Brasil enquadra exchanges de cripto como instituições financeiras</div><div class="badge badge-alto">Impacto: Alto</div></div>
-        <div class="card-meta">Regulamentação / Lei Cripto · 01/07/2026 · Fonte: Agência Brasil / Symplexia</div>
-        <div class="card-body">BC incorpora SPSAVs ao arcabouço prudencial (exigências de capital e risco a partir de 2027); Receita lança a DeCripto com reporte mensal, inclusive de exchanges estrangeiras.</div>
-        <div class="card-footer"><span><span class="rec-label">Recomendação:</span> mapear o gap prudencial e de reporte e tratar a licença como vantagem competitiva antes de 2027.</span></div>
-        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://agenciabrasil.ebc.com.br/economia/noticia/2025-11/banco-central-estabelece-regras-para-o-mercado-de-criptoativos" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('bc-spsav')">🔍 Mergulhar</button></div>
-      </div>
-      <div class="card">
-        <div class="card-top"><div class="card-title">GENIUS Act: EUA finalizam regras e propõem KYC bancário para emissores</div><div class="badge badge-medio">Impacto: Médio</div></div>
-        <div class="card-meta">Câmbio com Stablecoins · 18/07/2026 · Fonte: Bloomberg / BVNK</div>
-        <div class="card-body">Seis agências fecham regras de capital/reserva/licenciamento (OCC: piso US$ 5M); FinCEN, Fed, OCC, FDIC e NCUA propõem KYC grau-bancário para emissores, comentários até 21/08.</div>
-        <div class="card-footer"><span><span class="rec-label">Recomendação:</span> restringir liquidação em stablecoin a emissores compliant com o GENIUS Act.</span></div>
-        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://www.bloomberg.com/professional/insights/regulation/july-2026-global-regulatory-brief-stablecoins-ai-governance-and-regulatory-sandboxes/" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('genius-final')">🔍 Mergulhar</button></div>
-      </div>
-      <div class="card">
-        <div class="card-top"><div class="card-title">EUA e Reino Unido publicam blueprint conjunto para stablecoins cross-border</div><div class="badge badge-medio">Impacto: Médio</div></div>
-        <div class="card-meta">Pagamentos Internacionais · 22/07/2026 · Fonte: PYMNTS / Phemex</div>
-        <div class="card-body">Tesouro dos EUA e HM Treasury lançaram blueprint com 10 propostas para alinhar regras de stablecoins, tokenização e infraestrutura digital cross-border.</div>
-        <div class="card-footer"><span><span class="rec-label">Recomendação:</span> monitorar o corredor EUA-UK como benchmark regulatório para o corredor Brasil-EUA.</span></div>
-        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://www.pymnts.com/cryptocurrency/2026/us-uk-open-door-to-cross-border-stablecoins/" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('us-uk-blueprint')">🔍 Mergulhar</button></div>
-      </div>
-    </div>
+                    <div class="modal-section">
+                        <h4>💡 Impactos para a Brosbnk</h4>
+                        <p><strong>Negativo:</strong> Competidor gigante entrando em LATAM com recursos ilimitados, escala asiática, experiência de bilhões de transações.</p>
+                        <p><strong>Positivo:</strong> Validação de tese: pagamentos transfronteiriços é mercado de alto potencial. Esperado crescer para $336B em 2031.</p>
+                    </div>
 
-    <div class="section-heading archive-date-heading collapsed" id="head-20260711" onclick="toggleArchive('arch-20260711')" style="margin-top:32px;"><span class="bar"></span>11/07/2026<span class="count-badge">4 notícias</span><span class="chevron">▾</span></div>
-    <div class="archive-group collapsed" id="arch-20260711">
-      <div class="card">
-        <div class="card-top"><div class="card-title">IA precisa &quot;conquistar o direito&quot; de movimentar dinheiro</div><div class="badge badge-medio">Impacto: Médio</div></div>
-        <div class="card-meta">Inteligência Artificial · 10/07/2026 · Fonte: PYMNTS Intelligence</div>
-        <div class="card-body">Payments firms tratam a adoção de IA como teste de risco e ROI, não como rollout amplo: 80% citam redução de risco/compliance e 70% citam margem como razão para investir.</div>
-        <div class="card-footer"><span><span class="rec-label">Recomendação:</span> rodar piloto de IA auditável em KYC/AML de onboarding, com revisão humana obrigatória.</span></div>
-        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://www.pymnts.com/news/artificial-intelligence/2026/study-finds-ai-must-earn-the-right-to-move-money/" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('ia-study')">🔍 Mergulhar</button></div>
-      </div>
-      <div class="card">
-        <div class="card-top"><div class="card-title">Itaú é o único banco brasileiro no piloto blockchain 24/7 da Swift</div><div class="badge badge-alto">Impacto: Alto</div></div>
-        <div class="card-meta">Blockchain · 09/07/2026 · Fonte: Let's Money</div>
-        <div class="card-body">Itaú Unibanco pilota depósitos tokenizados na rede da Swift para mover dinheiro no exterior 24/7, ao lado de Citi, HSBC, UBS e outros 14 bancos globais.</div>
-        <div class="card-footer"><span><span class="rec-label">Recomendação:</span> consultar o Itaú sobre elegibilidade como cliente institucional do novo ledger tokenizado.</span></div>
-        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://www.letsmoney.com.br/noticias/itau-swift-blockchain-pagamento-internacional/" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('itau-swift')">🔍 Mergulhar</button></div>
-      </div>
-      <div class="card">
-        <div class="card-top"><div class="card-title">CLARITY Act trava no Senado dos EUA às vésperas do fim do recesso</div><div class="badge badge-medio">Impacto: Médio</div></div>
-        <div class="card-meta">Criptoativos · 06/07/2026 · Fonte: Coinspeaker / Yahoo Finance</div>
-        <div class="card-body">Projeto de regulação do mercado cripto nos EUA segue sem votação marcada, travado por três disputas; Senado volta do recesso em 13/07 com poucas semanas úteis antes de agosto.</div>
-        <div class="card-footer"><span><span class="rec-label">Recomendação:</span> acompanhar semanalmente a tramitação e preparar planos para os dois cenários (aprovação/fracasso).</span></div>
-        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://finance.yahoo.com/markets/crypto/articles/clarity-act-stalls-senate-three-100403007.html" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('clarity-act')">🔍 Mergulhar</button></div>
-      </div>
-      <div class="card">
-        <div class="card-top"><div class="card-title">Tesouro dos EUA sonda integração do Pix com o FedNow em audiência do USTR</div><div class="badge badge-alto">Impacto: Alto</div></div>
-        <div class="card-meta">Pagamentos Internacionais · 07/07/2026 · Fonte: Let's Money / Valor Econômico</div>
-        <div class="card-body">Em audiência da investigação Section 301, Tesouro dos EUA perguntou sobre ganhos de integrar-se ao Pix; brasileiros sugeriram uma ponte com o FedNow.</div>
-        <div class="card-footer"><span><span class="rec-label">Recomendação:</span> mapear qual parte do produto de câmbio poderia migrar para um trilho instantâneo Brasil-EUA.</span></div>
-        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://www.letsmoney.com.br/noticias/tesouro-eua-integracao-pix/" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('pix-fednow')">🔍 Mergulhar</button></div>
-      </div>
-    </div>
+                    <div class="modal-section">
+                        <h4>🎯 Plano passo a passo para a Brosbnk</h4>
+                        <div class="plan-step"><strong>1.</strong> Executar análise de competição: mapeie onde Ant pode entrar primeiro em LATAM (Brasil, México?).</div>
+                        <div class="plan-step"><strong>2.</strong> Reforçar moats locais: compliance Brazil-grade, UX em português, partnerships com bancos locais.</div>
+                        <div class="plan-step"><strong>3.</strong> Foco em nichos: SMEs, exportadores (comex), fintechs — mercados onde local é vantagem.</div>
+                        <div class="plan-step"><strong>4.</strong> Velocidade: lançar novo produto antes de Ant: ex., câmbio com stablecoin, API de pagamentos agentic.</div>
+                        <div class="plan-step"><strong>5.</strong> Comunicação: posicionar Brosbnk como "local, rápido, regulado" vs. "global, corporate" Ant.</div>
+                    </div>
+                `
+            },
+            brasil: {
+                title: 'Lei 14.478: Regulação de Criptoativos no Brasil',
+                content: `
+                    <div class="modal-section">
+                        <h4>📊 O que aconteceu</h4>
+                        <p>Brasil implementou novo framework regulatório para provedores de ativos virtuais. Destaque: novo formulário DeCripto, limiar de reporte aumentado para R$ 35k/mês, prazo de conformidade até 30 de novembro de 2026.</p>
+                    </div>
 
-    <div class="section-heading archive-date-heading collapsed" id="head-20260710" onclick="toggleArchive('arch-20260710')" style="margin-top:32px;"><span class="bar"></span>10/07/2026<span class="count-badge">4 notícias</span><span class="chevron">▾</span></div>
-    <div class="archive-group collapsed" id="arch-20260710">
-      <div class="card">
-        <div class="card-top"><div class="card-title">Swift lança plataforma blockchain com 17 bancos globais</div><div class="badge badge-alto">Impacto: Alto</div></div>
-        <div class="card-meta">Blockchain · 02/07/2026 · Fonte: Hipther</div>
-        <div class="card-body">HSBC, UBS, Wells Fargo e Citi pilotam liquidação tokenizada na nova rede Swift.</div>
-        <div class="card-footer"><span><span class="rec-label">Recomendação:</span> verificar se o parceiro bancário está no piloto e pedir acesso antecipado.</span></div>
-        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://hipther.com/latest-news/2026/07/02/114492/blocks-headlines-today-in-blockchain-july-2-2026-707-cayman-ethereum-blockchain-consensus-ai-supply-chains-and-institutional-web3/" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('swift-network')">🔍 Mergulhar</button></div>
-      </div>
-      <div class="card">
-        <div class="card-top"><div class="card-title">Citigroup expande pagamentos instantâneos cross-border</div><div class="badge badge-alto">Impacto: Alto</div></div>
-        <div class="card-meta">Pagamentos · 09/07/2026 · Fonte: US News</div>
-        <div class="card-body">Liquidação em tempo real estendida a bancos parceiros fora da rede interna do Citi.</div>
-        <div class="card-footer"><span><span class="rec-label">Recomendação:</span> contatar correspondent banking do Citi para elegibilidade como parceiro.</span></div>
-        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://money.usnews.com/investing/news/articles/2026-07-09/citigroup-expands-cross-border-instant-payments-to-partner-banks" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('citi-instant')">🔍 Mergulhar</button></div>
-      </div>
-      <div class="card">
-        <div class="card-top"><div class="card-title">Circle recebe aprovação de trust bank nos EUA</div><div class="badge badge-medio">Impacto: Médio</div></div>
-        <div class="card-meta">Criptoativos · 08-09/07/2026 · Fonte: CoinDesk</div>
-        <div class="card-body">Emissora do USDC formaliza entrada no sistema bancário regulado dos EUA.</div>
-        <div class="card-footer"><span><span class="rec-label">Recomendação:</span> avaliar integração com USDC para liquidação em corredores de câmbio.</span></div>
-        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://www.coindesk.com/" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('circle-trust')">🔍 Mergulhar</button></div>
-      </div>
-      <div class="card">
-        <div class="card-top"><div class="card-title">Hyundai adota stablecoin para tesouraria internacional</div><div class="badge badge-alto">Impacto: Alto</div></div>
-        <div class="card-meta">Criptoativos · 08-09/07/2026 · Fonte: CoinDesk</div>
-        <div class="card-body">Primeira grande empresa sul-coreana a mover capital entre operações via stablecoin.</div>
-        <div class="card-footer"><span><span class="rec-label">Recomendação:</span> lançar piloto de tesouraria via stablecoin com clientes estratégicos.</span></div>
-        <div class="card-actions" style="margin-top:10px;"><a class="link-btn" href="https://www.coindesk.com/business/2026/07/06/bitmine-added-another-usd74-million-in-ether-as-tom-lee-bets-on-clarity-act-boost" target="_blank" rel="noopener">Ler matéria original ↗</a><button class="dive-btn" onclick="openDive('hyundai-treasury')">🔍 Mergulhar</button></div>
-      </div>
-    </div>
-  </div>
+                    <div class="modal-section">
+                        <h4>💡 Impactos para a Brosbnk</h4>
+                        <p><strong>Negativo:</strong> Custos operacionais de compliance aumentam significativamente; risco de sanções se não cumprir até nov; possível restrição a certos produtos cripto.</p>
+                        <p><strong>Positivo:</strong> Legitimidade competitiva massiva; eliminação de 50%+ de competidores não-regulados; oportunidade de market share consolidado.</p>
+                    </div>
 
-</div>
+                    <div class="modal-section">
+                        <h4>🎯 Plano passo a passo para a Brosbnk</h4>
+                        <div class="plan-step"><strong>1.</strong> Auditoria imediata: verificar 100% de conformidade com Lei 14.478 em 30 dias.</div>
+                        <div class="plan-step"><strong>2.</strong> Integração DeCripto: implementar novo formulário eletrônico no sistema; treinar compliance team.</div>
+                        <div class="plan-step"><strong>3.</strong> Compliance-as-a-Service: oferecer suporte a clientes SMEs que não sabem reportar.</div>
+                        <div class="plan-step"><strong>4.</strong> Marketing: posicionar Brosbnk como "100% regulado no Brasil" até set/2026.</div>
+                        <div class="plan-step"><strong>5.</strong> Roadmap pós-nov: planejar expansão de produtos cripto agora que competição caiu.</div>
+                    </div>
+                `
+            },
+            usdc: {
+                title: 'USDC Leadership & Samsung Wallet: Mainstream Stablecoins',
+                content: `
+                    <div class="modal-section">
+                        <h4>📊 O que aconteceu</h4>
+                        <p>Circle's USDC atingiu 70% do volume de transações de stablecoins (vs 25% USDT). Samsung Wallet integra stablecoins, trazendo dólares digitais a bilhões de dispositivos. USDT contraiu $5,4B em 60 dias.</p>
+                    </div>
 
-<!-- Chat overlay "Mergulhar" -->
-<div class="chat-overlay" id="chat-overlay">
-  <div class="chat-panel">
-    <div class="chat-header">
-      <div>
-        <div class="chat-header-title" id="chat-title">Mergulhar na notícia</div>
-        <div class="chat-header-sub" id="chat-sub">Plano passo a passo para a Brosbnk</div>
-      </div>
-      <button class="chat-close" onclick="closeDive()">✕</button>
-    </div>
-    <div class="chat-body" id="chat-body"></div>
-    <div class="chat-footer">
-      <button class="chat-ask-btn" id="chat-ask-btn">Copiar pergunta para a IA</button>
-    </div>
-  </div>
-</div>
+                    <div class="modal-section">
+                        <h4>💡 Impactos para a Brosbnk</h4>
+                        <p><strong>Negativo:</strong> Se Brosbnk tem exposição USDT (tesouro, pares), contração sinaliza risco de liquidez. Circle em dificuldade financeira (-67,7% stock YTD).</p>
+                        <p><strong>Positivo:</strong> Samsung Wallet = adoção mainstream; USDC é novo standard; oportunidade de capturar volume de migração USDT→USDC.</p>
+                    </div>
 
-<script>
-var diveData = {
-  'tokenized-deposits': {
-    title: "Bancos dos EUA criam rede de depósitos tokenizados",
-    sub: "O que é e como a Brosbnk deve reagir",
-    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer em relação ao anúncio de que grandes bancos dos EUA (JPMorgan, Bank of America, Citi, HSBC e Wells Fargo) estão criando uma rede compartilhada de depósitos bancários tokenizados sobre blockchain, enquanto o setor busca levar stablecoins ao pagamento do dia a dia.",
-    html: [
-      "<h4>O que aconteceu, em linguagem simples</h4>",
-      "<p>Um consórcio dos maiores bancos dos EUA (JPMorgan, Bank of America, Citi, HSBC e Wells Fargo) anunciou planos de uma rede compartilhada que conecta depósitos bancários tokenizados, versões digitais do saldo do cliente, movimentados sobre trilhos blockchain. Em paralelo, o setor debate o próximo passo: fazer stablecoins funcionarem não só no settlement entre instituições, mas no pagamento cotidiano.</p>",
-      "<h4>Por que isso importa para a Brosbnk</h4>",
-      "<p>Câmbio e pagamentos internacionais são o core da Brosbnk, e esses bancos são correspondentes globais. Se a liquidação passa a acontecer 24/7 sobre depósitos tokenizados, o padrão de velocidade esperado pelos clientes muda, e quem depende só do trilho tradicional fica para trás.</p>",
-      "<h4>Plano passo a passo</h4>",
-      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Mapear o banco parceiro</strong><span>Verificar se o correspondente atual da Brosbnk está no consórcio ou terá acesso à rede.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Perguntar sobre elegibilidade</strong><span>Consultar formalmente as condições de acesso de clientes institucionais ao ledger de depósitos tokenizados.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Priorizar o corredor Brasil-EUA</strong><span>Focar no corredor de maior volume da carteira de câmbio para um eventual piloto.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Transformar em argumento comercial</strong><span>Usar a promessa de liquidação 24/7 como diferencial junto a clientes de comex sensíveis a prazo.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Validar a interoperabilidade</strong><span>Confirmar se a rede funciona entre bancos com ledgers distintos antes de depender dela.</span></div></div>"
-    ].join("")
-  },
-  'genius-missed': {
-    title: "GENIUS Act perde o prazo de 18/07",
-    sub: "O que é e como a Brosbnk deve reagir",
-    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer em relação ao fato de que as regras finais do GENIUS Act (stablecoins nos EUA) perderam o prazo legal de regulamentação de 18 de julho de 2026, deixando emissores bancários sem base regulatória e com o KYC grau-bancário ainda em consulta até 21/08.",
-    html: [
-      "<h4>O que aconteceu, em linguagem simples</h4>",
-      "<p>O GENIUS Act, lei que regula stablecoins nos EUA, tinha prazo de 18/07 (um ano após a sanção) para que seis agências federais publicassem as regras finais de capital, reserva e licenciamento. O prazo passou sem regra final nem orientação interina. Resultado: os bancos que queriam emitir stablecoins seguem sem base clara, e a proposta de KYC grau-bancário para emissores ainda está em consulta pública até 21/08.</p>",
-      "<h4>Por que isso importa para a Brosbnk</h4>",
-      "<p>A definição de quais stablecoins americanas são seguras e sob quais regras de KYC é critério direto para a Brosbnk escolher parceiros de liquidação em câmbio. Enquanto a regra não sai, qualquer estratégia de liquidação em dólar via stablecoin opera sob incerteza jurídica.</p>",
-      "<h4>Plano passo a passo</h4>",
-      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Não travar a estratégia</strong><span>Manter o planejamento de câmbio via stablecoin, mas sem comprometer capital em integrações definitivas até a regra sair.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Política interna de emissores</strong><span>Restringir liquidação futura a emissores que já sigam o padrão do GENIUS Act (reserva 1:1, sem yield direto).</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Participar da consulta</strong><span>Comentar a proposta de KYC bancário até 21/08 via associações do setor (ABfintechs, ABcripto).</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Acompanhar semanalmente</strong><span>Designar responsável no compliance para monitorar a publicação das regras finais atrasadas.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Preparar dois cenários</strong><span>Ter plano pronto para acelerar parcerias quando a regra sair e outro conservador caso o atraso se estenda.</span></div></div>"
-    ].join("")
-  },
-  'stablecoin-funding': {
-    title: "Capital acelera na infra de stablecoin (Cyclops, MoonPay)",
-    sub: "O que é e como a Brosbnk deve reagir",
-    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer em relação à onda de capital na infraestrutura de pagamentos com stablecoin: Cyclops levantando US$ 20 milhões para comerciantes/provedores e MoonPay adquirindo a Glide para depósitos cross-chain.",
-    html: [
-      "<h4>O que aconteceu, em linguagem simples</h4>",
-      "<p>O dinheiro está indo para a encanação que torna stablecoins usáveis no pagamento real: a Cyclops levantou US$ 20 milhões para expandir infraestrutura de pagamento com stablecoin para comerciantes e provedores, e a MoonPay comprou a Glide para simplificar depósitos cripto entre diferentes blockchains. É a fase de construir os trilhos, não de especular com preço.</p>",
-      "<h4>Por que isso importa para a Brosbnk</h4>",
-      "<p>Esses fornecedores de infraestrutura podem ser parceiros ou concorrentes da Brosbnk em corredores de câmbio e pagamento cross-border. Quem fizer parceria cedo herda trilho pronto de liquidação sem construir tudo do zero.</p>",
-      "<h4>Plano passo a passo</h4>",
-      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Mapear fornecedores</strong><span>Levantar players de infraestrutura de stablecoin (Cyclops, MoonPay e similares) relevantes para os corredores da Brosbnk.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Avaliar build vs. parceria</strong><span>Comparar o custo de construir trilho próprio contra integrar um fornecedor existente.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Checar compliance no Brasil</strong><span>Validar com o jurídico o que a Resolução BCB nº 561 (vigente 01/10) permite e o que fica restrito ao exterior.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Sondar parceria antes da exclusividade</strong><span>Conversar com 1-2 fornecedores antes que fechem contratos exclusivos com concorrentes locais.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Rodar piloto fora do escopo vedado</strong><span>Testar em corredor/estrutura permitida, medindo custo e tempo contra o câmbio tradicional.</span></div></div>"
-    ].join("")
-  },
-  'visa-stablecoin': {
-    title: "Visa lança plataforma de stablecoin em beta",
-    sub: "O que é e como a Brosbnk deve reagir",
-    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer diante do lançamento em beta da plataforma de stablecoin da Visa, que permite a bancos e fintechs emitir, gerir, transferir e resgatar stablecoins usando a rede global da Visa.",
-    html: [
-      "<h4>O que aconteceu, em linguagem simples</h4>",
-      "<p>A Visa abriu em beta (16/07/2026) uma plataforma que deixa bancos, fintechs e provedores de pagamento emitir, gerir, transferir e resgatar stablecoins usando sistemas já conectados à rede global da Visa. Na prática, a Visa passa a oferecer stablecoins como um trilho de liquidação cross-border mais rápido e barato, plugado à infraestrutura de cartão que já existe.</p>",
-      "<h4>Por que isso importa para a Brosbnk</h4>",
-      "<p>Câmbio e pagamentos internacionais são o core da Brosbnk. Uma plataforma de stablecoin operada pela Visa reduz a fricção técnica e regulatória de usar stablecoin em corredores de câmbio, mas também abre a porta para que qualquer fintech concorrente ofereça liquidação via stablecoin com a marca Visa por trás.</p>",
-      "<h4>Plano passo a passo</h4>",
-      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Falar com o gerente Visa</strong><span>Consultar formalmente as condições de acesso ao beta da plataforma de stablecoin.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Escolher um corredor piloto</strong><span>Selecionar o corredor de câmbio com maior fricção cambial e custo de liquidação.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Validar compliance</strong><span>Confirmar com o jurídico as regras brasileiras e do país de destino para liquidação via stablecoin.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Medir custo e tempo</strong><span>Comparar a liquidação via plataforma Visa com o trilho tradicional por 60 dias.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Decidir sobre produto</strong><span>Se o ganho se confirmar, estruturar oferta de câmbio via stablecoin apoiada na rede Visa.</span></div></div>"
-    ].join("")
-  },
-  'bc-spsav': {
-    title: "BC enquadra exchanges como instituições financeiras",
-    sub: "O que é e como a Brosbnk deve reagir",
-    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer diante da nova regra do Banco Central que incorpora as prestadoras de serviços de ativos virtuais (SPSAVs) ao arcabouço prudencial, e da nova declaração DeCripto da Receita Federal.",
-    html: [
-      "<h4>O que aconteceu, em linguagem simples</h4>",
-      "<p>O Banco Central publicou (01/07/2026) uma regra que trata as prestadoras de serviços de ativos virtuais (exchanges e afins) como parte do sistema financeiro regulado. A partir de 2027 elas terão de cumprir exigências de capital, gestão de risco e divulgação parecidas com as de bancos, com enquadramento no Segmento S4 até meados de 2028. Em paralelo, a Receita criou a DeCripto (no lugar da IN 1.888/2019), com reporte mensal, inclusive de exchanges estrangeiras que atendem brasileiros.</p>",
-      "<h4>Por que isso importa para a Brosbnk</h4>",
-      "<p>A Brosbnk atua em pagamentos e câmbio no Brasil; qualquer serviço que toque ativos virtuais passa a exigir enquadramento prudencial e reporte fiscal detalhado. Isso aumenta o custo de compliance, mas também premia quem já opera com governança de banco.</p>",
-      "<h4>Plano passo a passo</h4>",
-      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Mapear a exposição</strong><span>Identificar quais produtos atuais ou planejados se enquadram como serviço de ativos virtuais.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Diagnóstico prudencial</strong><span>Levantar o gap de capital, risco e divulgação frente às exigências que valem a partir de 2027.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Preparar a DeCripto</strong><span>Ajustar sistemas para o reporte mensal à Receita antes que vire obrigação em atraso.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Antecipar-se</strong><span>Adequar-se antes do prazo e transformar o enquadramento pelo BC em selo de confiança comercial.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Comunicar o mercado</strong><span>Sinalizar a clientes corporativos que a Brosbnk opera dentro do novo padrão prudencial.</span></div></div>"
-    ].join("")
-  },
-  'genius-final': {
-    title: "GENIUS Act: regras finais e KYC para emissores",
-    sub: "O que é e como a Brosbnk deve reagir",
-    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer diante da finalização das regras do GENIUS Act nos EUA (prazo 18/07/2026) e da proposta de KYC grau-bancário para emissores de stablecoin feita por FinCEN, Fed, OCC, FDIC e NCUA.",
-    html: [
-      "<h4>O que aconteceu, em linguagem simples</h4>",
-      "<p>Seis agências federais dos EUA precisam fechar até 18/07/2026 as regras de capital, reserva e licenciamento do GENIUS Act, a lei que rege stablecoins de pagamento. O OCC fixou um piso de US$ 5 milhões de capital e o FDIC deixou claro que tokens não têm seguro de depósito. Além disso, cinco agências propuseram que emissores mantenham um programa de identificação de cliente (KYC) no padrão bancário, com comentários abertos até 21/08.</p>",
-      "<h4>Por que isso importa para a Brosbnk</h4>",
-      "<p>Se a Brosbnk usar ou avaliar usar stablecoins americanas como ponte de liquidação em câmbio, essas regras definem quais emissores serão considerados seguros e sob quais obrigações de KYC, separando parceiros elegíveis dos que ficarão de fora.</p>",
-      "<h4>Plano passo a passo</h4>",
-      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Listar emissores elegíveis</strong><span>Mapear quais stablecoins estarão em conformidade com o GENIUS Act após 18/07.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Ler o padrão KYC</strong><span>Estudar a proposta de KYC bancário para entender o que exigirão dos emissores parceiros.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Definir política interna</strong><span>Restringir integrações futuras a emissores compliant, por escrito.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Enviar comentário</strong><span>Se relevante, contribuir na consulta pública até 21/08 via associações do setor.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Desenhar produto auditável</strong><span>Usar o novo padrão KYC como base de um serviço de câmbio via stablecoin já em conformidade.</span></div></div>"
-    ].join("")
-  },
-  'us-uk-blueprint': {
-    title: "Blueprint EUA-UK para stablecoins cross-border",
-    sub: "O que é e como a Brosbnk deve reagir",
-    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer diante do blueprint conjunto de EUA e Reino Unido com 10 propostas para alinhar regras de stablecoins, tokenização e infraestrutura digital cross-border.",
-    html: [
-      "<h4>O que aconteceu, em linguagem simples</h4>",
-      "<p>O Tesouro dos EUA e o HM Treasury do Reino Unido publicaram um blueprint conjunto com 10 propostas para alinhar como os dois países tratam stablecoins, tokenização e infraestrutura financeira digital. O objetivo é abrir caminho para mercados cross-border mais integrados entre EUA e Reino Unido.</p>",
-      "<h4>Por que isso importa para a Brosbnk</h4>",
-      "<p>Corredores regulatórios entre grandes economias tendem a virar referência global. O que EUA e Reino Unido padronizarem pode chegar depois ao corredor Brasil-EUA, onde a Brosbnk atua; antecipar esses padrões é vantagem competitiva.</p>",
-      "<h4>Plano passo a passo</h4>",
-      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Ler as 10 propostas</strong><span>Identificar quais delas afetam liquidação via stablecoin e tokenização.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Comparar com o Brasil</strong><span>Verificar onde o arcabouço brasileiro já converge ou diverge do padrão EUA-UK.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Usar como benchmark</strong><span>Adotar o corredor EUA-UK como referência de desenho de produto cross-border.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Antecipar padrões</strong><span>Preparar a operação para requisitos que provavelmente chegarão ao corredor Brasil-EUA.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Monitorar a evolução</strong><span>Acompanhar os próximos passos da cooperação para ajustar a estratégia.</span></div></div>"
-    ].join("")
-  },
-  'ia-study': {
-    title: "IA precisa \"conquistar o direito\" de movimentar dinheiro",
-    sub: "O que é e como a Brosbnk deve reagir",
-    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer em relação ao estudo da PYMNTS Intelligence mostrando que empresas de pagamentos tratam a adoção de IA como um teste de risco e ROI, e não como um rollout amplo.",
-    html: [
-      "<h4>O que aconteceu, em linguagem simples</h4>",
-      "<p>Um novo estudo da PYMNTS Intelligence mostra que, diferente de outros setores, as empresas de pagamentos estão colocando a IA bem perto da camada onde o dinheiro se move — fraude, conciliação, compliance — e exigindo que ela prove valor antes de ganhar mais responsabilidade. 80% das empresas citam redução de risco e compliance como razão para investir em IA, e 70% citam margem e rentabilidade.</p>",
-      "<h4>Por que isso importa para a Brosbnk</h4>",
-      "<p>A Brosbnk lida todos os dias com fluxos que exigem compliance, prevenção a fraude e conciliação em câmbio — exatamente as áreas onde o estudo mostra que o setor está concentrando IA de forma mais cautelosa e auditável, com decisão explicável e revisão humana.</p>",
-      "<h4>Plano passo a passo</h4>",
-      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Escolher um fluxo de alto volume</strong><span>Priorizar KYC/AML no onboarding de clientes de câmbio como primeiro piloto de IA.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Definir governança antes de ligar o modelo</strong><span>Exigir log de decisão auditável e revisão humana obrigatória em cada aprovação automatizada.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Medir o que interessa ao regulador</strong><span>Acompanhar taxa de falso positivo, tempo de aprovação e taxa de fraude, não só produtividade.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Usar o piloto como case de compliance</strong><span>Documentar o processo para mostrar ao Banco Central e a clientes corporativos que a IA da Brosbnk tem o mesmo rigor de controle de um banco tradicional.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Só então expandir</strong><span>Ampliar IA para decisões de crédito ou aprovação de operações apenas depois de validar governança no piloto inicial.</span></div></div>"
-    ].join("")
-  },
-  'itau-swift': {
-    title: "Itaú testa blockchain 24/7 da Swift",
-    sub: "O que é e como a Brosbnk deve reagir",
-    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer em relação ao Itaú Unibanco ser o único banco brasileiro a pilotar a rede blockchain da Swift para pagamentos internacionais 24/7 com depósitos tokenizados.",
-    html: [
-      "<h4>O que aconteceu, em linguagem simples</h4>",
-      "<p>O Itaú Unibanco é o único banco brasileiro entre os 17 bancos de seis continentes que vão testar transações ao vivo na nova rede blockchain da Swift. A infraestrutura movimenta depósitos tokenizados — uma versão digital do saldo do cliente — 24 horas por dia, inclusive madrugadas e fins de semana, antes da liquidação final pelos sistemas atuais.</p>",
-      "<h4>Por que isso importa para a Brosbnk</h4>",
-      "<p>O Itaú é um dos maiores bancos correspondentes do Brasil. Se ele ganha uma camada de liquidação 24/7, o padrão de velocidade esperado pelos clientes de câmbio no Brasil muda antes mesmo de outros bancos adotarem a tecnologia — e isso afeta diretamente quem depende de bancos correspondentes tradicionais, como a Brosbnk.</p>",
-      "<h4>Plano passo a passo</h4>",
-      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Mapear a relação com o Itaú</strong><span>Verificar se já existe relação de correspondente bancário ou se seria preciso construir uma.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Perguntar sobre elegibilidade</strong><span>Consultar formalmente se clientes institucionais podem acessar o novo ledger tokenizado.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Priorizar o corredor de maior volume</strong><span>Focar a conversa no corredor Brasil-EUA, hoje o de maior volume da carteira de câmbio.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Transformar em argumento comercial</strong><span>Usar a liquidação mais rápida como diferencial junto a clientes de comex que reclamam de prazo.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Acompanhar a interoperabilidade</strong><span>Monitorar se a promessa de pagamento 24/7 realmente funciona entre bancos com ledgers distintos antes de depender dela.</span></div></div>"
-    ].join("")
-  },
-  'clarity-act': {
-    title: "CLARITY Act travado no Senado dos EUA",
-    sub: "O que é e como a Brosbnk deve reagir",
-    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer em relação ao CLARITY Act — a principal lei de regulação do mercado cripto nos EUA — estar travado no Senado às vésperas do retorno do recesso em 13 de julho de 2026.",
-    html: [
-      "<h4>O que aconteceu, em linguagem simples</h4>",
-      "<p>O CLARITY Act, a principal proposta de regulação do mercado cripto nos EUA, está parado no Senado sem votação marcada, travado por três disputas: ética/insider trading, imunidade de desenvolvedores de software não-custodiante, e yield de stablecoin. O Senado volta do recesso em 13/07 com poucas semanas úteis antes do recesso de agosto — a última janela realista para aprovação em 2026.</p>",
-      "<h4>Por que isso importa para a Brosbnk</h4>",
-      "<p>A clareza regulatória nos EUA define o ambiente de compliance para qualquer fintech que usa ou avalia usar stablecoins como ponte de liquidação em corredores de câmbio, incluindo a Brosbnk.</p>",
-      "<h4>Plano passo a passo</h4>",
-      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Nomear um responsável</strong><span>Designar alguém do compliance/jurídico para acompanhar a tramitação semanalmente a partir de 13/07.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Preparar dois planos</strong><span>Um para o cenário de aprovação e outro para o cenário de fracasso em 2026.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Cenário de aprovação</strong><span>Acelerar conversas com emissores de stablecoin regulados nos EUA para parcerias de liquidação.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Cenário de fracasso</strong><span>Manter estratégia conservadora em cripto/stablecoin nos EUA e postergar investimento em infraestrutura até 2027.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Revisar o prazo do GENIUS Act</strong><span>Acompanhar também o prazo de regulamentação do GENIUS Act, em 18/07, que corre em paralelo.</span></div></div>"
-    ].join("")
-  },
-  'pix-fednow': {
-    title: "Tesouro dos EUA sonda integração Pix-FedNow",
-    sub: "O que é e como a Brosbnk deve reagir",
-    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer em relação ao Tesouro dos EUA ter perguntado, em audiência do USTR, sobre os ganhos de integrar o Pix ao FedNow.",
-    html: [
-      "<h4>O que aconteceu, em linguagem simples</h4>",
-      "<p>Em audiência pública do USTR sobre a investigação Section 301 contra práticas digitais do Brasil, uma funcionária do Tesouro dos EUA perguntou que ganho o país teria ao integrar-se ao Pix. Representantes brasileiros sugeriram conectar o Pix ao FedNow, já que os dois sistemas usam tecnologia e padrão de mensageria semelhantes.</p>",
-      "<h4>Por que isso importa para a Brosbnk</h4>",
-      "<p>Uma ponte Pix-FedNow reduziria fricção e custo em pagamentos entre Brasil e EUA — exatamente o corredor onde a Brosbnk atua em câmbio e pagamentos internacionais — mudando a dinâmica de um mercado hoje dominado por bancos correspondentes e remessas tradicionais.</p>",
-      "<h4>Plano passo a passo</h4>",
-      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Acompanhar a investigação Section 301</strong><span>Monitorar os próximos passos junto a associações do setor, como ABfintechs e ABcripto.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Mapear o produto de câmbio</strong><span>Identificar qual parte do fluxo Brasil-EUA poderia migrar para um trilho instantâneo caso a ponte avance.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Simular o impacto no volume</strong><span>Estimar quanto do volume de câmbio tradicional migraria para pagamentos instantâneos de baixo valor.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Não esperar a ponte estar pronta</strong><span>Preparar a operação agora, já que interligar dois sistemas costuma levar mais tempo do que a janela política.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Comunicar a clientes estratégicos</strong><span>Sinalizar a clientes de comex que a Brosbnk acompanha de perto essa possível mudança de infraestrutura.</span></div></div>"
-    ].join("")
-  },
-  'swift-network': {
-    title: "Swift lança plataforma blockchain com 17 bancos globais",
-    sub: "O que é e como a Brosbnk deve reagir",
-    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer em relação à Swift ter lançado uma nova plataforma blockchain para transações tokenizadas, com 17 bancos (HSBC, UBS, Wells Fargo, Citi, entre outros) se preparando para pilotar transações ao vivo.",
-    html: [
-      "<h4>O que aconteceu, em linguagem simples</h4>",
-      "<p>A Swift lançou uma nova plataforma blockchain para transações tokenizadas. Dezessete bancos — incluindo HSBC, UBS, Wells Fargo e Citi — estão se preparando para pilotar transações ao vivo com ativos digitais tokenizados na rede.</p>",
-      "<h4>Por que isso importa para a Brosbnk</h4>",
-      "<p>A Swift é a espinha dorsal das liquidações internacionais que a Brosbnk usa hoje para câmbio e remessas; uma migração para trilhos tokenizados redefine o padrão de settlement de todo o setor.</p>",
-      "<h4>Plano passo a passo</h4>",
-      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Mapear o parceiro bancário atual</strong><span>Descobrir se ele está entre os 17 participantes do piloto.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Pedir acesso antecipado</strong><span>Falar com o gerente de relacionamento sobre acesso antecipado ao programa piloto.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Escolher uma rota de teste de baixo risco</strong><span>Selecionar um corredor de câmbio de baixo volume para testar.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Medir o ganho real</strong><span>Acompanhar tempo e custo de liquidação por 30 dias.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Decidir sobre expansão</strong><span>Usar os resultados do piloto para decidir se vale ampliar para mais rotas.</span></div></div>"
-    ].join("")
-  },
-  'citi-instant': {
-    title: "Citigroup expande pagamentos instantâneos cross-border",
-    sub: "O que é e como a Brosbnk deve reagir",
-    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer em relação ao Citigroup ter ampliado seu serviço de pagamentos instantâneos internacionais para bancos parceiros, permitindo liquidação em tempo real fora da rede interna do banco.",
-    html: [
-      "<h4>O que aconteceu, em linguagem simples</h4>",
-      "<p>O Citigroup ampliou seu serviço de pagamentos instantâneos internacionais para bancos parceiros, permitindo liquidação em tempo real fora da rede interna do banco.</p>",
-      "<h4>Por que isso importa para a Brosbnk</h4>",
-      "<p>Isso pressiona o padrão de velocidade que clientes de comex e câmbio esperam de qualquer fintech de pagamentos, incluindo a Brosbnk — e pode ser uma porta de entrada para herdar liquidação instantânea via parceria.</p>",
-      "<h4>Plano passo a passo</h4>",
-      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Contatar o Citi</strong><span>Falar com o time de correspondent banking do Citigroup.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Levantar rotas prioritárias</strong><span>Mapear as rotas de comex/câmbio de maior volume da carteira atual.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Priorizar 1-2 rotas</strong><span>Selecionar as rotas com maior potencial de ganho para negociação.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Avaliar custo de integração</strong><span>Estimar o esforço técnico necessário para conectar-se como parceiro.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Comunicar clientes estratégicos</strong><span>Avisar clientes-chave assim que a integração avançar.</span></div></div>"
-    ].join("")
-  },
-  'circle-trust': {
-    title: "Circle recebe aprovação de trust bank nos EUA",
-    sub: "O que é e como a Brosbnk deve reagir",
-    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer em relação à Circle, emissora do USDC, ter obtido aprovação regulatória para operar como trust bank federal nos EUA.",
-    html: [
-      "<h4>O que aconteceu, em linguagem simples</h4>",
-      "<p>A Circle, emissora do stablecoin USDC, obteve aprovação regulatória para operar como trust bank federal nos EUA, formalizando sua entrada no sistema bancário regulado.</p>",
-      "<h4>Por que isso importa para a Brosbnk</h4>",
-      "<p>Stablecoins regulados como o USDC são cada vez mais usados como trilho de liquidação em pagamentos internacionais e câmbio — área central da Brosbnk — mas a Circle licenciada também pode virar concorrente direta por clientes corporativos.</p>",
-      "<h4>Plano passo a passo</h4>",
-      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Checar compliance</strong><span>Confirmar com o jurídico quais normas brasileiras efetivamente se aplicam ao uso de USDC fora do Brasil.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Mapear corredores</strong><span>Identificar corredores de câmbio com maior fricção cambial.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Estudar integração técnica</strong><span>Avaliar o esforço de integração com USDC via Circle.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Rodar piloto controlado</strong><span>Testar com um cliente disposto antes de escalar.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Monitorar como concorrente</strong><span>Acompanhar se a Circle passa a competir diretamente por clientes corporativos.</span></div></div>"
-    ].join("")
-  },
-  'hyundai-treasury': {
-    title: "Hyundai adota stablecoin para tesouraria internacional",
-    sub: "O que é e como a Brosbnk deve reagir",
-    prompt: "Explique em detalhe, com plano passo a passo simples, o que a Brosbnk deveria fazer em relação à Hyundai ter se tornado a primeira grande empresa sul-coreana a usar stablecoin para transferências internacionais corporativas.",
-    html: [
-      "<h4>O que aconteceu, em linguagem simples</h4>",
-      "<p>A Hyundai se tornou a primeira grande empresa sul-coreana a implementar transferências internas via stablecoin, movendo capital entre operações internacionais.</p>",
-      "<h4>Por que isso importa para a Brosbnk</h4>",
-      "<p>É um sinal de demanda corporativa real (não especulativa) por stablecoins como ferramenta de tesouraria internacional — mercado adjacente aos clientes corporativos de câmbio da Brosbnk, e uma oportunidade de novo produto.</p>",
-      "<h4>Plano passo a passo</h4>",
-      "<div class='chat-step'><div class='chat-step-num'>1</div><div class='chat-step-text'><strong>Identificar clientes-alvo</strong><span>Selecionar 2-3 clientes corporativos com operações internacionais.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>2</div><div class='chat-step-text'><strong>Desenhar a oferta piloto</strong><span>Estruturar um serviço de tesouraria internacional via stablecoin.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>3</div><div class='chat-step-text'><strong>Definir limites de compliance</strong><span>Validar as normas e autorizações aplicáveis em cada jurisdição antes de operar.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>4</div><div class='chat-step-text'><strong>Testar e medir</strong><span>Rodar o piloto por um trimestre e medir custo/tempo frente ao câmbio tradicional.</span></div></div>",
-      "<div class='chat-step'><div class='chat-step-num'>5</div><div class='chat-step-text'><strong>Formalizar como produto</strong><span>Se validado, transformar em oferta permanente.</span></div></div>"
-    ].join("")
-  }
-};
+                    <div class="modal-section">
+                        <h4>🎯 Plano passo a passo para a Brosbnk</h4>
+                        <div class="plan-step"><strong>1.</strong> Auditoria de tesouro: verificar exposição USDT vs USDC; rebalancear em favor de USDC.</div>
+                        <div class="plan-step"><strong>2.</strong> Produto: lançar "USDC Liquidity" — ser market maker local para pares USDC/BRL, USDC/COP, etc.</div>
+                        <div class="plan-step"><strong>3.</strong> Samsung integration (se possível): estudar API Samsung Wallet para integrar Brosbnk como pagamento provider.</div>
+                        <div class="plan-step"><strong>4.</strong> Comunicação: "Brosbnk moves to USDC" — marketing de migração; ajudar clientes com conversão automática.</div>
+                        <div class="plan-step"><strong>5.</strong> Hedge: monitorar saúde de Circle; preparar plano B se USDC falhar (PYUSD, FDUSD como backup).</div>
+                    </div>
+                `
+            },
+            agentic: {
+                title: 'Agentic Commerce & Autonomous AI Payments',
+                content: `
+                    <div class="modal-section">
+                        <h4>📊 O que aconteceu</h4>
+                        <p>Coinbase lançou protocolo x402 permitindo agentes IA autônomos fazer pagamentos em USDC sem intermediário humano. Liberado para APIs, data, serviços. Mega-trend 2026-2027.</p>
+                    </div>
 
-function updateDashboardMetrics() {
-  var currentCards = document.querySelectorAll('#page-briefing > .card');
-  var highImpact = document.querySelectorAll('#page-briefing > .card .badge-alto');
-  var recommendations = document.querySelectorAll('#page-briefing > .card .rec-label');
-  var archiveGroups = document.querySelectorAll('#page-arquivo .archive-group');
-  var archiveCards = document.querySelectorAll('#page-arquivo .archive-group .card');
-  var setText = function(id, value) {
-    var element = document.getElementById(id);
-    if (element) element.textContent = value;
-  };
-  setText('news-today-count', currentCards.length);
-  setText('high-impact-count', highImpact.length);
-  setText('recommendation-count', recommendations.length);
-  setText('archive-group-count', archiveGroups.length);
-  setText('archive-news-count', archiveCards.length);
-}
+                    <div class="modal-section">
+                        <h4>💡 Impactos para a Brosbnk</h4>
+                        <p><strong>Negativo:</strong> Risco AML/KYC com IA autônoma; dependência de tech proprietária Coinbase; compliance desafiador.</p>
+                        <p><strong>Positivo:</strong> Blue-ocean em LATAM; Brosbnk pode ser first-mover; diferenciação massiva; agentic commerce é tese central 2026-2027.</p>
+                    </div>
 
-updateDashboardMetrics();
+                    <div class="modal-section">
+                        <h4>🎯 Plano passo a passo para a Brosbnk</h4>
+                        <div class="plan-step"><strong>1.</strong> Estude x402: entenda spec do protocolo Coinbase; prepare compatibilidade.</div>
+                        <div class="plan-step"><strong>2.</strong> "Agentic Payment API": lance REST endpoint suportando pagamentos sem UI humana, com rate-limits e auditoria.</div>
+                        <div class="plan-step"><strong>3.</strong> Pilotos com IA LATAM: partnerships com startups de IA brasileiras/colombianas; case studies de automação de expense management.</div>
+                        <div class="plan-step"><strong>4.</strong> Compliance by design: cada transação agentic loggada, rastreável, reportável ao BC; transparência total.</div>
+                        <div class="plan-step"><strong>5.</strong> Marketing: "Brosbnk for AI Agents" — posicione como payment infrastructure nativa de IA; rode casos de uso; build community.</div>
+                    </div>
+                `
+            }
+        };
 
-var updatedElement = document.getElementById('last-updated');
-if (updatedElement && document.lastModified) {
-  var modifiedDate = new Date(document.lastModified);
-  if (!isNaN(modifiedDate.getTime())) {
-    updatedElement.textContent = 'Arquivo atualizado em ' + modifiedDate.toLocaleDateString('pt-BR');
-  }
-}
+        function openModal(key) {
+            const modal = document.getElementById('modal');
+            const body = document.getElementById('modal-body');
+            const data = modals[key];
+            body.innerHTML = `<h3 class="modal-title">${data.title}</h3>${data.content}`;
+            modal.classList.add('active');
+        }
 
-document.querySelectorAll('.nav-item').forEach(function(item) {
-  item.addEventListener('click', function() {
-    document.querySelectorAll('.nav-item').forEach(function(i) { i.classList.remove('active'); });
-    document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
-    item.classList.add('active');
-    document.getElementById('page-' + item.dataset.page).classList.add('active');
-  });
-});
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+        }
 
-document.querySelectorAll('.filter-pills .pill').forEach(function(pill) {
-  pill.addEventListener('click', function() {
-    document.querySelectorAll('.filter-pills .pill').forEach(function(p) { p.classList.remove('active'); });
-    pill.classList.add('active');
-    var filter = pill.dataset.filter;
-    var visibleCount = 0;
-    document.querySelectorAll('#page-regulamentacoes .timeline-item').forEach(function(item) {
-      var show = false;
-      if (filter === 'todos') {
-        show = true;
-      } else if (filter === 'critico') {
-        show = !!item.querySelector('.badge-critico');
-      } else {
-        show = item.dataset.region === filter;
-      }
-      item.classList.toggle('hidden', !show);
-      if (show) visibleCount++;
-    });
-    var emptyMsg = document.getElementById('timeline-empty');
-    if (emptyMsg) emptyMsg.classList.toggle('show', visibleCount === 0);
-  });
-});
+        function toggleArchive(header) {
+            const content = header.nextElementSibling;
+            content.classList.toggle('expanded');
+            header.style.fontWeight = content.classList.contains('expanded') ? '600' : '600';
+        }
 
-function toggleArchive(id) {
-  var group = document.getElementById(id);
-  var heading = document.getElementById('head-' + id.replace('arch-', ''));
-  if (group) group.classList.toggle('collapsed');
-  if (heading) heading.classList.toggle('collapsed');
-}
-
-function openDive(key) {
-  var d = diveData[key];
-  if (!d) return;
-  document.getElementById('chat-title').textContent = d.title;
-  document.getElementById('chat-sub').textContent = d.sub;
-  document.getElementById('chat-body').innerHTML = d.html;
-  var askBtn = document.getElementById('chat-ask-btn');
-  var originalLabel = 'Copiar pergunta para a IA';
-  askBtn.textContent = originalLabel;
-  askBtn.onclick = function() {
-    // Copia o contexto para uso em qualquer assistente de IA, sem abrir outro site.
-    var legacyCopyPrompt = function() {
-      var ta = document.createElement('textarea');
-      ta.value = d.prompt;
-      ta.style.position = 'fixed';
-      ta.style.opacity = '0';
-      document.body.appendChild(ta);
-      ta.focus();
-      ta.select();
-      var ok = false;
-      try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
-      document.body.removeChild(ta);
-      return ok;
-    };
-    if (legacyCopyPrompt()) {
-      askBtn.textContent = '✓ Pergunta copiada!';
-      setTimeout(function() { askBtn.textContent = originalLabel; }, 3000);
-    } else if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(d.prompt).then(function() {
-        askBtn.textContent = '✓ Pergunta copiada!';
-        setTimeout(function() { askBtn.textContent = originalLabel; }, 3000);
-      }, function() {
-        askBtn.textContent = 'Não foi possível copiar';
-        setTimeout(function() { askBtn.textContent = originalLabel; }, 3000);
-      });
-    } else {
-      askBtn.textContent = 'Não foi possível copiar';
-      setTimeout(function() { askBtn.textContent = originalLabel; }, 3000);
-    }
-  };
-  document.getElementById('chat-overlay').classList.add('open');
-}
-function closeDive() {
-  document.getElementById('chat-overlay').classList.remove('open');
-}
-document.getElementById('chat-overlay').addEventListener('click', function(e) {
-  if (e.target === this) closeDive();
-});
-
-</script>
+        // Allow asking Claude via sendPrompt
+        if (window.cowork && window.cowork.askClaude) {
+            window.askClaude = window.cowork.askClaude;
+        }
+    </script>
 </body>
 </html>
